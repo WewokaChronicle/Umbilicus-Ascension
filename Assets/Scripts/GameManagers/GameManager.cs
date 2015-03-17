@@ -2,22 +2,21 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 	public AudioClip gameMusic;
 	public AudioClip gameOverSound;
 	public AudioClip highScoreSound;
-
 	public static GameManager instance;
-
 	public static int highScore;
-
 	public Text scoreText;
 	public Text highScoreText;
 	private float score;
 	private bool ended = false;
 	private float endTime;
 
-	public void Awake() {
+	public void Awake()
+	{
 		/*** InputManager code below is part of InControl plugin ***/
 //		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
 //			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileArrows()));
@@ -34,7 +33,8 @@ public class GameManager : MonoBehaviour {
 		Sound_Manager.Instance.PlayMusicLoop(gameMusic);
 	}
 
-	public void Update() {
+	public void Update()
+	{
 		if(Input.GetKeyUp(KeyCode.Escape)) {
 			Application.LoadLevel(0);
 			Time.timeScale = 1f;
@@ -46,11 +46,13 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void Collect() {
+	public void Collect()
+	{
 		score += 500f;
 	}
 
-	public void EndLevel() {
+	public void EndLevel()
+	{
 		if(!ended) {
 			ended = true;
 			Time.timeScale = 0f;
@@ -59,7 +61,8 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator EndRoutine() {
+	private IEnumerator EndRoutine()
+	{
 		DeathText();
 		while(Time.realtimeSinceStartup - endTime < 3f) {
 			yield return false;
@@ -68,7 +71,8 @@ public class GameManager : MonoBehaviour {
 		Application.LoadLevel(1);
 	}
 
-	private void DeathText() {
+	private void DeathText()
+	{
 		// Save score
 		bool high = false;
 		if(score > highScore) {

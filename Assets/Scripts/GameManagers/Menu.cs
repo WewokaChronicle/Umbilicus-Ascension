@@ -3,19 +3,18 @@ using UnityEngine.UI;
 using System.Collections;
 using InControl;
 
-public class Menu:MonoBehaviour {
+public class Menu:MonoBehaviour
+{
 	public AudioClip menuMusic;
 	public AudioClip startSound;
-
 	public Text highScoreText;
-
 	public static bool starting = false;
 	public tk2dSprite fade;
 	private Color c;
-
 	private float startTimer = 2f;
 
-	public void Awake() {
+	public void Awake()
+	{
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
 			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileArrows()));
 		}
@@ -34,7 +33,8 @@ public class Menu:MonoBehaviour {
 		highScoreText.text = "HIGH SCORE: " + GameManager.highScore;
 	}
 
-	public void Update() {
+	public void Update()
+	{
 
 		if(starting) {
 			startTimer -= Time.deltaTime;

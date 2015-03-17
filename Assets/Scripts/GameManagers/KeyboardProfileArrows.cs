@@ -7,8 +7,10 @@ using InControl;
 // on the InControlManager component, or you can attach it yourself like so:
 // InputManager.AttachDevice( new UnityInputDevice( "KeyboardProfile" ) );
 // 
-public class KeyboardProfileArrows : UnityInputDeviceProfile {
-	public KeyboardProfileArrows() {
+public class KeyboardProfileArrows : UnityInputDeviceProfile
+{
+	public KeyboardProfileArrows()
+	{
 		Name = "Keyboard Arrows";
 		Meta = "A keyboard profile.";
 

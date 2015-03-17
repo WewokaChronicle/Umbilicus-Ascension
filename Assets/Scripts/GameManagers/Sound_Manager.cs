@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Sound_Manager:MonoBehaviour {
+public class Sound_Manager:MonoBehaviour
+{
 	// Audio source
 	private AudioSource _musicSrc;
 	private AudioSource _musicSrcAlt;
@@ -8,7 +9,6 @@ public class Sound_Manager:MonoBehaviour {
 	private AudioSource _effectSrc;
 	private AudioSource[] _loopEffectSrcs;
 	private int[] _loopEffectsChannelInUse;
-
 	private const int LOOP_EFFECTS_CHANNELS = 7; // Increase this number if the number of looping sound effects goes up
 
 	private const float ONE_SHOT_DELAY = 0.15f;
@@ -52,6 +52,7 @@ public class Sound_Manager:MonoBehaviour {
 			_musicSrc.volume = value;
 		}
 	}
+
 	private float _effectVolume {
 		get {
 			return _effectSrc.volume;
@@ -65,7 +66,8 @@ public class Sound_Manager:MonoBehaviour {
 	}
 	
 	// Main controls		
-	public void Awake() {
+	public void Awake()
+	{
 		// Add audio sources and set volumes
 		_musicSrc = gameObject.AddComponent<AudioSource>();
 		_musicSrc.volume = MusicVolume;
@@ -87,16 +89,19 @@ public class Sound_Manager:MonoBehaviour {
 	}
 
 	// Instantly change all sources to the current volume setting
-	public void CommitVolumes() {
+	public void CommitVolumes()
+	{
 		_effectVolume = EffectVolume;
 		_musicVolume = MusicVolume;
 	}
 
-	public void PlayEffectOnceAllowOverlap(AudioClip snd, bool overMusic = false, float volumePercent = 1f) {
+	public void PlayEffectOnceAllowOverlap(AudioClip snd, bool overMusic = false, float volumePercent = 1f)
+	{
 		PlayEffectOnce(snd, overMusic, false, volumePercent);
 	}
 	
-	public void PlayEffectOnce(AudioClip snd, bool overMusic = false, bool noOverlap = true, float volumePercent = 1f) {
+	public void PlayEffectOnce(AudioClip snd, bool overMusic = false, bool noOverlap = true, float volumePercent = 1f)
+	{
 		if(snd == null) {
 			Debug.LogError("SOUND NOT FOUND");
 			return;
@@ -111,7 +116,8 @@ public class Sound_Manager:MonoBehaviour {
 		}
 	}
 	
-	public void PlayEffectLoop(AudioClip snd, int channel) {
+	public void PlayEffectLoop(AudioClip snd, int channel)
+	{
 		// Check for playing a different sound
 		if(_loopEffectSrcs[channel].clip != snd) {
 			_loopEffectSrcs[channel].loop = true;
@@ -125,7 +131,8 @@ public class Sound_Manager:MonoBehaviour {
 		}
 	}
 
-	public void StopAllEffectLoops() {
+	public void StopAllEffectLoops()
+	{
 		for(int i = 0; i < LOOP_EFFECTS_CHANNELS; i++) {
 			// Reset usage
 			_loopEffectsChannelInUse[i] = 0;
@@ -134,16 +141,19 @@ public class Sound_Manager:MonoBehaviour {
 		}
 	}
 
-	public void StopEffectLoop(int channel) {
+	public void StopEffectLoop(int channel)
+	{
 		// Subtract usage from this channel, don't go below zero
-		if(_loopEffectsChannelInUse[channel] > 0) _loopEffectsChannelInUse[channel]--;
+		if(_loopEffectsChannelInUse[channel] > 0)
+			_loopEffectsChannelInUse[channel]--;
 		// Make sure we're actually playing a sound and usage is zero
 		if(_loopEffectSrcs[channel].isPlaying && _loopEffectsChannelInUse[channel] == 0) {
 			_loopEffectSrcs[channel].Stop();
 		}
 	}
 	
-	public void PlayMusicOnce(AudioClip snd, float fadeIn = 0f, float volumePercent = 1f) {
+	public void PlayMusicOnce(AudioClip snd, float fadeIn = 0f, float volumePercent = 1f)
+	{
 		// Check for fading out and interrupt it
 		_musicSrc.Stop();
 		_musicSrc.loop = false;
@@ -157,7 +167,8 @@ public class Sound_Manager:MonoBehaviour {
 		_musicSrc.Play();
 	}
 	
-	public void PlayMusicLoop(AudioClip snd, float fadeIn = 0f, float volumePercent = 1f) {
+	public void PlayMusicLoop(AudioClip snd, float fadeIn = 0f, float volumePercent = 1f)
+	{
 		if(_musicSrc.clip != snd) {
 			_musicVolume = volumePercent * MusicVolume;
 			_musicSrc.loop = true;
@@ -171,7 +182,8 @@ public class Sound_Manager:MonoBehaviour {
 		}
 	}
 
-	public void PlayMusicAlt(AudioClip snd) {
+	public void PlayMusicAlt(AudioClip snd)
+	{
 		_musicSrcAlt.loop = false;
 		_musicSrcAlt.volume = 0f; // Alt music source never gets volume
 
@@ -181,7 +193,8 @@ public class Sound_Manager:MonoBehaviour {
 		_musicSrcAlt.Play();
 	}
 
-	public void PlayMusicLoopAlt(AudioClip snd, bool syncWithPrimarySrc = false) {
+	public void PlayMusicLoopAlt(AudioClip snd, bool syncWithPrimarySrc = false)
+	{
 		_musicSrcAlt.loop = true;
 		_musicSrcAlt.volume = 0f; // Alt music source never gets volume
 
@@ -196,7 +209,8 @@ public class Sound_Manager:MonoBehaviour {
 		}
 	}
 
-	public void StopMusic() {
+	public void StopMusic()
+	{
 		_musicSrc.Stop();
 	}
 }

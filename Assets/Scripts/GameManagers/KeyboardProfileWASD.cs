@@ -7,8 +7,10 @@ using InControl;
 // on the InControlManager component, or you can attach it yourself like so:
 // InputManager.AttachDevice( new UnityInputDevice( "KeyboardProfile" ) );
 // 
-public class KeyboardProfileWASD : UnityInputDeviceProfile {
-	public KeyboardProfileWASD() {
+public class KeyboardProfileWASD : UnityInputDeviceProfile
+{
+	public KeyboardProfileWASD()
+	{
 		Name = "Keyboard WASD";
 		Meta = "A WASD keyboard profile.";
 
