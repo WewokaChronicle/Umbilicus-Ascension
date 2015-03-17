@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using InControl;
 
 public class GameManager : MonoBehaviour {
 	public AudioClip gameMusic;
@@ -19,12 +18,13 @@ public class GameManager : MonoBehaviour {
 	private float endTime;
 
 	public void Awake() {
-		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
-			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileArrows()));
-		}
-		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
-			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileWASD()));
-		}
+		/*** InputManager code below is part of InControl plugin ***/
+//		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
+//			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileArrows()));
+//		}
+//		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
+//			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileWASD()));
+//		}
 
 		instance = this;
 		score = 0f;
