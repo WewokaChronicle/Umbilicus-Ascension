@@ -14,7 +14,7 @@ public class Player:MonoBehaviour {
 	public LayerMask stickMask;
 
 	// Sprites
-	public tk2dSpriteAnimation[] playerSprites;
+//	public tk2dSpriteAnimation[] playerSprites;
 
 	// Audio
 	public AudioClip[] specialSounds;
@@ -45,16 +45,16 @@ public class Player:MonoBehaviour {
 	private Vector2 velocity;
 	private RaycastHit2D hit;
 
-	private tk2dSprite sp;
-	[HideInInspector]
-	public tk2dSpriteAnimator spAnim;
+//	private tk2dSprite sp;
+//	[HideInInspector]
+//	public tk2dSpriteAnimator spAnim;
 
 	public void Awake() {
 		cam = Camera.main;
-		sp = GetComponent<tk2dSprite>();
-		spAnim = GetComponent<tk2dSpriteAnimator>();
-		spAnim.Library = playerSprites[playerNum];
-		spAnim.Play("Float");
+//		sp = GetComponent<tk2dSprite>();
+//		spAnim = GetComponent<tk2dSpriteAnimator>();
+//		spAnim.Library = playerSprites[playerNum];
+//		spAnim.Play("Float");
 		inputDevice = (InputManager.Devices.Count > playerNum && PlayerControl.NumberOfPlayers > playerNum) ? InputManager.Devices[playerNum] : null;
 		if(inputDevice == null) {
 			cooldownSlider.gameObject.SetActive(false);
@@ -113,37 +113,37 @@ public class Player:MonoBehaviour {
 			forceX *= 0.75f;
 		}
 		// Facing direction
-		if(forceX > 0f && sp.FlipX) {
-			sp.FlipX = false;
-		} else if(forceX < 0f && !sp.FlipX) {
-			sp.FlipX = true;
-		}
+//		if(forceX > 0f && sp.FlipX) {
+//			sp.FlipX = false;
+//		} else if(forceX < 0f && !sp.FlipX) {
+//			sp.FlipX = true;
+//		}
 
 		// Check float vs stand
 		hit = Physics2D.Raycast(transform.position, -Vector2.up, 3f, stickMask);
-		if(hit.collider != null) {
-			if(spAnim.CurrentClip.name == "Float") {
-				spAnim.Play("Stand");
-			}
-		} else {
-			if(spAnim.CurrentClip.name == "Stand") {
-				spAnim.Play("Float");
-			}
-		}
+//		if(hit.collider != null) {
+//			if(spAnim.CurrentClip.name == "Float") {
+//				spAnim.Play("Stand");
+//			}
+//		} else {
+//			if(spAnim.CurrentClip.name == "Stand") {
+//				spAnim.Play("Float");
+//			}
+//		}
 	}
 
 	public void FixedUpdate() {
 		if(isDead)
 			return;
 		// Limit speed
-		velX = rigidbody2D.velocity.x;
+//		velX = rigidbody2D.velocity.x;
 		if(velX >= MAX_SPEED && forceX > 0) {
 			// Too fast, no more force
 		} else if(velX <= -MAX_SPEED && forceX < 0) {
 			// Too fast in negative, no more force
 		} else {
 			// Move target left and right with input stick
-			rigidbody2D.AddForce(Vector2.right * forceX, ForceMode2D.Impulse);
+//			rigidbody2D.AddForce(Vector2.right * forceX, ForceMode2D.Impulse);
 		}
 	}
 
@@ -151,17 +151,17 @@ public class Player:MonoBehaviour {
 		if(isDead)
 			return;
 		isDead = true;
-		rigidbody2D.fixedAngle = false;
+//		rigidbody2D.fixedAngle = false;
 		cooldownSlider.gameObject.SetActive(false);
 		// Adjust collider
-		BoxCollider2D box = (BoxCollider2D)collider2D;
+		BoxCollider2D box = (BoxCollider2D)GetComponent<Collider2D>();
 		box.size = new Vector2(2f, 2f);
-		box.center = new Vector2(0, -1.7f);
+		box.offset = new Vector2(0, -1.7f);
 		// Spawn corpse
-		((GameObject)Instantiate(corpsePrefab, transform.position, transform.rotation)).GetComponent<tk2dSprite>().SetSprite("Player" + spAnim.Library.name + "Dead");
+//		((GameObject)Instantiate(corpsePrefab, transform.position, transform.rotation)).GetComponent<tk2dSprite>().SetSprite("Player" + spAnim.Library.name + "Dead");
 		// Sprite
-		spAnim.Stop();
-		sp.SetSprite("Player" + spAnim.Library.name + "DeadLegs");
+//		spAnim.Stop();
+//		sp.SetSprite("Player" + spAnim.Library.name + "DeadLegs");
 		// Sounds
 		Sound_Manager.Instance.PlayEffectOnce(deathSounds[playerNum * 3 + UnityEngine.Random.Range(0, 3)]);
 		// Special

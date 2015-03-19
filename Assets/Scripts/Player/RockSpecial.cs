@@ -59,7 +59,7 @@ public class RockSpecial:MonoBehaviour {
 			rockTimer -= Time.deltaTime;
 		} else if(rocking) {
 			rocking = false;
-			player.spAnim.Play("SmashHit");
+//			player.spAnim.Play("SmashHit");
 		}
 	}
 
@@ -76,21 +76,21 @@ public class RockSpecial:MonoBehaviour {
 			rockTimer = ROCK_TIME;
 
 			// Anim
-			player.spAnim.Play("Smash");
-			player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
-				player.spAnim.Play("Float");
-			};
-
+//			player.spAnim.Play("Smash");
+//			player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
+//				player.spAnim.Play("Float");
+//			};
+//
 			// Sound
 			Sound_Manager.Instance.PlayEffectOnce(specialSnd);
 
 			// Initial impulse force
-			rigidbody2D.AddForce(-Vector2.up * FORCE * 0.5f, ForceMode2D.Impulse);
+			GetComponent<Rigidbody2D>().AddForce(-Vector2.up * FORCE * 0.5f, ForceMode2D.Impulse);
 		}
 
 		if(rocking) {
 			// Jet down force
-			rigidbody2D.AddForce(-Vector2.up * FORCE, ForceMode2D.Force);
+			GetComponent<Rigidbody2D>().AddForce(-Vector2.up * FORCE, ForceMode2D.Force);
 		}
 	}
 

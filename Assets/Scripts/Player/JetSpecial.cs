@@ -56,17 +56,17 @@ public class JetSpecial:MonoBehaviour {
 			// Sound
 			Sound_Manager.Instance.PlayEffectOnce(specialSnd);
 			// Jet up force
-			rigidbody2D.AddForce(Vector2.up * FORCE, ForceMode2D.Impulse);
+			GetComponent<Rigidbody2D>().AddForce(Vector2.up * FORCE, ForceMode2D.Impulse);
 			// Cooldown
 			cooldownTimer = COOLDOWN_TIME;
 			
 			cooldownFillImage.color = offColor;
 			actionAvailable = false;
 			// Animation
-			player.spAnim.Play("Boost");
-			player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
-				player.spAnim.Play("Float");
-			};
+//			player.spAnim.Play("Boost");
+//			player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
+//				player.spAnim.Play("Float");
+//			};
 		}
 	}
 

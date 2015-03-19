@@ -47,9 +47,9 @@ public class FloatSpecial:MonoBehaviour {
 		if(!actionDisabled && floatPower > (MAX_FLOAT_POWER * 0.1f)) {
 			if(!actionOn && inputDevice.Action1) {
 				Sound_Manager.Instance.PlayEffectOnce(specialSnd);
-				player.spAnim.Play("Jet");
+//				player.spAnim.Play("Jet");
 			} else if(actionOn && !inputDevice.Action1) {
-				player.spAnim.Play("Float");
+//				player.spAnim.Play("Float");
 			}
 			actionOn = inputDevice.Action1;
 			if(actionOn) {
@@ -62,7 +62,7 @@ public class FloatSpecial:MonoBehaviour {
 			}
 			if(actionOn) {
 				actionOn = false;
-				player.spAnim.Play("Float");
+//				player.spAnim.Play("Float");
 			}
 		}
 		// Undisable
@@ -82,13 +82,13 @@ public class FloatSpecial:MonoBehaviour {
 	public void FixedUpdate() {
 		if(actionOn) {
 			// Limit falling speed
-			velY = rigidbody2D.velocity.y;
+			velY = GetComponent<Rigidbody2D>().velocity.y;
 			if(velY <= MAX_SPEED) {
 				leftoverForceTimer = WIND_DOWN_TIME;
 			}
 			// "wind down" our counter force
 			if(leftoverForceTimer > 0f) {
-				rigidbody2D.AddForce(Vector2.up * FORCE * (MAX_SPEED - velY) * (leftoverForceTimer / WIND_DOWN_TIME), ForceMode2D.Force);
+				GetComponent<Rigidbody2D>().AddForce(Vector2.up * FORCE * (MAX_SPEED - velY) * (leftoverForceTimer / WIND_DOWN_TIME), ForceMode2D.Force);
 				leftoverForceTimer -= Time.deltaTime;
 			}
 		}

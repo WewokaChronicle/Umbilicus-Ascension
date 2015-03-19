@@ -9,7 +9,7 @@ public class Menu:MonoBehaviour
 	public AudioClip startSound;
 	public Text highScoreText;
 	public static bool starting = false;
-	public tk2dSprite fade;
+//	public tk2dSprite fade;
 	private Color c;
 	private float startTimer = 2f;
 
@@ -39,7 +39,7 @@ public class Menu:MonoBehaviour
 		if(starting) {
 			startTimer -= Time.deltaTime;
 			c.a = 1f - (startTimer / 2f);
-			fade.color = c;
+//			fade.color = c;
 			if(startTimer <= 0f) {
 				Application.LoadLevel("Game");
 			}
@@ -47,7 +47,7 @@ public class Menu:MonoBehaviour
 			for(int i = 0; i < InputManager.Devices.Count && i < PlayerControl.NumberOfPlayers; i++) {
 				if(InputManager.Devices[i].Action1) {
 					starting = true;
-					c = fade.color;
+//					c = fade.color;
 					Sound_Manager.Instance.PlayEffectOnce(startSound);
 				}
 			}

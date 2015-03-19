@@ -4,7 +4,7 @@ using System.Collections;
 public class Spike:MonoBehaviour {
 	public AudioClip flattenSound;
 
-	private tk2dSprite sp;
+//	private tk2dSprite sp;
 	
 	public bool bloody = false;
 	private bool flattened = false;
@@ -13,9 +13,9 @@ public class Spike:MonoBehaviour {
 
 	public void Awake() {
 		// Sprite
-		sp = GetComponent<tk2dSprite>();
+//		sp = GetComponent<tk2dSprite>();
 		// Set random sprite
-		sp.SetSprite("Spikes" + Random.Range(1, 3));
+//		sp.SetSprite("Spikes" + Random.Range(1, 3));
 	}
 
 	public void OnCollisionEnter2D(Collision2D coll){
@@ -31,14 +31,14 @@ public class Spike:MonoBehaviour {
 				if(player != null) {
 					player.Kill();
 					bloody = true;
-					sp.SetSprite(sp.CurrentSprite.name + "_Blood");
+//					sp.SetSprite(sp.CurrentSprite.name + "_Blood");
 				}
 			}
 		}
 		if(!bloody) {
 			Sound_Manager.Instance.PlayEffectOnce(flattenSound);
 			flattened = true;
-			collider2D.isTrigger = true;
+//			collider2D.isTrigger = true;
 			// Spawn particles
 			((GameObject) Instantiate(particlePrefab, transform.position + Vector3.back * 2f, particlePrefab.transform.rotation)).GetComponent<DestroyParticlesOnFinish>().followTarget = transform;
 		}

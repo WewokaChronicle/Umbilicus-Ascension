@@ -54,10 +54,10 @@ public class StickSpecial:MonoBehaviour {
 					actionOn = true;
 					Sound_Manager.Instance.PlayEffectOnce(specialSnd);
 					// Anim
-					player.spAnim.Play("GrabStart");
-					player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
-						player.spAnim.Play("Grab");
-					};
+//					player.spAnim.Play("GrabStart");
+//					player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
+//						player.spAnim.Play("Grab");
+//					};
 				}
 			} else if(actionOn && !inputDevice.Action1) {
 				// Turn off
@@ -72,7 +72,7 @@ public class StickSpecial:MonoBehaviour {
 				cooldownFillImage.color = Color.red;
 			}
 			if(actionOn) {
-				player.spAnim.Play("Float");
+//				player.spAnim.Play("Float");
 			}
 			actionOn = false;
 		}
@@ -93,7 +93,7 @@ public class StickSpecial:MonoBehaviour {
 	public void FixedUpdate() {
 		if(actionOn) {
 			// Stick in place
-			rigidbody2D.velocity = Vector2.up * Block.SPEED;
+			GetComponent<Rigidbody2D>().velocity = Vector2.up * Block.SPEED;
 		}
 	}
 

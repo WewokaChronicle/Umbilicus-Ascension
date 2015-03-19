@@ -33,7 +33,7 @@ public class FadeIn : MonoBehaviour
 		Texture2D text = this.fade.texture;
 		int pixelCount = text.width * text.height;
 		if(pixelCount > 0) {
-			Color colors = new Color[pixelCount];
+			Color[] colors = new Color[pixelCount];
 			text.SetPixels(0, 0, text.width, text.height, colors);
 			return true;
 		}
