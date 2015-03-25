@@ -67,8 +67,20 @@ public class PlayerUnity2D : MonoBehaviour
 	
 	void Awake() 
 	{
-		cam = Camera.main;
-		spriteAnimator = GetComponent<Animator>();
+		this.cam = Camera.main;
+		this.spriteAnimator = GetComponent<Animator>();
+
+		// Get the input device corresponding to the player number
+		//this.inputDevice = (InputManager.Devices.Count > playerNum && PlayerControl.NumberOfPlayers > playerNum) ? InputManager.Devices[playerNum] : null;
+		if(this.inputDevice == null) {
+			//this.cooldownSlider.gameObject.SetActive(false);
+			// If no controller exists for this player, destroy it
+			//Destroy(gameObject);
+		} 
+
+		else {
+			inGame = true;
+		}
 	}
 
 
@@ -81,13 +93,50 @@ public class PlayerUnity2D : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(Math.Abs(Input.GetAxis("Vertical")) != 0) {
-			spriteAnimator.SetBool("thereIsGroundUnderneath", false);
+		//UpdateInput(this.inputDevice);
+	}
+
+	void FixedUpdate()
+	{
+		// Check float vs. stand
+		this.hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 3f, this.stickMask);
+		
+		if(this.hit.collider != null) { // if we hit something, then there is ground underneath
+			this.spriteAnimator.SetBool("thereIsGroundUnderneath", true);
+		}
+		
+		else { // otherwise, we're not above anything
+			this.spriteAnimator.SetBool("thereIsGroundUnderneath", false);
+		}
+	}
+
+
+	private void UpdateInput(InputDevice inputDevice)
+	{
+		if(Time.timeScale == 0f) {
+			return; //we've effectively paused, so there's nothing to update
 		}
 
-		else {
-			spriteAnimator.SetBool("thereIsGroundUnderneath", true);
+		// Direction
+		this.forceX = FORCE * inputDevice.Direction.X;
+		if(this.playerOnTheEnd) {
+			this.forceX *= 0.75f;
 		}
+
+		// Facing direction
+		// if we're moving right and we are facing left,
+		if(this.forceX > 0.0f && this.transform.localScale.x < 0) {
+			// invert!
+			this.transform.localScale = -this.transform.localScale;
+		}
+
+		// if we're moving left and we are facing right,
+		else if(this.forceX < 0.0f && this.transform.localScale.x > 0) {
+			// invert!
+			this.transform.localScale = -this.transform.localScale;
+		}
+
+
 
 	}
 }
