@@ -64,20 +64,15 @@ public class PlayerUnity2D : MonoBehaviour
 	private float velX;
 	private Vector2 velocity;
 	private RaycastHit2D hit;
-	
+
+	// This is called before Start
 	void Awake() 
 	{
 		this.cam = Camera.main;
 		this.spriteAnimator = GetComponent<Animator>();
 
 		// Get the input device corresponding to the player number
-//		this.inputDevice = (InputManager.Devices.Count > playerNum && PlayerControl.NumberOfPlayers > playerNum) ? InputManager.Devices[playerNum] : null;
-		Debug.Log(InputManager.Devices.Count);
-//		this.inputDevice = InputManager.Devices[playerNum];
-		this.inputDevice = InputManager.ActiveDevice;
-
-
-		Debug.Log(this.inputDevice.Name);
+		this.inputDevice = (InputManager.Devices.Count > playerNum && PlayerControl.NumberOfPlayers > playerNum) ? InputManager.Devices[playerNum] : null;
 		if(this.inputDevice == null) {
 			//this.cooldownSlider.gameObject.SetActive(false);
 			// If no controller exists for this player, destroy it
@@ -87,26 +82,37 @@ public class PlayerUnity2D : MonoBehaviour
 		else {
 			inGame = true;
 		}
-	}
 
+		// Actions (To be continued)
 
-	// Use this for initialization
-	void Start()
-	{
-	
 	}
 	
 	// Update is called once per frame
 	void Update()
 	{
-		//UpdateInput(this.inputDevice);
+		// End Game
+		if(this.transform.position.y < -5f) {
+			GameManager.instance.EndLevel();
+		} else if(this.transform.position.y > 70f) {
+			GameManager.instance.EndLevel();
+		}
+		
+		// Don't do anything if we're dead
+		if(isDead) {
+			return;
+		}
+
+		// Input
+		UpdateInput(this.inputDevice);
 	}
 
 	void FixedUpdate()
 	{
 		// Check float vs. stand
 		this.hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 3f, this.stickMask);
-		
+		Debug.Log(this.hit.collider);
+		Debug.DrawRay(this.transform.position,-Vector3.up);
+
 		if(this.hit.collider != null) { // if we hit something, then there is ground underneath
 			this.spriteAnimator.SetBool("thereIsGroundUnderneath", true);
 		}
