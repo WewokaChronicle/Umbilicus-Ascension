@@ -14,8 +14,9 @@ public class Block:MonoBehaviour {
 	private bool dying = false;
 	private bool dyingPhase2 = false;
 	private float deathTimer = 1f;
-	private tk2dSprite sp;
-	private tk2dSprite spikeSprite;
+	private Sprite sp;
+	private Sprite spikeSprite;
+	private SpriteRenderer spriteRenderer;
 	private Color c;
 
 	private bool spikes = false;
@@ -30,16 +31,17 @@ public class Block:MonoBehaviour {
 
 	public void Awake() {
 		// Sprite
-		sp = GetComponent<tk2dSprite>();
+		sp = GetComponent<Sprite>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
 		// Set random sprite
 		blockNum = Random.Range(1, 4);
-		sp.SetSprite("block" + blockNum + "_1");
+		spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_1");
 		// Spikes
 		if(!starterBlock) {
 			if(Random.Range(0, 6) == 0) {
 				GameObject spikeGO = (GameObject) Instantiate(spikePrefab, transform.position + Vector3.right * 0.4f + Vector3.up * 4f + Vector3.back, Quaternion.Euler(new Vector3(0f, 0f, -90f)));
 				spikeGO.transform.parent = transform;
-				spikeSprite = spikeGO.GetComponent<tk2dSprite>();
+				spikeSprite = spikeGO.GetComponent<Sprite>();
 				spike = spikeGO.GetComponent<Spike>();
 				spikes = true;
 			} else if(Random.Range(0, 8) == 0) {
