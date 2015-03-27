@@ -6,8 +6,8 @@ public class Battery:MonoBehaviour {
 	public AudioClip collectSnd;
 
 	public void Awake() {
-		tk2dSpriteAnimator anim = GetComponent<tk2dSpriteAnimator>();
-		anim.PlayFromFrame(Random.Range(0, 4));
+		Animator anim = GetComponent<Animator>();
+		anim.Play("default");
 	}
 
 	public void OnTriggerEnter2D() {
