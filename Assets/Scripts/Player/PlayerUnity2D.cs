@@ -71,11 +71,15 @@ public class PlayerUnity2D : MonoBehaviour
 		this.spriteAnimator = GetComponent<Animator>();
 
 		// Get the input device corresponding to the player number
-		//this.inputDevice = (InputManager.Devices.Count > playerNum && PlayerControl.NumberOfPlayers > playerNum) ? InputManager.Devices[playerNum] : null;
+//		this.inputDevice = (InputManager.Devices.Count > playerNum && PlayerControl.NumberOfPlayers > playerNum) ? InputManager.Devices[playerNum] : null;
+//		Debug.Log(InputManager.Devices.Count);
+//		this.inputDevice = InputManager.Devices[playerNum];
+		this.inputDevice = InputManager.ActiveDevice;
+		Debug.Log(this.inputDevice.Name);
 		if(this.inputDevice == null) {
 			//this.cooldownSlider.gameObject.SetActive(false);
 			// If no controller exists for this player, destroy it
-			//Destroy(gameObject);
+			Destroy(gameObject);
 		} 
 
 		else {
