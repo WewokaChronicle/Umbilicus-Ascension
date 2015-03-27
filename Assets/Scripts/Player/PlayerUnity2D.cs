@@ -108,20 +108,10 @@ public class PlayerUnity2D : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		// Check float vs. stand
-		this.hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 3f, this.stickMask);
-		Debug.Log(this.hit.collider);
-		Debug.DrawRay(this.transform.position,-Vector3.up);
 
-		if(this.hit.collider != null) { // if we hit something, then there is ground underneath
-			this.spriteAnimator.SetBool("thereIsGroundUnderneath", true);
-		}
-		
-		else { // otherwise, we're not above anything
-			this.spriteAnimator.SetBool("thereIsGroundUnderneath", false);
-		}
+
+
 	}
-
 
 	private void UpdateInput(InputDevice inputDevice)
 	{
@@ -139,17 +129,30 @@ public class PlayerUnity2D : MonoBehaviour
 		// if we're moving right and we are facing left,
 		if(this.forceX > 0.0f && this.transform.localScale.x < 0) {
 			// invert!
-			this.transform.localScale = -this.transform.localScale;
+			Vector3 oldLocalScale = this.transform.localScale;
+			Vector3 newLocalScale = new Vector3(-oldLocalScale.x, oldLocalScale.y, oldLocalScale.z);
+			this.transform.localScale = newLocalScale;
 		}
 
 		// if we're moving left and we are facing right,
 		else if(this.forceX < 0.0f && this.transform.localScale.x > 0) {
-			// invert!
-			this.transform.localScale = -this.transform.localScale;
+			Vector3 oldLocalScale = this.transform.localScale;
+			Vector3 newLocalScale = new Vector3(-oldLocalScale.x, oldLocalScale.y, oldLocalScale.z);
+			this.transform.localScale = newLocalScale;
 		}
 
-
-
+		// Check float vs. stand
+		this.hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 3f, this.stickMask);
+		Debug.Log(this.hit.collider);
+		Debug.DrawRay(this.transform.position,-Vector3.up);
+		
+		if(this.hit.collider != null) { // if we hit something, then there is ground underneath
+			this.spriteAnimator.SetBool("thereIsGroundUnderneath", true);
+		}
+		
+		else { // otherwise, we're not above anything
+			this.spriteAnimator.SetBool("thereIsGroundUnderneath", false);
+		}
 	}
 }
 
