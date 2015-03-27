@@ -7,6 +7,7 @@ using InControl;
 /// Reimplementation of the Player.cs that uses Unity2D's native tools.
 /// </summary>
 [RequireComponent (typeof (Animator))]
+[RequireComponent (typeof (Rigidbody2D))]
 public class PlayerUnity2D : MonoBehaviour
 {
 	public const float FORCE = 50.0f;
@@ -61,15 +62,17 @@ public class PlayerUnity2D : MonoBehaviour
 
 	// Physics
 	private float forceX;
-	private float velX;
+	private float velocityX;
 	private Vector2 velocity;
 	private RaycastHit2D hit;
+	private Rigidbody2D rigidbod2D;
 
 	// This is called before Start
 	void Awake() 
 	{
 		this.cam = Camera.main;
 		this.spriteAnimator = GetComponent<Animator>();
+		this.rigidbod2D = GetComponent<Rigidbody2D>();
 
 		// Get the input device corresponding to the player number
 		this.inputDevice = (InputManager.Devices.Count > playerNum && PlayerControl.NumberOfPlayers > playerNum) ? InputManager.Devices[playerNum] : null;
@@ -108,11 +111,31 @@ public class PlayerUnity2D : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		if(this.isDead) {
+			return; //do nothing!
+		}
 
+		// Limit speed
+		this.velocityX = this.rigidbod2D.velocity.x;
 
+		if(this.velocityX >= MAX_SPEED && this.forceX > 0) {
+			// Too fast, no more force will be applied!
+		}
+
+		else if(this.velocityX <= -MAX_SPEED && this.forceX < 0) {
+			// Too fast in negative, no more force
+		}
+
+		else {
+			// Move target left and right with input stick
+			this.rigidbod2D.AddForce(Vector2.right * this.forceX, ForceMode2D.Impulse);
+		}
 
 	}
 
+	/// <summary>
+	/// Auxiliary method for handling input detection.
+	/// </summary>
 	private void UpdateInput(InputDevice inputDevice)
 	{
 		if(Time.timeScale == 0f) {
