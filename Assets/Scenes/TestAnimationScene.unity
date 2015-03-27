@@ -119,7 +119,9 @@ MonoBehaviour:
   enableXInput: 0
   useFixedUpdate: 0
   dontDestroyOnLoad: 0
-  customProfiles: []
+  customProfiles:
+  - KeyboardProfileArrows
+  - KeyboardProfileWASD
 --- !u!4 &148226053
 Transform:
   m_ObjectHideFlags: 0
@@ -308,7 +310,7 @@ MonoBehaviour:
   specialSounds: []
   goreSounds: []
   deathSounds: []
-  playerNum: 1
+  playerNum: 0
   cooldownSlider: {fileID: 0}
   inGame: 0
   playerOnTheEnd: 0
