@@ -24,8 +24,13 @@ public class Spike:MonoBehaviour {
 			return;
 		}
 		if(Vector2.Dot(coll.contacts[0].normal, -Vector2.up) > 0.2f) {
-			RockSpecial rock = coll.gameObject.GetComponent<RockSpecial>();
-			if(rock != null && rock.rocking) {
+
+			/***
+			 * ROUTINE FOR DESTROYING SPIKED BLOCK?
+			 */
+//			RockSpecial rock = coll.gameObject.GetComponent<RockSpecial>();
+			GameObject rock = null;
+			if(rock != null /* && rock.rocking */) {
 				Destroy(gameObject);
 			} else if(!flattened) {
 
