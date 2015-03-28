@@ -46,11 +46,11 @@ public class Block:MonoBehaviour {
 				spikes = true;
 			} else if(Random.Range(0, 8) == 0) {
 				battery = (GameObject)Instantiate(batteryPrefab, transform.position + Vector3.up * 6f + Vector3.back, Quaternion.identity);
-				battery.rigidbody2D.velocity = Vector2.up * SPEED;
+				((Rigidbody2D)battery.rigidbody2D).velocity = Vector2.up * SPEED;
 			}
 		}
 		// Velocity
-		rigidbody2D.velocity = Vector2.up * SPEED;
+		GetComponent<Rigidbody>().velocity = Vector2.up * SPEED;
 	}
 
 	public void Update() {
