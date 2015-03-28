@@ -109,7 +109,7 @@ public class Block:MonoBehaviour {
 				}
 			}
 			dying = true;
-			sp.SetSprite("block" + blockNum + "_2");
+			spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_2");
 			// Spawn particles
 			((GameObject) Instantiate(particlesPrefab, transform.position + new Vector3(0.2f, 2f, 1f), Quaternion.identity)).GetComponent<DestroyParticlesOnFinish>().followTarget = transform;
 			// Play sound
