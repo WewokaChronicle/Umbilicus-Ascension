@@ -36,6 +36,7 @@ public class Block:MonoBehaviour {
 		// Set random sprite
 		blockNum = Random.Range(1, 4);
 		spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_1");
+
 		// Spikes
 		if(!starterBlock) {
 			if(Random.Range(0, 6) == 0) {
@@ -65,8 +66,10 @@ public class Block:MonoBehaviour {
 		// Keep the block alive if our spikes are bloody
 		if(spikes) {
 			if(spike.bloody && dying) {
-				sp.color = Color.white;
-				spikeSprite.color = Color.white;
+				spriteRenderer.sprite = sp;
+				spriteRenderer.color = Color.white;
+				spriteRenderer.sprite = spikeSprite;
+				spriteRenderer.color = Color.white; // redundant?
 				dying = false;
 			}
 		}
@@ -74,14 +77,14 @@ public class Block:MonoBehaviour {
 		// Death timer
 		if((!spikes || !spike.bloody) && dying) {
 			deathTimer -= Time.deltaTime;
-			c = sp.color;
+			c = spriteRenderer.color;
 			c.a = deathTimer / 2f;
 			//sp.color = c;
 			if(spikes) {
 				//spikeSprite.color = c;
 			}
 			if(!dyingPhase2 && deathTimer < 0.5f) {
-				sp.SetSprite("block" + blockNum + "_3");
+				spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_3");
 				dyingPhase2 = true;
 				// Spawn particles
 			}
