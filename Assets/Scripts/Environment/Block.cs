@@ -47,7 +47,7 @@ public class Block:MonoBehaviour {
 				spikes = true;
 			} else if(Random.Range(0, 8) == 0) {
 				battery = (GameObject)Instantiate(batteryPrefab, transform.position + Vector3.up * 6f + Vector3.back, Quaternion.identity);
-				((Rigidbody2D)battery.rigidbody2D).velocity = Vector2.up * SPEED;
+				((Rigidbody2D)battery.GetComponent<Rigidbody2D>()).velocity = Vector2.up * SPEED;
 			}
 		}
 		// Velocity
@@ -101,13 +101,17 @@ public class Block:MonoBehaviour {
 		}
 
 		if(Vector2.Dot(coll.contacts[0].normal, -Vector2.up) > 0.2f) {
-			RockSpecial rock = coll.gameObject.GetComponent<RockSpecial>();
-			if(rock != null && rock.rocking) {
-				Destroy(gameObject);
-				if(spikes) {
-					Destroy(spike);
-				}
-			}
+
+			/**
+			 * RockSpecial collision
+			 */ 
+//			RockSpecial rock = coll.gameObject.GetComponent<RockSpecial>();
+//			if(rock != null && rock.rocking) {
+//				Destroy(gameObject);
+//				if(spikes) {
+//					Destroy(spike);
+//				}
+//			}
 			dying = true;
 			spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_2");
 			// Spawn particles
