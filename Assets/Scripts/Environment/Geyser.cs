@@ -31,6 +31,6 @@ public class Geyser:MonoBehaviour {
 	}
 
 	public void OnTriggerStay2D(Collider2D coll) {
-		coll.rigidbody2D.AddForce(Vector2.up * FORCE, ForceMode2D.Force);
+		coll.attachedRigidbody.AddForce(Vector2.up * FORCE, ForceMode2D.Force);
 	}
 }
