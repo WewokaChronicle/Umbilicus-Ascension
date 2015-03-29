@@ -6,6 +6,7 @@ using InControl;
 /// <summary>
 /// Reimplementation of the Player.cs that uses Unity2D's native tools.
 /// </summary>
+[RequireComponent (typeof (Collider2D))]
 [RequireComponent (typeof (Animator))]
 [RequireComponent (typeof (Rigidbody2D))]
 public class PlayerUnity2D : MonoBehaviour
@@ -74,6 +75,7 @@ public class PlayerUnity2D : MonoBehaviour
 		this.spriteAnimator = GetComponent<Animator>();
 		this.rigidbod2D = GetComponent<Rigidbody2D>();
 
+
 		// Get the input device corresponding to the player number
 		this.inputDevice = (InputManager.Devices.Count > playerNum && PlayerControl.NumberOfPlayers > playerNum) ? InputManager.Devices[playerNum] : null;
 		if(this.inputDevice == null) {
@@ -94,11 +96,11 @@ public class PlayerUnity2D : MonoBehaviour
 	void Update()
 	{
 		// End Game
-		if(this.transform.position.y < -5f) {
-			GameManager.instance.EndLevel();
-		} else if(this.transform.position.y > 70f) {
-			GameManager.instance.EndLevel();
-		}
+//		if(this.transform.position.y < -5f) {
+//			GameManager.instance.EndLevel();
+//		} else if(this.transform.position.y > 70f) {
+//			GameManager.instance.EndLevel();
+//		}
 		
 		// Don't do anything if we're dead
 		if(isDead) {
@@ -128,7 +130,20 @@ public class PlayerUnity2D : MonoBehaviour
 
 		else {
 			// Move target left and right with input stick
-			this.rigidbod2D.AddForce(Vector2.right * this.forceX, ForceMode2D.Impulse);
+			this.rigidbod2D.AddForce(Vector2.right * this.forceX, ForceMode2D.Force);
+		}
+
+		// Check float vs. stand
+		this.hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 3f, this.stickMask);
+		Debug.Log(this.hit.collider);
+		Debug.DrawRay(this.transform.position,-Vector3.up);
+		
+		if(this.hit.collider != null) { // if we hit something, then there is ground underneath
+			this.spriteAnimator.SetBool("thereIsGroundUnderneath", true);
+		}
+		
+		else { // otherwise, we're not above anything
+			this.spriteAnimator.SetBool("thereIsGroundUnderneath", false);
 		}
 
 	}
@@ -164,18 +179,7 @@ public class PlayerUnity2D : MonoBehaviour
 			this.transform.localScale = newLocalScale;
 		}
 
-		// Check float vs. stand
-		this.hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 3f, this.stickMask);
-		Debug.Log(this.hit.collider);
-		Debug.DrawRay(this.transform.position,-Vector3.up);
-		
-		if(this.hit.collider != null) { // if we hit something, then there is ground underneath
-			this.spriteAnimator.SetBool("thereIsGroundUnderneath", true);
-		}
-		
-		else { // otherwise, we're not above anything
-			this.spriteAnimator.SetBool("thereIsGroundUnderneath", false);
-		}
+
 	}
 }
 
