@@ -14,8 +14,9 @@ public class Block:MonoBehaviour {
 	private bool dying = false;
 	private bool dyingPhase2 = false;
 	private float deathTimer = 1f;
-//	private tk2dSprite sp;
-//	private tk2dSprite spikeSprite;
+	private Sprite sp;
+	private Sprite spikeSprite;
+	private SpriteRenderer spriteRenderer;
 	private Color c;
 
 	private bool spikes = false;
@@ -30,25 +31,27 @@ public class Block:MonoBehaviour {
 
 	public void Awake() {
 		// Sprite
-//		sp = GetComponent<tk2dSprite>();
+		sp = GetComponent<Sprite>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
 		// Set random sprite
 		blockNum = Random.Range(1, 4);
-//		sp.SetSprite("block" + blockNum + "_1");
+		spriteRenderer.sprite = Instantiate(Resources.Load<Sprite>("Sprites/Environment/block" + blockNum)) as Sprite;
+
 		// Spikes
 		if(!starterBlock) {
 			if(Random.Range(0, 6) == 0) {
 				GameObject spikeGO = (GameObject) Instantiate(spikePrefab, transform.position + Vector3.right * 0.4f + Vector3.up * 4f + Vector3.back, Quaternion.Euler(new Vector3(0f, 0f, -90f)));
 				spikeGO.transform.parent = transform;
-//				spikeSprite = spikeGO.GetComponent<tk2dSprite>();
+				spikeSprite = spikeGO.GetComponent<Sprite>();
 				spike = spikeGO.GetComponent<Spike>();
 				spikes = true;
 			} else if(Random.Range(0, 8) == 0) {
 				battery = (GameObject)Instantiate(batteryPrefab, transform.position + Vector3.up * 6f + Vector3.back, Quaternion.identity);
-				battery.GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
+				((Rigidbody2D)battery.GetComponent<Rigidbody2D>()).velocity = Vector2.up * SPEED;
 			}
 		}
 		// Velocity
-//		rigidbody2D.velocity = Vector2.up * SPEED;
+		GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
 	}
 
 	public void Update() {
@@ -63,8 +66,10 @@ public class Block:MonoBehaviour {
 		// Keep the block alive if our spikes are bloody
 		if(spikes) {
 			if(spike.bloody && dying) {
-//				sp.color = Color.white;
-//				spikeSprite.color = Color.white;
+				spriteRenderer.sprite = sp;
+				spriteRenderer.color = Color.white;
+				spriteRenderer.sprite = spikeSprite;
+				spriteRenderer.color = Color.white; // redundant?
 				dying = false;
 			}
 		}
@@ -72,14 +77,14 @@ public class Block:MonoBehaviour {
 		// Death timer
 		if((!spikes || !spike.bloody) && dying) {
 			deathTimer -= Time.deltaTime;
-//			c = sp.color;
+			c = spriteRenderer.color;
 			c.a = deathTimer / 2f;
 			//sp.color = c;
 			if(spikes) {
 				//spikeSprite.color = c;
 			}
 			if(!dyingPhase2 && deathTimer < 0.5f) {
-//				sp.SetSprite("block" + blockNum + "_3");
+				spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_3");
 				dyingPhase2 = true;
 				// Spawn particles
 			}
@@ -96,15 +101,19 @@ public class Block:MonoBehaviour {
 		}
 
 		if(Vector2.Dot(coll.contacts[0].normal, -Vector2.up) > 0.2f) {
-			RockSpecial rock = coll.gameObject.GetComponent<RockSpecial>();
-			if(rock != null && rock.rocking) {
-				Destroy(gameObject);
-				if(spikes) {
-					Destroy(spike);
-				}
-			}
+
+			/**
+			 * RockSpecial collision
+			 */ 
+//			RockSpecial rock = coll.gameObject.GetComponent<RockSpecial>();
+//			if(rock != null && rock.rocking) {
+//				Destroy(gameObject);
+//				if(spikes) {
+//					Destroy(spike);
+//				}
+//			}
 			dying = true;
-//			sp.SetSprite("block" + blockNum + "_2");
+			spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_2");
 			// Spawn particles
 			((GameObject) Instantiate(particlesPrefab, transform.position + new Vector3(0.2f, 2f, 1f), Quaternion.identity)).GetComponent<DestroyParticlesOnFinish>().followTarget = transform;
 			// Play sound

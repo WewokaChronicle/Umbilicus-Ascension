@@ -5,7 +5,7 @@ public class BGDecoration:MonoBehaviour {
 	private bool spawnedNextSegment = false;
 
 	public void Awake() {
-//		rigidbody2D.velocity = Vector3.up * Block.SPEED * 0.8f;
+		GetComponent<Rigidbody2D>().velocity = Vector3.up * Block.SPEED * 0.8f;
 	}
 
 	public void Update() {

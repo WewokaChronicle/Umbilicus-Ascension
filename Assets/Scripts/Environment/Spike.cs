@@ -4,7 +4,8 @@ using System.Collections;
 public class Spike:MonoBehaviour {
 	public AudioClip flattenSound;
 
-//	private tk2dSprite sp;
+//	private Sprite sp;
+	private SpriteRenderer spriteRenderer;
 	
 	public bool bloody = false;
 	private bool flattened = false;
@@ -13,32 +14,41 @@ public class Spike:MonoBehaviour {
 
 	public void Awake() {
 		// Sprite
-//		sp = GetComponent<tk2dSprite>();
+		spriteRenderer = GetComponent<SpriteRenderer>(); 
 		// Set random sprite
-//		sp.SetSprite("Spikes" + Random.Range(1, 3));
+		spriteRenderer.sprite = Resources.Load<Sprite>("Spikes" + Random.Range(1, 3));
 	}
 
-	public void OnCollisionEnter2D(Collision2D coll){
+	public void OnCollisionEnter2D(Collision2D coll) {
 		if(flattened || bloody) {
 			return;
 		}
 		if(Vector2.Dot(coll.contacts[0].normal, -Vector2.up) > 0.2f) {
-			RockSpecial rock = coll.gameObject.GetComponent<RockSpecial>();
-			if(rock != null && rock.rocking) {
+
+			/***
+			 * ROUTINE FOR DESTROYING SPIKED BLOCK?
+			 */
+//			RockSpecial rock = coll.gameObject.GetComponent<RockSpecial>();
+			GameObject rock = null;
+			if(rock != null /* && rock.rocking */) {
 				Destroy(gameObject);
 			} else if(!flattened) {
-				Player player = coll.gameObject.GetComponent<Player>();
-				if(player != null) {
-					player.Kill();
-					bloody = true;
+
+				/****************************
+				* KILL PLAYER ROUTINE
+				****************************/
+//				Player player = coll.gameObject.GetComponent<Player>();
+//				if(player != null) {
+//					player.Kill();
+//					bloody = true;
 //					sp.SetSprite(sp.CurrentSprite.name + "_Blood");
-				}
+//				}
 			}
 		}
 		if(!bloody) {
 			Sound_Manager.Instance.PlayEffectOnce(flattenSound);
 			flattened = true;
-//			collider2D.isTrigger = true;
+			GetComponent<Collider2D>().isTrigger = true;
 			// Spawn particles
 			((GameObject) Instantiate(particlePrefab, transform.position + Vector3.back * 2f, particlePrefab.transform.rotation)).GetComponent<DestroyParticlesOnFinish>().followTarget = transform;
 		}
