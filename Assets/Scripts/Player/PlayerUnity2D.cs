@@ -96,11 +96,13 @@ public class PlayerUnity2D : MonoBehaviour
 	void Update()
 	{
 		// End Game
-//		if(this.transform.position.y < -5f) {
-//			GameManager.instance.EndLevel();
-//		} else if(this.transform.position.y > 70f) {
-//			GameManager.instance.EndLevel();
-//		}
+		if(this.transform.position.y < -5f) {
+			//GameManager.instance.EndLevel();
+			Debug.Log("You lose!");
+		} else if(this.transform.position.y > 70f) {
+			//GameManager.instance.EndLevel();
+			Debug.Log("You lose!");
+		}
 		
 		// Don't do anything if we're dead
 		if(isDead) {
@@ -135,8 +137,8 @@ public class PlayerUnity2D : MonoBehaviour
 
 		// Check float vs. stand
 		this.hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 3f, this.stickMask);
-		Debug.Log(this.hit.collider);
-		Debug.DrawRay(this.transform.position,-Vector3.up);
+		// Debug.Log(this.hit.collider);
+		// Debug.DrawRay(this.transform.position,-Vector3.up);
 		
 		if(this.hit.collider != null) { // if we hit something, then there is ground underneath
 			this.spriteAnimator.SetBool("thereIsGroundUnderneath", true);
