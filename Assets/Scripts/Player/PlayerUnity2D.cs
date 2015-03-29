@@ -6,9 +6,10 @@ using InControl;
 /// <summary>
 /// Reimplementation of the Player.cs that uses Unity2D's native tools.
 /// </summary>
-[RequireComponent (typeof (Collider2D))]
-[RequireComponent (typeof (Animator))]
+[RequireComponent (typeof (BoxCollider2D))]
 [RequireComponent (typeof (Rigidbody2D))]
+[RequireComponent (typeof (Animator))]
+[RequireComponent (typeof (SpriteRenderer))]
 public class PlayerUnity2D : MonoBehaviour
 {
 	public const float FORCE = 50.0f;
@@ -31,7 +32,7 @@ public class PlayerUnity2D : MonoBehaviour
 
 	public Sprite sprite;
 	public Animator spriteAnimator;
-
+	public SpriteRenderer spriteRenderer;
 
 	// Audio
 	public AudioClip[] specialSounds;
@@ -58,6 +59,9 @@ public class PlayerUnity2D : MonoBehaviour
 	// Corpse 
 	public GameObject corpsePrefab;
 
+	// This player's Special Script
+	public GameObject specialScript;
+
 	// Particles
 	public ParticleSystem bloodParticles;
 
@@ -67,13 +71,17 @@ public class PlayerUnity2D : MonoBehaviour
 	private Vector2 velocity;
 	private RaycastHit2D hit;
 	private Rigidbody2D rigidbod2D;
+	private BoxCollider2D boxCollider2D;
 
 	// This is called before Start
 	void Awake() 
 	{
 		this.cam = Camera.main;
-		this.spriteAnimator = GetComponent<Animator>();
+		this.boxCollider2D = GetComponent<BoxCollider2D>();
 		this.rigidbod2D = GetComponent<Rigidbody2D>();
+		this.spriteAnimator = GetComponent<Animator>();
+		this.spriteRenderer = GetComponent<SpriteRenderer>();
+
 
 
 		// Get the input device corresponding to the player number
@@ -151,12 +159,48 @@ public class PlayerUnity2D : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Kill this instance and spawn this player's corpse.
+	/// </summary>
+	public void Kill() 
+	{
+		if(this.isDead) {
+			return; // do nothing.
+		}
+
+		this.isDead = true;
+		this.rigidbod2D.fixedAngle = false;
+
+		// adjust collider
+		this.boxCollider2D.size = new Vector2(2f, 2f);
+		this.boxCollider2D.offset = new Vector2(0f, -1.7f);
+
+		// spawn corpse
+		GameObject corpse = ((GameObject) Instantiate(this.corpsePrefab, this.transform.position, this.transform.rotation));
+		Sprite corpseSprite = Resources.Load<Sprite>("Sprites/Player/PlayerBlueDead");
+		corpse.GetComponent<SpriteRenderer>().sprite = corpseSprite;
+
+		// sprite
+		this.spriteAnimator.StopPlayback();
+		Sprite deadLegsSprite = Resources.Load<Sprite>("Sprites/Player/PlayerBlueDeadLegs");
+		this.spriteRenderer.sprite = deadLegsSprite;
+
+		// blood!
+		this.bloodParticles.Play();
+
+	}
+
+	/// <summary>
 	/// Auxiliary method for handling input detection.
 	/// </summary>
 	private void UpdateInput(InputDevice inputDevice)
 	{
 		if(Time.timeScale == 0f) {
 			return; //we've effectively paused, so there's nothing to update
+		}
+
+		bool actionOn = inputDevice.Action1;
+		if(actionOn) {
+			this.Kill();
 		}
 
 		// Direction
@@ -180,8 +224,6 @@ public class PlayerUnity2D : MonoBehaviour
 			Vector3 newLocalScale = new Vector3(-oldLocalScale.x, oldLocalScale.y, oldLocalScale.z);
 			this.transform.localScale = newLocalScale;
 		}
-
-
 	}
 }
 
