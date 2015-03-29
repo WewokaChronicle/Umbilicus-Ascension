@@ -35,9 +35,7 @@ public class Block:MonoBehaviour {
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		// Set random sprite
 		blockNum = Random.Range(1, 4);
-		Debug.Log(spriteRenderer);
 		spriteRenderer.sprite = Instantiate(Resources.Load<Sprite>("Sprites/Environment/block" + blockNum)) as Sprite;
-		Debug.Log(spriteRenderer.sprite);
 
 		// Spikes
 		if(!starterBlock) {
