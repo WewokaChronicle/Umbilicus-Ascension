@@ -8,7 +8,6 @@ using InControl;
 /// </summary>
 [RequireComponent (typeof (BoxCollider2D))]
 [RequireComponent (typeof (Rigidbody2D))]
-[RequireComponent (typeof (Animator))]
 [RequireComponent (typeof (SpriteRenderer))]
 public class PlayerUnity2D : MonoBehaviour
 {
@@ -168,25 +167,27 @@ public class PlayerUnity2D : MonoBehaviour
 		}
 
 		this.isDead = true;
-		this.rigidbod2D.fixedAngle = false;
 
-		// adjust collider
-		this.boxCollider2D.size = new Vector2(2f, 2f);
-		this.boxCollider2D.offset = new Vector2(0f, -1.7f);
-
-		// spawn corpse
+		// Spawn Corpse
 		GameObject corpse = ((GameObject) Instantiate(this.corpsePrefab, this.transform.position, this.transform.rotation));
 		Sprite corpseSprite = Resources.Load<Sprite>("Sprites/Player/PlayerBlueDead");
 		corpse.GetComponent<SpriteRenderer>().sprite = corpseSprite;
 
-		// sprite
-		this.spriteAnimator.StopPlayback();
+		// --- Player modifications ---
+		// change the sprite to dead legs
 		Sprite deadLegsSprite = Resources.Load<Sprite>("Sprites/Player/PlayerBlueDeadLegs");
 		this.spriteRenderer.sprite = deadLegsSprite;
+		this.transform.position += new Vector3(0f, -deadLegsSprite.bounds.size.y);
+
+		// adjust this Sprite's collider to dead legs size, since they remain attached to the chain
+		this.boxCollider2D.size = deadLegsSprite.bounds.size;
+		this.rigidbod2D.fixedAngle = false; // dead legs can be chaotic!
+
+		// destroy the animator, since dead legs don't animate
+		Destroy(this.spriteAnimator);
 
 		// blood!
 		this.bloodParticles.Play();
-
 	}
 
 	/// <summary>
