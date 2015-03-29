@@ -35,7 +35,9 @@ public class Block:MonoBehaviour {
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		// Set random sprite
 		blockNum = Random.Range(1, 4);
-		spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_1");
+		Debug.Log(spriteRenderer);
+		spriteRenderer.sprite = Instantiate(Resources.Load<Sprite>("Sprites/Environment/block" + blockNum)) as Sprite;
+		Debug.Log(spriteRenderer.sprite);
 
 		// Spikes
 		if(!starterBlock) {
@@ -51,7 +53,7 @@ public class Block:MonoBehaviour {
 			}
 		}
 		// Velocity
-		GetComponent<Rigidbody>().velocity = Vector2.up * SPEED;
+		GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
 	}
 
 	public void Update() {
