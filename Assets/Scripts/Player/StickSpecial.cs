@@ -10,7 +10,7 @@ public class StickSpecial:MonoBehaviour {
 	private bool actionOn = false;
 	private bool actionDisabled = false;
 
-	public AudioClip specialSnd;
+	public AudioClip specialSound;
 
 	// Collider offsets
 	private Vector2 bottomRightOffset;
@@ -52,7 +52,7 @@ public class StickSpecial:MonoBehaviour {
 				Collider2D coll = Physics2D.OverlapArea((Vector2) transform.position - bottomRightOffset, (Vector2) transform.position + bottomRightOffset, player.stickMask);
 				if(coll != null) {
 					actionOn = true;
-					Sound_Manager.Instance.PlayEffectOnce(specialSnd);
+					Sound_Manager.Instance.PlayEffectOnce(specialSound);
 					// Anim
 //					player.spAnim.Play("GrabStart");
 //					player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {

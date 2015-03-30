@@ -363,9 +363,9 @@ GameObject:
   - 4: {fileID: 1917393737}
   - 212: {fileID: 1917393736}
   - 95: {fileID: 1917393738}
-  - 114: {fileID: 1917393739}
   - 50: {fileID: 1917393740}
   - 61: {fileID: 1917393741}
+  - 114: {fileID: 1917393742}
   m_Layer: 8
   m_Name: Blue
   m_TagString: Untagged
@@ -429,34 +429,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &1917393739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1917393735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdaeac8332fbb416892b6e9e3e9d6464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stickMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  sprite: {fileID: 0}
-  spriteAnimator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  specialSounds: []
-  goreSounds: []
-  deathSounds: []
-  playerNum: 0
-  cooldownSlider: {fileID: 0}
-  inGame: 0
-  playerOnTheEnd: 0
-  isDead: 0
-  corpsePrefab: {fileID: 160410, guid: 6e95eac1e52314b8fa9576d203b78880, type: 2}
-  specialScript: {fileID: 0}
-  bloodParticles: {fileID: 1860072288}
 --- !u!50 &1917393740
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -485,3 +457,30 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .600000024, y: 1.10000002}
+--- !u!114 &1917393742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1917393735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdaeac8332fbb416892b6e9e3e9d6464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stickMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  sprite: {fileID: 0}
+  spriteAnimator: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  specialSounds: []
+  goreSounds: []
+  deathSounds: []
+  playerNum: 0
+  cooldownSlider: {fileID: 0}
+  inGame: 0
+  playerOnTheEnd: 0
+  isDead: 0
+  corpsePrefab: {fileID: 160410, guid: 6e95eac1e52314b8fa9576d203b78880, type: 2}
+  bloodParticles: {fileID: 1860072288}
