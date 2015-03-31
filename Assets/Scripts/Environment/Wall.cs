@@ -7,7 +7,7 @@ public class Wall:MonoBehaviour {
 	private bool spawnedNextSegment = false;
 
 	public void Awake() {
-		rigidbody2D.velocity = Vector3.up * Block.SPEED;
+		GetComponent<Rigidbody2D>().velocity = Vector3.up * Block.SPEED;
 		// Only do this on the first wall segment, not any clone
 		if(name == "RightWall" || name == "LeftWall") {
 			transform.Translate(Vector3.up * Random.Range(0f, 40f));
