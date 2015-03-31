@@ -14,9 +14,9 @@ public class Spike:MonoBehaviour {
 
 	public void Awake() {
 		// Sprite
-		spriteRenderer = GetComponent<SpriteRenderer>(); 
+		this.spriteRenderer = GetComponent<SpriteRenderer>(); 
 		// Set random sprite
-		spriteRenderer.sprite = Resources.Load<Sprite>("Spikes" + Random.Range(1, 3));
+		this.spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Environment/Spikes" + Random.Range(1, 3)) as Sprite;
 	}
 
 	public void OnCollisionEnter2D(Collision2D coll) {
