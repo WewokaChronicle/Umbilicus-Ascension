@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400930}
-  - 114: {fileID: 11400930}
   - 68: {fileID: 6852734}
   - 50: {fileID: 5052734}
   - 114: {fileID: 11452734}
@@ -548,29 +547,6 @@ EdgeCollider2D:
   - {x: -3.85269165, y: 50.9626389}
   - {x: -3.17480469, y: 53.9984169}
   - {x: 10.1431808, y: 53.8655357}
---- !u!114 &11400930
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fac570381f34f647b768dc5a5aa1364, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collection: {fileID: 11409690, guid: 73a156f8744fc4bcc9b31aa6a3fd003c, type: 2}
-  _color: {r: 1, g: 1, b: 1, a: 1}
-  _scale: {x: 1, y: 1, z: 1}
-  _spriteId: 2
-  boxCollider2D: {fileID: 0}
-  polygonCollider2D: []
-  edgeCollider2D: []
-  boxCollider: {fileID: 0}
-  meshCollider: {fileID: 0}
-  meshColliderPositions: []
-  meshColliderMesh: {fileID: 0}
-  renderLayer: 0
 --- !u!114 &11452734
 MonoBehaviour:
   m_ObjectHideFlags: 1
