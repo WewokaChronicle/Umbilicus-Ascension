@@ -31,7 +31,7 @@ public class ChainGenerator:MonoBehaviour
 
 	public void CreateChain(int playerInd, Player p1, Player p2)
 	{
-		Vector2 linkSize = ((BoxCollider2D)chainLinkPrefab.collider2D).size;
+		Vector2 linkSize = ((BoxCollider2D)chainLinkPrefab.GetComponent<Collider2D>()).size;
 		float linkOffset = linkSize.x * 0.5f;
 		Vector3 pos = p1.transform.position + (Vector3.right * linkOffset) + Vector3.forward;
 
