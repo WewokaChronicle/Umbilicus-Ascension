@@ -4,9 +4,18 @@ using System.Collections;
 
 public class FadeIn : MonoBehaviour
 {
-	public Sprite fade;
+//	public Sprite fade;
 	private Color color;
+	private float alpha;
 	private float startTime;
+
+	public void Awake()
+	{
+		this.color = GetComponent<SpriteRenderer>().color;
+		this.alpha = 0f;
+		this.color.a = this.alpha;
+		GetComponent<SpriteRenderer>().color = this.color;
+	}
 
 	public void Start()
 	{
@@ -15,28 +24,21 @@ public class FadeIn : MonoBehaviour
 
 	public void Update()
 	{
-		float t = Time.realtimeSinceStartup - startTime;
-		color.a = 1f - (t / 2f);
-		this._SetFadeColor();
-		if(t > 2f) {
-			Destroy(fade);
-			Destroy(gameObject);
+		if(this.alpha < 1f)
+		{
+			this._FadeIn();
 		}
 	}
 
 	/// <summary>
-	/// Sets fade texture color
+	/// Set alpha of sprite based on time since scene start
 	/// </summary>
-	/// <returns><c>true</c>, if set fade color was set, <c>false</c> otherwise.</returns>
-	private bool _SetFadeColor()
+	private void _FadeIn() 
 	{
-		Texture2D text = this.fade.texture;
-		int pixelCount = text.width * text.height;
-		if(pixelCount > 0) {
-			Color colors = new Color[pixelCount];
-			text.SetPixels(0, 0, text.width, text.height, colors);
-			return true;
-		}
-		return false;
+		float t = Time.realtimeSinceStartup - startTime;
+		this.color = GetComponent<SpriteRenderer>().color;
+		this.alpha += t/100f;
+		this.color.a = this.alpha;
+		GetComponent<SpriteRenderer>().color = this.color;
 	}
 }
