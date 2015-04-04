@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using InControl;
 
 /// <summary>
-/// Reimplementation of the Player.cs that uses Unity2D's native tools.
+/// The base class for all Players.
 /// </summary>
 [RequireComponent (typeof (BoxCollider2D))]
 [RequireComponent (typeof (Rigidbody2D))]
@@ -185,11 +185,6 @@ public class Player : MonoBehaviour
 	{
 		if(Time.timeScale == 0f) {
 			return; //we've effectively paused, so there's nothing to update
-		}
-
-		bool actionOn = inputDevice.Action1;
-		if(actionOn) {
-			this.Kill();
 		}
 
 		// Direction

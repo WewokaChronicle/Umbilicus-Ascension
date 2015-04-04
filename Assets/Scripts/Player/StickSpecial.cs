@@ -3,13 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using InControl;
 
-public class StickSpecial:MonoBehaviour {
+[RequireComponent (typeof (Player))]
+public class StickSpecial : MonoBehaviour {
+
 	// Player and input
 	public Player player;
 	private InputDevice inputDevice;
 	private bool actionOn = false;
 	private bool actionDisabled = false;
 
+	// Sound
 	public AudioClip specialSound;
 
 	// Collider offsets
@@ -31,20 +34,23 @@ public class StickSpecial:MonoBehaviour {
 	private float velY;
 	private Vector2 velocity;
 
-	public void Start() {
-		player = GetComponent<Player>();
-		if(player.inGame) {
-			cooldownSlider = player.cooldownSlider;
-			cooldownFillImage = cooldownSlider.transform.FindChild("Fill Area").GetComponentInChildren<Image>();
-			origColor = cooldownFillImage.color;
-			inputDevice = player.inputDevice;
+	public void Start() 
+	{
+		this.player = GetComponent<Player>();
+		if(this.player.inGame) {
+//			cooldownSlider = player.cooldownSlider;
+//			cooldownFillImage = cooldownSlider.transform.FindChild("Fill Area").GetComponentInChildren<Image>();
+//			origColor = cooldownFillImage.color;
+			this.inputDevice = player.inputDevice;
+
 			// Collider offsets
 			BoxCollider2D coll = GetComponent<BoxCollider2D>();
-			bottomRightOffset = new Vector2(coll.size.x / 2f * 1.2f, coll.size.y / 2f * 1.2f);
+			this.bottomRightOffset = new Vector2(coll.size.x / 2f * 1.2f, coll.size.y / 2f * 1.2f);
 		}
 	}
 
-	public void Update() {
+	public void Update() 
+	{
 		// Action
 		if(!actionDisabled && floatPower > (MAX_STICK_POWER * 0.1f)) {
 			if(!actionOn && inputDevice.Action1) {
@@ -53,6 +59,12 @@ public class StickSpecial:MonoBehaviour {
 				if(coll != null) {
 					actionOn = true;
 					Sound_Manager.Instance.PlayEffectOnce(specialSound);
+
+					this.player.spriteAnimator.SetTrigger("grabStart");
+					this.player.spriteAnimator.SetTrigger("grabLoopStart");
+					this.player.spriteAnimator.SetBool("isGrabbing", true);
+
+
 					// Anim
 //					player.spAnim.Play("GrabStart");
 //					player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
@@ -69,17 +81,17 @@ public class StickSpecial:MonoBehaviour {
 		} else {
 			if(!actionDisabled) {
 				actionDisabled = true;
-				cooldownFillImage.color = Color.red;
+//				cooldownFillImage.color = Color.red;
 			}
 			if(actionOn) {
-//				player.spAnim.Play("Float");
+				this.player.spriteAnimator.SetBool("isGrabbing", false);
 			}
 			actionOn = false;
 		}
 		// Un-disable
 		if(actionDisabled && floatPower > (MAX_STICK_POWER * 0.9f)) {
 			actionDisabled = false;
-			cooldownFillImage.color = origColor;
+//			cooldownFillImage.color = origColor;
 		}
 		// Recover sticky power
 		if(!actionOn) {
@@ -87,7 +99,7 @@ public class StickSpecial:MonoBehaviour {
 			floatPower = Mathf.Min(floatPower, MAX_STICK_POWER);
 		}
 		// Display remaining sticky power
-		cooldownSlider.value = floatPower / MAX_STICK_POWER;
+//		cooldownSlider.value = floatPower / MAX_STICK_POWER;
 	}
 	
 	public void FixedUpdate() {
