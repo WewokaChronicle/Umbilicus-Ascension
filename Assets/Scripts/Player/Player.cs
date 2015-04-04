@@ -31,12 +31,11 @@ public class Player : MonoBehaviour
 	public SpriteRenderer spriteRenderer;
 
 	// Audio
-	public AudioClip[] specialSounds;
 	public AudioClip[] goreSounds;
 	public AudioClip[] deathSounds;
 	
 	// Input
-	public int playerNum;
+	public int playerNumber;
 	public Slider cooldownSlider;
 
 	[HideInInspector]
@@ -75,7 +74,7 @@ public class Player : MonoBehaviour
 		this.spriteRenderer = GetComponent<SpriteRenderer>();
 
 		// Get the input device corresponding to the player number
-		this.inputDevice = (InputManager.Devices.Count > playerNum && PlayerControl.NumberOfPlayers > playerNum) ? InputManager.Devices[playerNum] : null;
+		this.inputDevice = (InputManager.Devices.Count > playerNumber && PlayerControl.NumberOfPlayers > playerNumber) ? InputManager.Devices[playerNumber] : null;
 		if(this.inputDevice == null) {
 			//this.cooldownSlider.gameObject.SetActive(false);
 			// If no controller exists for this player, destroy it
@@ -166,6 +165,15 @@ public class Player : MonoBehaviour
 		Sprite deadLegsSprite = Resources.Load<Sprite>("Sprites/Player/PlayerBlueDeadLegs");
 		this.spriteRenderer.sprite = deadLegsSprite;
 		this.transform.position += new Vector3(0f, -deadLegsSprite.bounds.size.y);
+
+		// Play a death grunt
+		Sound_Manager.Instance.PlayEffectOnce(this.deathSounds[this.playerNumber * 3 + UnityEngine.Random.Range(0, 3)]);
+
+		// Play a gore sound
+		Sound_Manager.Instance.PlayEffectOnce(this.goreSounds[UnityEngine.Random.Range(0, 3)]);
+
+		// Disable this player's Special (this method should exist in the Special script attached to this game object)
+		SendMessage("DisableSpecial");
 
 		// adjust this Sprite's collider to dead legs size, since they remain attached to the chain
 		this.boxCollider2D.size = deadLegsSprite.bounds.size;
