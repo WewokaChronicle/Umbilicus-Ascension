@@ -63,13 +63,6 @@ public class StickSpecial : MonoBehaviour {
 					this.player.spriteAnimator.SetTrigger("grabStart");
 					this.player.spriteAnimator.SetTrigger("grabLoopStart");
 					this.player.spriteAnimator.SetBool("isGrabbing", true);
-
-
-					// Anim
-//					player.spAnim.Play("GrabStart");
-//					player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
-//						player.spAnim.Play("Grab");
-//					};
 				}
 			} else if(actionOn && !inputDevice.Action1) {
 				// Turn off
