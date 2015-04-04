@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: fdaeac8332fbb416892b6e9e3e9d6464
-timeCreated: 1426723879
+timeCreated: 1428171414
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - sprite: {instanceID: 0}
+  - spriteAnimator: {instanceID: 0}
+  - spriteRenderer: {instanceID: 0}
+  - cooldownSlider: {instanceID: 0}
+  - corpsePrefab: {instanceID: 0}
+  - bloodParticles: {fileID: 19893940, guid: e5c710c089d1c1e4189ae2840b72c751, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
