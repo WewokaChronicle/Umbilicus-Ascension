@@ -47,7 +47,7 @@ public class BlockGenerator:MonoBehaviour
 		for(int i = 0; i < cnt; i++) {
 			block = (GameObject)GameObject.Instantiate(blockPrefab, pos, Quaternion.identity);
 			block.name = blockPrefab.name;
-//			pos.x += 7f;
+			pos.x += 7f;
 		}
 	}
 }
