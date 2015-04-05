@@ -35,7 +35,7 @@ public class BlockGenerator:MonoBehaviour
 
 	public void SpawnBlock()
 	{
-		Vector3 pos = new Vector3(16f + Random.Range(0, 10) * 7f, -10f);
+		Vector3 pos = new Vector3(Random.Range(-10, 10), -10f);
 		GameObject block;
 
 		int cnt = Random.Range(1, 5);

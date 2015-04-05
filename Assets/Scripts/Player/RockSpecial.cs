@@ -59,7 +59,9 @@ public class RockSpecial:MonoBehaviour {
 			rockTimer -= Time.deltaTime;
 		} else if(rocking) {
 			rocking = false;
-//			player.spAnim.Play("SmashHit");
+
+			// UNCOMMENT THIS WHEN PLAYER IS COMPLETE
+//			player.spAnim.Play("SmashHit"); // UNCOMMENT THIS WHEN PLAYER IS COMPLETE
 		}
 	}
 
@@ -76,11 +78,12 @@ public class RockSpecial:MonoBehaviour {
 			rockTimer = ROCK_TIME;
 
 			// Anim
+			// UNCOMMENT THIS WHEN PLAYER IS COMPLETE
 //			player.spAnim.Play("Smash");
 //			player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
 //				player.spAnim.Play("Float");
 //			};
-//
+
 			// Sound
 			Sound_Manager.Instance.PlayEffectOnce(specialSnd);
 

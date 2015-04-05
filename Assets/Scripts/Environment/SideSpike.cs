@@ -4,14 +4,14 @@ using System.Collections;
 public class SideSpike:MonoBehaviour {
 	public AudioClip flattenSound;
 
-//	private tk2dSprite sp;
+	private SpriteRenderer spriteRenderer;
 	
 	public bool bloody = false;
 	private bool flattened = false;
 
 	public void Awake() {
 		// Sprite
-//		sp = GetComponent<tk2dSprite>();
+		this.spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
 	public void OnCollisionEnter2D(Collision2D coll){
@@ -26,7 +26,7 @@ public class SideSpike:MonoBehaviour {
 			if(player != null) {
 				player.Kill();
 				bloody = true;
-//				sp.SetSprite(sp.CurrentSprite.name + "_Blood");
+				this.spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Environment/" + this.spriteRenderer.sprite.name + "_Blood") as Sprite;
 			}
 		}
 		if(!bloody) {

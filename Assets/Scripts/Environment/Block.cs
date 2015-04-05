@@ -40,7 +40,7 @@ public class Block:MonoBehaviour {
 		// Spikes
 		if(!starterBlock) {
 			if(Random.Range(0, 6) == 0) {
-				GameObject spikeGO = (GameObject) Instantiate(spikePrefab, transform.position + Vector3.right * 0.4f + Vector3.up * 4f + Vector3.back, Quaternion.Euler(new Vector3(0f, 0f, -90f)));
+				GameObject spikeGO = (GameObject) Instantiate(spikePrefab, transform.position + Vector3.up + Vector3.back, Quaternion.Euler(new Vector3(0f, 0f, -90f)));
 				spikeGO.transform.parent = transform;
 				spikeSprite = spikeGO.GetComponent<Sprite>();
 				spike = spikeGO.GetComponent<Spike>();
