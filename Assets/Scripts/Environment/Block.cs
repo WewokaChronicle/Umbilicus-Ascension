@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Block:MonoBehaviour {
-	public const float SPEED = 10f;
+	public const float SPEED = 5f;
 
 	public bool starterBlock = false;
 
