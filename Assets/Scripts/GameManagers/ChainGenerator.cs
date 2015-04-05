@@ -5,7 +5,7 @@ public class ChainGenerator:MonoBehaviour
 {
 	public Player[] players;
 	public GameObject chainLinkPrefab;
-	private const float PLAYER_DISTANCE = 10f;
+	private const float PLAYER_DISTANCE = 2f;
 	private const int NUM_LINKS = 10;
 
 	public void Start()
@@ -32,7 +32,7 @@ public class ChainGenerator:MonoBehaviour
 	public void CreateChain(int playerInd, Player p1, Player p2)
 	{
 		Vector2 linkSize = ((BoxCollider2D)chainLinkPrefab.GetComponent<Collider2D>()).size;
-		float linkOffset = linkSize.x * 0.5f;
+		float linkOffset = linkSize.x * 0.3f;
 		Vector3 pos = p1.transform.position + (Vector3.right * linkOffset) + Vector3.forward;
 
 		GameObject link;
