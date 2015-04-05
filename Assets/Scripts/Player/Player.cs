@@ -227,8 +227,7 @@ public class Player : MonoBehaviour
 	/// </summary>
 	private void RepositionSlider(Slider cooldownSlider) 
 	{
-		cooldownSlider.transform.position = cam.WorldToScreenPoint(this.transform.position) + Vector3.up * 42f;
-
+		cooldownSlider.transform.position = this.transform.position + Vector3.up * 1f;
 		if(this.transform.position.y > 49f || this.transform.position.y < 3f || Time.timeScale == 0f) {
 			cooldownSlider.gameObject.SetActive(false);
 		}
