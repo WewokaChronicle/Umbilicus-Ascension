@@ -75,14 +75,15 @@ public class Player : MonoBehaviour
 
 		// Get the input device corresponding to the player number
 		this.inputDevice = (InputManager.Devices.Count > playerNumber && PlayerControl.NumberOfPlayers > playerNumber) ? InputManager.Devices[playerNumber] : null;
+
 		if(this.inputDevice == null) {
-			//this.cooldownSlider.gameObject.SetActive(false);
+			this.cooldownSlider.gameObject.SetActive(false);
 			// If no controller exists for this player, destroy it
-			Destroy(gameObject);
+			Destroy(this.gameObject);
 		} 
 
 		else {
-			inGame = true;
+			this.inGame = true;
 		}
 	}
 	
@@ -99,12 +100,15 @@ public class Player : MonoBehaviour
 		}
 		
 		// Don't do anything if we're dead
-		if(isDead) {
+		if(this.isDead) {
 			return;
 		}
 
 		// Input
-		UpdateInput(this.inputDevice);
+		this.UpdateInput(this.inputDevice);
+
+		// Reposition Slider over us
+		this.RepositionSlider(this.cooldownSlider);
 	}
 
 	void FixedUpdate()
@@ -215,6 +219,22 @@ public class Player : MonoBehaviour
 			Vector3 oldLocalScale = this.transform.localScale;
 			Vector3 newLocalScale = new Vector3(-oldLocalScale.x, oldLocalScale.y, oldLocalScale.z);
 			this.transform.localScale = newLocalScale;
+		}
+	}
+
+	/// <summary>
+	/// Auxiliary method for handling respositioning the slider bar above the player.
+	/// </summary>
+	private void RepositionSlider(Slider cooldownSlider) 
+	{
+		cooldownSlider.transform.position = cam.WorldToScreenPoint(this.transform.position) + Vector3.up * 42f;
+
+		if(this.transform.position.y > 49f || this.transform.position.y < 3f || Time.timeScale == 0f) {
+			cooldownSlider.gameObject.SetActive(false);
+		}
+
+		else {
+			cooldownSlider.gameObject.SetActive(true);
 		}
 	}
 }

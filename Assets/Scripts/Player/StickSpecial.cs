@@ -38,10 +38,13 @@ public class StickSpecial : MonoBehaviour {
 	{
 		this.player = GetComponent<Player>();
 		if(this.player.inGame) {
-//			cooldownSlider = player.cooldownSlider;
-//			cooldownFillImage = cooldownSlider.transform.FindChild("Fill Area").GetComponentInChildren<Image>();
-//			origColor = cooldownFillImage.color;
+
 			this.inputDevice = player.inputDevice;
+
+			// Setup the slider
+			this.cooldownSlider = this.player.cooldownSlider;
+			this.cooldownFillImage = this.cooldownSlider.transform.FindChild("Fill Area").FindChild("Fill").GetComponent<Image>();
+			this.origColor = cooldownFillImage.color;
 
 			// Collider offsets
 			BoxCollider2D coll = GetComponent<BoxCollider2D>();
@@ -52,58 +55,76 @@ public class StickSpecial : MonoBehaviour {
 	public void Update() 
 	{
 		// Action
-		if(!actionDisabled && floatPower > (MAX_STICK_POWER * 0.1f)) {
-			if(!actionOn && inputDevice.Action1) {
+		if(!this.actionDisabled && this.floatPower > (MAX_STICK_POWER * 0.1f)) {
+		
+			if(!this.actionOn && this.inputDevice.Action1) {
 				// Turn on
-				Collider2D coll = Physics2D.OverlapArea((Vector2) transform.position - bottomRightOffset, (Vector2) transform.position + bottomRightOffset, player.stickMask);
-				if(coll != null) {
-					actionOn = true;
+
+				// Get the bounding box of this game object
+				Vector2 boundingBoxTopLeftCoordinate = ((Vector2) this.transform.position - this.bottomRightOffset);
+				Vector2 boundingBoxBottomRightCoordinate = ((Vector2) this.transform.position + this.bottomRightOffset);
+
+				// Check for anything colliding with this bounding box
+				Collider2D coll = Physics2D.OverlapArea(boundingBoxTopLeftCoordinate, boundingBoxBottomRightCoordinate, this.player.stickMask);
+
+				if(coll != null) { // we're colliding with the environment
+					this.actionOn = true;
 					Sound_Manager.Instance.PlayEffectOnce(specialSound);
 
 					this.player.spriteAnimator.SetTrigger("grabStart");
 					this.player.spriteAnimator.SetTrigger("grabLoopStart");
 					this.player.spriteAnimator.SetBool("isGrabbing", true);
 				}
-			} else if(actionOn && !inputDevice.Action1) {
-				// Turn off
-				actionDisabled = true;
+			} 
+
+			else if(this.actionOn && !this.inputDevice.Action1) {
+				this.actionDisabled = true; // Turn off
 			}
-			if(actionOn) {
-				floatPower -= Time.deltaTime;
+
+			if(this.actionOn) {
+				this.floatPower -= Time.deltaTime;
 			}
-		} else {
-			if(!actionDisabled) {
-				actionDisabled = true;
-//				cooldownFillImage.color = Color.red;
+		} 
+
+		else {
+
+			if(!this.actionDisabled) {
+				this.actionDisabled = true;
+				this.cooldownFillImage.color = Color.red;
 			}
-			if(actionOn) {
+
+			if(this.actionOn) {
 				this.player.spriteAnimator.SetBool("isGrabbing", false);
 			}
-			actionOn = false;
+
+			this.actionOn = false;
 		}
+
 		// Un-disable
-		if(actionDisabled && floatPower > (MAX_STICK_POWER * 0.9f)) {
-			actionDisabled = false;
-//			cooldownFillImage.color = origColor;
+		if(this.actionDisabled && this.floatPower > (MAX_STICK_POWER * 0.9f)) {
+			this.actionDisabled = false;
+			this.cooldownFillImage.color = origColor;
 		}
+
 		// Recover sticky power
 		if(!actionOn) {
-			floatPower += Time.deltaTime * 1.5f;
-			floatPower = Mathf.Min(floatPower, MAX_STICK_POWER);
+			this.floatPower += Time.deltaTime * 1.5f;
+			this.floatPower = Mathf.Min(this.floatPower, MAX_STICK_POWER);
 		}
+
 		// Display remaining sticky power
-//		cooldownSlider.value = floatPower / MAX_STICK_POWER;
+		this.cooldownSlider.value = this.floatPower / MAX_STICK_POWER;
 	}
 	
 	public void FixedUpdate() {
-		if(actionOn) {
+		if(this.actionOn) {
 			// Stick in place
 			GetComponent<Rigidbody2D>().velocity = Vector2.up * Block.SPEED;
 		}
 	}
 
 	public void DisableSpecial() {
-		enabled = false;
+		this.enabled = false;
 	}
 }
 
