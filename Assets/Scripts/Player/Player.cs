@@ -13,10 +13,7 @@ public class Player : MonoBehaviour
 {
 	public const float FORCE = 50.0f;
 	public const float MAX_SPEED = 50.0f;
-	
-	// Camera
-	private Camera cam;
-	
+
 	// Layer mask
 	public LayerMask stickMask;
 
@@ -67,7 +64,6 @@ public class Player : MonoBehaviour
 	// This is called before Start
 	void Awake() 
 	{
-		this.cam = Camera.main;
 		this.boxCollider2D = GetComponent<BoxCollider2D>();
 		this.rigidbod2D = GetComponent<Rigidbody2D>();
 		this.spriteAnimator = GetComponent<Animator>();
