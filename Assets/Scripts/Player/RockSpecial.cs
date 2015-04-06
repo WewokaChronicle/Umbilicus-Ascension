@@ -5,9 +5,7 @@ using InControl;
 
 public class RockSpecial:MonoBehaviour {
 	public const float FORCE = 8000f;
-
-	public AudioClip specialSnd;
-
+	
 	// Player and input
 	public Player player;
 	private InputDevice inputDevice;
@@ -28,6 +26,10 @@ public class RockSpecial:MonoBehaviour {
 	// Leftover force timer
 	private const float COOLDOWN_TIME = 2f;
 	private float cooldownTimer;
+
+	// Special SFX
+	public AudioClip specialSound;
+
 
 	public void Start() {
 		player = GetComponent<Player>();
@@ -85,7 +87,7 @@ public class RockSpecial:MonoBehaviour {
 //			};
 
 			// Sound
-			Sound_Manager.Instance.PlayEffectOnce(specialSnd);
+			Sound_Manager.Instance.PlayEffectOnce(specialSound);
 
 			// Initial impulse force
 			GetComponent<Rigidbody2D>().AddForce(-Vector2.up * FORCE * 0.5f, ForceMode2D.Impulse);
