@@ -42,9 +42,9 @@ public class BlockGenerator:MonoBehaviour
 		GameObject block;
 
 		// randomly select number of blocks in group
-		int cnt = Random.Range(1, MAX_BLOCKS);
+		int count = Random.Range(1, MAX_BLOCKS);
 
-		for(int i = 0; i < cnt; i++) {
+		for(int i = 0; i < count; i++) {
 			block = (GameObject)GameObject.Instantiate(blockPrefab, pos, Quaternion.identity);
 			block.name = blockPrefab.name;
 
