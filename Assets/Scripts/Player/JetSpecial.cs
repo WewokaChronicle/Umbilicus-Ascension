@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using InControl;
 
-public class JetSpecial:MonoBehaviour {
+public class JetSpecial : MonoBehaviour {
 
 	// Jet Force power!
 	public const float FORCE = 100f;

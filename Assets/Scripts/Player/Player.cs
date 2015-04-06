@@ -91,11 +91,11 @@ public class Player : MonoBehaviour
 	{
 		// End Game
 		if(this.transform.position.y < -5f) {
-			GameManager.instance.EndLevel();
-//			Debug.Log("You lose!");
+//			GameManager.instance.EndLevel();
+			Debug.Log("You lose!");
 		} else if(this.transform.position.y > 70f) {
-			GameManager.instance.EndLevel();
-//			Debug.Log("You lose!");
+//			GameManager.instance.EndLevel();
+			Debug.Log("You lose!");
 		}
 		
 		// Don't do anything if we're dead

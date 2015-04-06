@@ -3,8 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using InControl;
 
-public class RockSpecial:MonoBehaviour {
-	public const float FORCE = 8000f;
+public class RockSpecial : MonoBehaviour {
+	public const float FORCE = 80f;
 	
 	// Player and input
 	public Player player;
@@ -29,62 +29,61 @@ public class RockSpecial:MonoBehaviour {
 
 	// Special SFX
 	public AudioClip specialSound;
-
-
+	
 	public void Start() {
-		player = GetComponent<Player>();
-		if(player.inGame) {
-			cooldownSlider = player.cooldownSlider;
-			cooldownFillImage = cooldownSlider.transform.FindChild("Fill Area").GetComponentInChildren<Image>();
-			origColor = cooldownFillImage.color;
-			offColor = origColor * Color.gray;
-			inputDevice = player.inputDevice;
+		this.player = GetComponent<Player>();
+		if(this.player.inGame) {
+			this.cooldownSlider = this.player.cooldownSlider;
+			this.cooldownFillImage = this.cooldownSlider.transform.FindChild("Fill Area").FindChild("Fill").GetComponent<Image>();
+			this.origColor = this.cooldownFillImage.color;
+			this.offColor = this.origColor * Color.gray;
+			this.inputDevice = this.player.inputDevice;
 		}
 	}
 
 	public void Update() {
 		// Action
-		actionOn = inputDevice.Action1;
+		this.actionOn = this.inputDevice.Action1;
 		// Cooldown
-		if(cooldownTimer > 0f) {
-			cooldownTimer -= Time.deltaTime;
-			cooldownSlider.value = 1f - (cooldownTimer / COOLDOWN_TIME);
-		} else {
-			cooldownSlider.value = 1f;
-			if(!actionAvailable) {
-				actionAvailable = true;
-				cooldownFillImage.color = origColor;
+		if(this.cooldownTimer > 0f) {
+			this.cooldownTimer -= Time.deltaTime;
+			this.cooldownSlider.value = 1f - (this.cooldownTimer / COOLDOWN_TIME);
+		} 
+
+		else {
+			this.cooldownSlider.value = 1f;
+			if(!this.actionAvailable) {
+				this.actionAvailable = true;
+				this.cooldownFillImage.color = origColor;
 			}
 		}
-		// Rock action
-		if(rockTimer > 0f) {
-			rockTimer -= Time.deltaTime;
-		} else if(rocking) {
-			rocking = false;
 
-			// UNCOMMENT THIS WHEN PLAYER IS COMPLETE
-//			player.spAnim.Play("SmashHit"); // UNCOMMENT THIS WHEN PLAYER IS COMPLETE
+		// Rock action
+		if(this.rockTimer > 0f) {
+			this.rockTimer -= Time.deltaTime;
+		} 
+
+		else if(this.rocking) {
+			this.rocking = false;
+			this.player.spriteAnimator.SetTrigger("smashHit");
 		}
 	}
 
 	public void FixedUpdate() {
-		if(actionOn && cooldownTimer <= 0f) {
+
+		if(this.actionOn && this.cooldownTimer <= 0f) {
+
 			// Cooldown
-			cooldownTimer = COOLDOWN_TIME;
-			
-			cooldownFillImage.color = offColor;
-			actionAvailable = false;
+			this.cooldownTimer = COOLDOWN_TIME;
+			this.cooldownFillImage.color = offColor;
+			this.actionAvailable = false;
 
 			// Turn on rock
-			rocking = true;
-			rockTimer = ROCK_TIME;
+			this.rocking = true;
+			this.rockTimer = ROCK_TIME;
 
 			// Anim
-			// UNCOMMENT THIS WHEN PLAYER IS COMPLETE
-//			player.spAnim.Play("Smash");
-//			player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
-//				player.spAnim.Play("Float");
-//			};
+			this.player.spriteAnimator.SetTrigger("smashStart");
 
 			// Sound
 			Sound_Manager.Instance.PlayEffectOnce(specialSound);
@@ -93,14 +92,14 @@ public class RockSpecial:MonoBehaviour {
 			GetComponent<Rigidbody2D>().AddForce(-Vector2.up * FORCE * 0.5f, ForceMode2D.Impulse);
 		}
 
-		if(rocking) {
+		if(this.rocking) {
 			// Jet down force
 			GetComponent<Rigidbody2D>().AddForce(-Vector2.up * FORCE, ForceMode2D.Force);
 		}
 	}
 
 	public void DisableSpecial() {
-		enabled = false;
+		this.enabled = false;
 	}
 }
 
