@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
 	public LayerMask stickMask;
 
 	// Sprites
+	public Sprite deadTorsoSprite;
+	public Sprite deadLegsSprite;
+
 	[HideInInspector]
 	public Sprite sprite;
 
@@ -157,13 +160,11 @@ public class Player : MonoBehaviour
 
 		// Spawn Corpse
 		GameObject corpse = ((GameObject) Instantiate(this.corpsePrefab, this.transform.position, this.transform.rotation));
-		Sprite corpseSprite = Resources.Load<Sprite>("Sprites/Player/PlayerBlueDead");
-		corpse.GetComponent<SpriteRenderer>().sprite = corpseSprite;
+		corpse.GetComponent<SpriteRenderer>().sprite = this.deadTorsoSprite;
 
 		// --- Player modifications ---
 		// change the sprite to dead legs
-		Sprite deadLegsSprite = Resources.Load<Sprite>("Sprites/Player/PlayerBlueDeadLegs");
-		this.spriteRenderer.sprite = deadLegsSprite;
+		this.spriteRenderer.sprite = this.deadLegsSprite;
 		this.transform.position += new Vector3(0f, -deadLegsSprite.bounds.size.y);
 
 		// Play a death grunt

@@ -8,14 +8,14 @@ public class JetSpecial:MonoBehaviour {
 	// Jet Force power!
 	public const float FORCE = 100f;
 
-	// Jet SFX
-	public AudioClip specialSound;
-
 	// Player and input
 	public Player player;
 	private InputDevice inputDevice;
 	private bool actionOn = false;
 	private bool actionAvailable = true;
+
+	// Jet SFX
+	public AudioClip specialSound;
 
 	// Cooldown
 	private Slider cooldownSlider;
