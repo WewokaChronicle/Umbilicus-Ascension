@@ -216,18 +216,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fff3b4f73f84d4e5ba92068a08423485, type: 3}
   - {fileID: 8300000, guid: 1aa242d24f42f4856890c73dc7aba91e, type: 3}
   deathSounds:
-  - {fileID: 8300000, guid: 6b2aca33e73e1403da8b528574e8582e, type: 3}
-  - {fileID: 8300000, guid: 6c80c9edae186485fa9e3909059ad291, type: 3}
-  - {fileID: 8300000, guid: 31fccea895ae747488d94931db389ccd, type: 3}
-  - {fileID: 8300000, guid: c6a5e68e9862d42d58f6960f28d108aa, type: 3}
-  - {fileID: 8300000, guid: c4c223c2015fb4198b5819da963681f2, type: 3}
-  - {fileID: 8300000, guid: 24b6c9551ae43400783f216d9a5e1c75, type: 3}
   - {fileID: 8300000, guid: 692ad962e04694fbc86ee50882703c43, type: 3}
   - {fileID: 8300000, guid: cec61428ef191499ebb0479a33dc66b2, type: 3}
   - {fileID: 8300000, guid: e9f4397a481cf4ba698a4d0f1efdaf43, type: 3}
-  - {fileID: 8300000, guid: 5b5c85baa50c145d49930b8ebfca847e, type: 3}
-  - {fileID: 8300000, guid: fa3336fda956b4d60b0cd09fe23ac39a, type: 3}
-  - {fileID: 8300000, guid: 141acb242e13a4ca7b0daae8bac85380, type: 3}
   playerNumber: 0
   cooldownSlider: {fileID: 11456932}
   inGame: 0

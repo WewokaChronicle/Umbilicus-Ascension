@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
 		this.transform.position += new Vector3(0f, -deadLegsSprite.bounds.size.y);
 
 		// Play a death grunt
-		Sound_Manager.Instance.PlayEffectOnce(this.deathSounds[this.playerNumber * 3 + UnityEngine.Random.Range(0, 3)]);
+		Sound_Manager.Instance.PlayEffectOnce(this.deathSounds[UnityEngine.Random.Range(0, 3)]);
 
 		// Play a gore sound
 		Sound_Manager.Instance.PlayEffectOnce(this.goreSounds[UnityEngine.Random.Range(0, 3)]);
