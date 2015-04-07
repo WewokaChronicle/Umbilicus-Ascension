@@ -697,6 +697,7 @@ GameObject:
   - 61: {fileID: 1014247364}
   - 50: {fileID: 1014247363}
   - 114: {fileID: 1014247362}
+  - 114: {fileID: 1014247365}
   m_Layer: 0
   m_Name: Quasar Quade
   m_TagString: Untagged
@@ -787,7 +788,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c6a5e68e9862d42d58f6960f28d108aa, type: 3}
   - {fileID: 8300000, guid: c4c223c2015fb4198b5819da963681f2, type: 3}
   - {fileID: 8300000, guid: 24b6c9551ae43400783f216d9a5e1c75, type: 3}
-  playerNumber: 3
+  playerNumber: 1
   cooldownSlider: {fileID: 14192996}
   inGame: 0
   playerOnTheEnd: 0
@@ -822,6 +823,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .600000024, y: 1.10000002}
+--- !u!114 &1014247365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1014247358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ffd289c5c8947a7ae4cd2695121925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1014247362}
+  specialSound: {fileID: 8300000, guid: 0025f4e7f50c048a7829253c3ad20732, type: 3}
 --- !u!1 &1014957855
 GameObject:
   m_ObjectHideFlags: 0
