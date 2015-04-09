@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
 	public LayerMask stickMask;
 
 	// Sprites
+	public Sprite deadTorsoSprite;
+	public Sprite deadLegsSprite;
+
 	[HideInInspector]
 	public Sprite sprite;
 
@@ -88,11 +91,11 @@ public class Player : MonoBehaviour
 	{
 		// End Game
 		if(this.transform.position.y < -5f) {
-			GameManager.instance.EndLevel();
-//			Debug.Log("You lose!");
+//			GameManager.instance.EndLevel();
+			Debug.Log("You lose!");
 		} else if(this.transform.position.y > 70f) {
-			GameManager.instance.EndLevel();
-//			Debug.Log("You lose!");
+//			GameManager.instance.EndLevel();
+			Debug.Log("You lose!");
 		}
 		
 		// Don't do anything if we're dead
@@ -157,17 +160,15 @@ public class Player : MonoBehaviour
 
 		// Spawn Corpse
 		GameObject corpse = ((GameObject) Instantiate(this.corpsePrefab, this.transform.position, this.transform.rotation));
-		Sprite corpseSprite = Resources.Load<Sprite>("Sprites/Player/PlayerBlueDead");
-		corpse.GetComponent<SpriteRenderer>().sprite = corpseSprite;
+		corpse.GetComponent<SpriteRenderer>().sprite = this.deadTorsoSprite;
 
 		// --- Player modifications ---
 		// change the sprite to dead legs
-		Sprite deadLegsSprite = Resources.Load<Sprite>("Sprites/Player/PlayerBlueDeadLegs");
-		this.spriteRenderer.sprite = deadLegsSprite;
+		this.spriteRenderer.sprite = this.deadLegsSprite;
 		this.transform.position += new Vector3(0f, -deadLegsSprite.bounds.size.y);
 
 		// Play a death grunt
-		Sound_Manager.Instance.PlayEffectOnce(this.deathSounds[this.playerNumber * 3 + UnityEngine.Random.Range(0, 3)]);
+		Sound_Manager.Instance.PlayEffectOnce(this.deathSounds[UnityEngine.Random.Range(0, 3)]);
 
 		// Play a gore sound
 		Sound_Manager.Instance.PlayEffectOnce(this.goreSounds[UnityEngine.Random.Range(0, 3)]);

@@ -587,7 +587,9 @@ MonoBehaviour:
   enableXInput: 0
   useFixedUpdate: 0
   dontDestroyOnLoad: 0
-  customProfiles: []
+  customProfiles:
+  - KeyboardProfileArrows
+  - KeyboardProfileWASD
 --- !u!4 &1064748557
 Transform:
   m_ObjectHideFlags: 0
@@ -815,9 +817,9 @@ Canvas:
   m_GameObject: {fileID: 1704352156}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 486273824}
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

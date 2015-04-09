@@ -3,16 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using InControl;
 
-public class JetSpecial:MonoBehaviour {
-	public const float FORCE = 10000f;
+public class JetSpecial : MonoBehaviour {
 
-	public AudioClip specialSnd;
+	// Jet Force power!
+	public const float FORCE = 100f;
 
 	// Player and input
 	public Player player;
 	private InputDevice inputDevice;
 	private bool actionOn = false;
 	private bool actionAvailable = true;
+
+	// Jet SFX
+	public AudioClip specialSound;
 
 	// Cooldown
 	private Slider cooldownSlider;
@@ -23,50 +26,53 @@ public class JetSpecial:MonoBehaviour {
 	// Leftover force timer
 	private const float COOLDOWN_TIME = 3f;
 	private float cooldownTimer;
-
+	
 	public void Start() {
-		player = GetComponent<Player>();
-		if(player.inGame) {
-			cooldownSlider = player.cooldownSlider;
-			cooldownFillImage = cooldownSlider.transform.FindChild("Fill Area").GetComponentInChildren<Image>();
-			origColor = cooldownFillImage.color;
-			offColor = origColor * Color.gray;
-			inputDevice = player.inputDevice;
+		this.player = GetComponent<Player>();
+		if(this.player.inGame) {
+			this.cooldownSlider = player.cooldownSlider;
+			this.cooldownFillImage = this.cooldownSlider.transform.FindChild("Fill Area").FindChild("Fill").GetComponent<Image>();
+			this.origColor = this.cooldownFillImage.color;
+			this.offColor = this.origColor * Color.gray;
+			this.inputDevice = this.player.inputDevice;
 		}
 	}
 
 	public void Update() {
 		// Action
-		actionOn = inputDevice.Action1;
+		this.actionOn = inputDevice.Action1;
+
 		// Cooldown
-		if(cooldownTimer > 0f) {
-			cooldownTimer -= Time.deltaTime;
-			cooldownSlider.value = 1f - (cooldownTimer / COOLDOWN_TIME);
-		} else {
-			cooldownSlider.value = 1f;
-			if(!actionAvailable) {
-				actionAvailable = true;
-				cooldownFillImage.color = origColor;
+		if(this.cooldownTimer > 0f) {
+			this.cooldownTimer -= Time.deltaTime;
+			this.cooldownSlider.value = 1f - (this.cooldownTimer / COOLDOWN_TIME);
+		} 
+
+		else {
+			this.cooldownSlider.value = 1f;
+			if(!this.actionAvailable) {
+				this.actionAvailable = true;
+				this.cooldownFillImage.color = this.origColor;
 			}
 		}
 	}
 
 	public void FixedUpdate() {
-		if(actionOn && cooldownTimer <= 0f) {
+		if(this.actionOn && this.cooldownTimer <= 0f) {
 			// Sound
-			Sound_Manager.Instance.PlayEffectOnce(specialSnd);
+			Sound_Manager.Instance.PlayEffectOnce(specialSound);
+
 			// Jet up force
 			GetComponent<Rigidbody2D>().AddForce(Vector2.up * FORCE, ForceMode2D.Impulse);
+
 			// Cooldown
-			cooldownTimer = COOLDOWN_TIME;
+			this.cooldownTimer = COOLDOWN_TIME;
 			
-			cooldownFillImage.color = offColor;
-			actionAvailable = false;
+			this.cooldownFillImage.color = this.offColor;
+			this.actionAvailable = false;
+
 			// Animation
-//			player.spAnim.Play("Boost");
-//			player.spAnim.AnimationCompleted += delegate(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip) {
-//				player.spAnim.Play("Float");
-//			};
+			this.player.spriteAnimator.SetTrigger("triggerBoost");
 		}
 	}
 

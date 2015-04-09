@@ -1,23 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &129798
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 401466}
-  - 114: {fileID: 11440092}
-  - 114: {fileID: 11472822}
-  - 114: {fileID: 11485092}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &138374
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,8 +28,8 @@ GameObject:
   - 4: {fileID: 499112}
   - 212: {fileID: 21266416}
   - 95: {fileID: 9568488}
-  - 50: {fileID: 5046776}
   - 61: {fileID: 6193524}
+  - 50: {fileID: 5046776}
   - 114: {fileID: 11403094}
   - 114: {fileID: 11420744}
   m_Layer: 8
@@ -139,18 +121,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &401466
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 129798}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 499112}
-  m_RootOrder: 0
 --- !u!4 &444392
 Transform:
   m_ObjectHideFlags: 1
@@ -162,7 +132,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 499112}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &499112
 Transform:
   m_ObjectHideFlags: 1
@@ -170,10 +140,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149948}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.98999977, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 401466}
   - {fileID: 22460966}
   - {fileID: 444392}
   m_Father: {fileID: 0}
@@ -237,6 +206,8 @@ MonoBehaviour:
   stickMask:
     serializedVersion: 2
     m_Bits: 1024
+  deadTorsoSprite: {fileID: 21300000, guid: ea9dab2737b0043e9a15fb53b7991b0f, type: 3}
+  deadLegsSprite: {fileID: 21300000, guid: b7b3b23a571da4debb3dfa4786e956a1, type: 3}
   sprite: {fileID: 0}
   spriteAnimator: {fileID: 0}
   spriteRenderer: {fileID: 0}
@@ -245,18 +216,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fff3b4f73f84d4e5ba92068a08423485, type: 3}
   - {fileID: 8300000, guid: 1aa242d24f42f4856890c73dc7aba91e, type: 3}
   deathSounds:
-  - {fileID: 8300000, guid: 6b2aca33e73e1403da8b528574e8582e, type: 3}
-  - {fileID: 8300000, guid: 6c80c9edae186485fa9e3909059ad291, type: 3}
-  - {fileID: 8300000, guid: 31fccea895ae747488d94931db389ccd, type: 3}
-  - {fileID: 8300000, guid: c6a5e68e9862d42d58f6960f28d108aa, type: 3}
-  - {fileID: 8300000, guid: c4c223c2015fb4198b5819da963681f2, type: 3}
-  - {fileID: 8300000, guid: 24b6c9551ae43400783f216d9a5e1c75, type: 3}
   - {fileID: 8300000, guid: 692ad962e04694fbc86ee50882703c43, type: 3}
   - {fileID: 8300000, guid: cec61428ef191499ebb0479a33dc66b2, type: 3}
   - {fileID: 8300000, guid: e9f4397a481cf4ba698a4d0f1efdaf43, type: 3}
-  - {fileID: 8300000, guid: 5b5c85baa50c145d49930b8ebfca847e, type: 3}
-  - {fileID: 8300000, guid: fa3336fda956b4d60b0cd09fe23ac39a, type: 3}
-  - {fileID: 8300000, guid: 141acb242e13a4ca7b0daae8bac85380, type: 3}
   playerNumber: 0
   cooldownSlider: {fileID: 11456932}
   inGame: 0
@@ -335,20 +297,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 11403094}
   specialSound: {fileID: 8300000, guid: 272761fda9bcc4362a1cb745611eba6d, type: 3}
---- !u!114 &11440092
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 129798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 5
 --- !u!114 &11456932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -397,35 +345,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &11472822
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 129798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_AllowActivationOnMobileDevice: 0
---- !u!114 &11485092
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 129798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 0
 --- !u!114 &11492070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1637,7 +1556,7 @@ RectTransform:
   m_Children:
   - {fileID: 22437162}
   m_Father: {fileID: 499112}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}

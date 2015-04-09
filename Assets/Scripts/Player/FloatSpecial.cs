@@ -3,11 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using InControl;
 
-public class FloatSpecial:MonoBehaviour {
+public class FloatSpecial : MonoBehaviour {
 	public const float MAX_SPEED = 5f;
-	public const float FORCE = 5000f;
-
-	public AudioClip specialSnd;
+	public const float FORCE = 500f;
 
 	// Player and input
 	public Player player;
@@ -23,6 +21,7 @@ public class FloatSpecial:MonoBehaviour {
 	// Float power
 	private const float MAX_FLOAT_POWER = 1f;
 	private float floatPower = MAX_FLOAT_POWER;
+	public AudioClip specialSound;
 
 	// Leftover force timer
 	private const float WIND_DOWN_TIME = 0.2f;
@@ -33,12 +32,12 @@ public class FloatSpecial:MonoBehaviour {
 	private Vector2 velocity;
 
 	public void Start() {
-		player = GetComponent<Player>();
-		if(player.inGame) {
-			cooldownSlider = player.cooldownSlider;
-			cooldownFillImage = cooldownSlider.transform.FindChild("Fill Area").GetComponentInChildren<Image>();
-			origColor = cooldownFillImage.color;
-			inputDevice = player.inputDevice;
+		this.player = GetComponent<Player>();
+		if(this.player.inGame) {
+			this.cooldownSlider = player.cooldownSlider;
+			this.cooldownFillImage = this.cooldownSlider.transform.FindChild("Fill Area").FindChild("Fill").GetComponent<Image>();
+			this.origColor = this.cooldownFillImage.color;
+			this.inputDevice = this.player.inputDevice;
 		}
 	}
 
@@ -46,10 +45,10 @@ public class FloatSpecial:MonoBehaviour {
 		// Action
 		if(!actionDisabled && floatPower > (MAX_FLOAT_POWER * 0.1f)) {
 			if(!actionOn && inputDevice.Action1) {
-				Sound_Manager.Instance.PlayEffectOnce(specialSnd);
-//				player.spAnim.Play("Jet");
+				Sound_Manager.Instance.PlayEffectOnce(specialSound);
+				this.player.spriteAnimator.SetBool("isJetting", true);
 			} else if(actionOn && !inputDevice.Action1) {
-//				player.spAnim.Play("Float");
+				this.player.spriteAnimator.SetBool("isJetting", false);
 			}
 			actionOn = inputDevice.Action1;
 			if(actionOn) {
@@ -62,7 +61,7 @@ public class FloatSpecial:MonoBehaviour {
 			}
 			if(actionOn) {
 				actionOn = false;
-//				player.spAnim.Play("Float");
+				this.player.spriteAnimator.SetBool("isJetting", false);
 			}
 		}
 		// Undisable

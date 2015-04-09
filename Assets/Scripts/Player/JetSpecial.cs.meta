@@ -1,8 +1,14 @@
 fileFormatVersion: 2
 guid: 619ac889c91574e55941d48b10987ec4
+timeCreated: 1428275748
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - specialSnd: {fileID: 8300000, guid: 13a65c9ad89fd4f50ad2d750cc0d19cb, type: 3}
+  - player: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
