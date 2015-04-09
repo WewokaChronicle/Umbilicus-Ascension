@@ -8,7 +8,7 @@ public class BlockGenerator:MonoBehaviour
 	private float spawnTimer = 0f;
 	private float startTime;
 	private bool started = false;
-	private const int MAX_BLOCKS = 4;
+	private const int MAX_BLOCKS = 5;
 	private const float MAX_BLOCK_X = 6f;
 
 
@@ -45,13 +45,12 @@ public class BlockGenerator:MonoBehaviour
 		int count = Random.Range(1, MAX_BLOCKS);
 
 		for(int i = 0; i < count; i++) {
-			block = (GameObject)GameObject.Instantiate(blockPrefab, pos, Quaternion.identity);
-			block.name = blockPrefab.name;
-
-			// check if block is outside of bounds of level
-			if((pos.x += 1.4f) > MAX_BLOCK_X) {
-				Destroy(block);
-				break; // stop spawning blocks
+			if(pos.x <= MAX_BLOCK_X) {
+				block = (GameObject)GameObject.Instantiate(blockPrefab, pos, Quaternion.identity);
+				block.name = blockPrefab.name;
+				pos.x += 1.4f;
+			} else {
+				break; // don't generate any more blocks in this group
 			}
 		}
 	}
