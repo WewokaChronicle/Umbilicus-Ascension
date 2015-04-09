@@ -38,7 +38,7 @@ public class BlockGenerator:MonoBehaviour
 
 	public void SpawnBlock()
 	{
-		Vector3 pos = new Vector3(Random.Range(-6, 6), -10f);
+		Vector3 pos = new Vector3(Random.Range(-MAX_BLOCK_X, MAX_BLOCK_X), -10f);
 		GameObject block;
 
 		// randomly select number of blocks in group
