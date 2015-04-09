@@ -18,9 +18,9 @@ public class Wall:MonoBehaviour
 
 	public void Update()
 	{
-		if(!spawnedNextSegment && transform.position.y > -9f) {
+		if(!spawnedNextSegment && transform.position.y < 9f) {
 			spawnedNextSegment = true;
-			GameObject wall = (GameObject)Instantiate(gameObject, transform.position + Vector3.down * 20f, transform.rotation);
+			GameObject wall = (GameObject)Instantiate(gameObject, transform.position + Vector3.up * 20f, transform.rotation);
 			// This happens after awake so our if "RightWall" still works
 			wall.name = this.name;
 		}

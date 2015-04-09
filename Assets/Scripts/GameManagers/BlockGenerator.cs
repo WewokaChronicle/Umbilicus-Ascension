@@ -4,7 +4,7 @@ using System.Collections;
 public class BlockGenerator:MonoBehaviour
 {
 	public GameObject blockPrefab;
-	private const float SPAWN_TIME = 0.6f;
+	private const float SPAWN_TIME = 4f;
 	private float spawnTimer = 0f;
 	private float startTime;
 	private bool started = false;
@@ -29,6 +29,7 @@ public class BlockGenerator:MonoBehaviour
 		spawnTimer -= Time.deltaTime;
 
 		if(spawnTimer <= 0f) {
+			Debug.Log("spawn blocks");
 			// Spawn!
 			SpawnBlock();
 
@@ -38,7 +39,7 @@ public class BlockGenerator:MonoBehaviour
 
 	public void SpawnBlock()
 	{
-		Vector3 pos = new Vector3(Random.Range(-MAX_BLOCK_X, MAX_BLOCK_X), -10f);
+		Vector3 pos = new Vector3(Random.Range(-MAX_BLOCK_X, MAX_BLOCK_X), 10f);
 		GameObject block;
 
 		// randomly select number of blocks in group
