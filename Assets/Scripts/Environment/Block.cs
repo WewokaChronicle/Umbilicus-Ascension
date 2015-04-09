@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Block:MonoBehaviour {
-	public const float SPEED = 5f;
+	public const float SPEED = -1f;
 
 	public bool starterBlock = false;
 
@@ -11,9 +11,6 @@ public class Block:MonoBehaviour {
 	public AudioClip[] crumbleSnd;
 
 	private int blockNum;
-	private bool dying = false;
-	private bool dyingPhase2 = false;
-	private float deathTimer = 1f;
 	private Sprite sp;
 	private Sprite spikeSprite;
 	private SpriteRenderer spriteRenderer;
@@ -65,60 +62,27 @@ public class Block:MonoBehaviour {
 
 		// Keep the block alive if our spikes are bloody
 		if(spikes) {
-			if(spike.bloody && dying) {
+			if(spike.bloody) {
 				spriteRenderer.sprite = sp;
 				spriteRenderer.color = Color.white;
 				spriteRenderer.sprite = spikeSprite;
 				spriteRenderer.color = Color.white; // redundant?
-				dying = false;
 			}
 		}
 
 		// Death timer
-		if((!spikes || !spike.bloody) && dying) {
-			deathTimer -= Time.deltaTime;
+		if((!spikes || !spike.bloody)) {
 			c = spriteRenderer.color;
-			c.a = deathTimer / 2f;
 			//sp.color = c;
 			if(spikes) {
 				//spikeSprite.color = c;
-			}
-			if(!dyingPhase2 && deathTimer < 0.5f) {
-				spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_3");
-				dyingPhase2 = true;
-				// Spawn particles
-			}
-			if(deathTimer <= 0f) {
-				Sound_Manager.Instance.PlayEffectOnce(breakSnd[Random.Range(0, 3)], false, true, 0.4f);
-				Destroy(gameObject);
 			}
 		}
 	}
 
 	public void OnCollisionEnter2D(Collision2D coll){
-		if(dying || (spikes && spike.bloody)) {
+		if(spikes && spike.bloody) {
 			return;
 		}
-
-		if(Vector2.Dot(coll.contacts[0].normal, -Vector2.up) > 0.2f) {
-
-			/**
-			 * RockSpecial collision
-			 */ 
-//			RockSpecial rock = coll.gameObject.GetComponent<RockSpecial>();
-//			if(rock != null && rock.rocking) {
-//				Destroy(gameObject);
-//				if(spikes) {
-//					Destroy(spike);
-//				}
-//			}
-			dying = true;
-			spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_2");
-			// Spawn particles
-			((GameObject) Instantiate(particlesPrefab, transform.position + new Vector3(0.2f, 2f, 1f), Quaternion.identity)).GetComponent<DestroyParticlesOnFinish>().followTarget = transform;
-			// Play sound
-			Sound_Manager.Instance.PlayEffectOnce(crumbleSnd[Random.Range(0, 3)], false, true, 0.6f);
-		}
-
 	}
 }
