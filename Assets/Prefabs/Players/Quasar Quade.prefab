@@ -82,7 +82,7 @@ GameObject:
   - 50: {fileID: 5064254}
   - 114: {fileID: 11476786}
   - 114: {fileID: 11403540}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Quasar Quade
   m_TagString: Untagged
   m_Icon: {fileID: 0}

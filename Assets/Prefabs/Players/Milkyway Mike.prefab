@@ -29,7 +29,7 @@ GameObject:
   - 50: {fileID: 5060496}
   - 114: {fileID: 11472870}
   - 114: {fileID: 11423150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Milkyway Mike
   m_TagString: Untagged
   m_Icon: {fileID: 0}

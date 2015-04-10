@@ -46,7 +46,7 @@ GameObject:
   - 50: {fileID: 5063224}
   - 114: {fileID: 11491544}
   - 114: {fileID: 11466162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cosmonaut Carla
   m_TagString: Untagged
   m_Icon: {fileID: 0}
