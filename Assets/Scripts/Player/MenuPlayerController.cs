@@ -99,6 +99,9 @@ public class MenuPlayerController : MonoBehaviour
 		// wrap around the total number of characters
 		this.highlightedCharacter = _Modulo(this.highlightedCharacter, MenuPlayerController.numberOfCharacters);
 
+		// set the planel representing the player to the color of the character's panel
+		this.playerMenuPanel.color = this.characterMenuPanels[this.highlightedCharacter].color;
+
 		// player is attempting to select a character
 		if(device.Action1.WasPressed) {
 
