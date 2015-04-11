@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using InControl;
 
-public class PlayerControl:MonoBehaviour {
-	public static int NumberOfPlayers = 4;
+public class PlayerControl : MonoBehaviour {
+
+	public static int NumberOfPlayers = 2;
 
 	private Text text;
 
