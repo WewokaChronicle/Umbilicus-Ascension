@@ -8,6 +8,7 @@ public class MenuPlayerController : MonoBehaviour
 	public int playerNumber; // the player's id.
 	public Image playerMenuPanel; // the image panel that says "P[X]" where X = player number
 	public Image[] characterMenuPanels; // the image panels that contain all the game characters
+	public AudioClip characterSelectSound;
 
 	private static readonly int AVAILABLE = -1; // this denotes a character that is still available
 	private static int numberOfCharacters = 4; // there are four potential characters
@@ -119,6 +120,9 @@ public class MenuPlayerController : MonoBehaviour
 				Text characterPanelText = characterPanel.transform.FindChild("Text").GetComponent<Text>();
 				this._SetUIGraphicAlpha(characterPanel, 0.1f);
 				this._SetUIGraphicAlpha(characterPanelText, 0.1f);
+
+				// play this character's sound effect
+				Sound_Manager.Instance.PlayEffectOnce(characterSelectSound);
 
 				// set a flag indicating a character has been selected
 				this.playerHasChosenCharacter = true;
