@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
 
 	public void Awake() {
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
-			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileArrows()));
+			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileIJKL()));
 		}
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
 			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileWASD()));

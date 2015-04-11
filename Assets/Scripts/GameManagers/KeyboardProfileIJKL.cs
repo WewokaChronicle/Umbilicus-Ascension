@@ -7,12 +7,12 @@ using InControl;
 // on the InControlManager component, or you can attach it yourself like so:
 // InputManager.AttachDevice( new UnityInputDevice( "KeyboardProfile" ) );
 // 
-public class KeyboardProfileWASD : UnityInputDeviceProfile
+public class KeyboardProfileIJKL : UnityInputDeviceProfile
 {
-	public KeyboardProfileWASD()
+	public KeyboardProfileIJKL()
 	{
-		Name = "Keyboard WASD";
-		Meta = "A WASD keyboard profile.";
+		Name = "Keyboard IJKL";
+		Meta = "A IJKL keyboard profile.";
 
 		// This profile only works on desktops.
 		SupportedPlatforms = new[]
@@ -33,7 +33,7 @@ public class KeyboardProfileWASD : UnityInputDeviceProfile
 					Handle = "Fire - Keyboard",
 					Target = InputControlType.Action1,
 					// KeyCodeButton fires when any of the provided KeyCode params are down.
-					Source = KeyCodeButton( KeyCode.E )
+					Source = KeyCodeButton( KeyCode.O )
 				},
 			};
 
@@ -42,12 +42,12 @@ public class KeyboardProfileWASD : UnityInputDeviceProfile
 				new InputControlMapping {
 					Handle = "Move X",
 					Target = InputControlType.LeftStickX,
-					Source = KeyCodeAxis( KeyCode.A, KeyCode.D )
+					Source = KeyCodeAxis( KeyCode.J, KeyCode.L )
 				},
 				new InputControlMapping {
 					Handle = "Move Y",
 					Target = InputControlType.LeftStickY,
-					Source = KeyCodeAxis( KeyCode.S, KeyCode.W )
+					Source = KeyCodeAxis( KeyCode.K, KeyCode.I )
 				}
 			};
 	}

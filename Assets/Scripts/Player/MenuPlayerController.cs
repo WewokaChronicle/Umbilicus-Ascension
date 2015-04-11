@@ -14,11 +14,16 @@ public class MenuPlayerController : MonoBehaviour
 	private Camera camera;
 
 	[HideInInspector]
-	public int selectedCharacter = 0; // sentinel
+	public int[] characters;
+
+	[HideInInspector]
+	public int selectedCharacter;
 	
 	// Use this for initialization
 	public void Start () {
 		this.camera = Camera.main;
+		this.selectedCharacter = 0;
+		Debug.Log("Controller " + playerNumber + " @ Position: " + playerMenuPanel.transform.position);
 
 		this.inputDevice = (InputManager.Devices.Count > playerNumber && PlayerControl.NumberOfPlayers > playerNumber) ? InputManager.Devices[playerNumber] : null;
 
