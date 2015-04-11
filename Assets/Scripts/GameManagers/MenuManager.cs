@@ -4,22 +4,19 @@ using System.Collections;
 using InControl;
 
 [RequireComponent (typeof (SpriteRenderer))]
-public class Menu : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
 	public static bool starting = false;
 
 	public AudioClip menuMusic;
 	public AudioClip startSound;
-	public Sprite fadeToSprite; //this is the sprite we'll fade to
+	public Image fadeoutOverlay;
 
 	private Color color;
 	private float startTimer = 2f;
 
 	public void Awake()
 	{
-		// Load the fadeToSprite onto the renderer 
-		GetComponent<SpriteRenderer>().sprite = this.fadeToSprite;
-
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
 			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileIJKL()));
 			Debug.Log("Attaching Keyboard IJKL");
@@ -46,8 +43,8 @@ public class Menu : MonoBehaviour
 		// Fade out this scene and load the Game when done
 		if(starting) {
 			startTimer -= Time.deltaTime;
-			color.a = 1f - (startTimer / 2f);
-			this.GetComponent<SpriteRenderer>().color = color;
+			float alpha = 1f - (startTimer / 2f);
+			fadeoutOverlay.color = new Color(0.0f, 0.0f, 0.0f, alpha);
 
 			// if we're done fading out
 			if(startTimer <= 0f) {
@@ -59,7 +56,6 @@ public class Menu : MonoBehaviour
 			for(int i = 0; i < InputManager.Devices.Count && i < PlayerControl.NumberOfPlayers; i++) {
 				if(Input.GetKeyUp(KeyCode.Space) && MenuPlayerController.allPlayersHaveChosenACharacter()) {
 					starting = true;
-					color = this.GetComponent<SpriteRenderer>().color;
 					Sound_Manager.Instance.PlayEffectOnce(startSound);
 				}
 			}

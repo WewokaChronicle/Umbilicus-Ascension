@@ -33,7 +33,7 @@ public class MenuPlayer:MonoBehaviour {
 	}
 
 	public void Update() {
-		if(Menu.starting) {
+		if(MenuManager.starting) {
 			playerText.gameObject.SetActive(false);
 		} else {
 			playerText.transform.position = cam.WorldToScreenPoint(transform.position) + Vector3.down * (playerNum % 2 == 0 ? 60f : 130f);

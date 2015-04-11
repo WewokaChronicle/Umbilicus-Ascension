@@ -33,7 +33,7 @@ public class MenuPlayerController : MonoBehaviour
 				numberOfCharactersThatHaveBeenChosen++;
 			}
 		}
-		Debug.Log("number of characters that have been chosen: "+numberOfCharactersThatHaveBeenChosen);
+
 		if(numberOfCharactersThatHaveBeenChosen != PlayerControl.NumberOfPlayers) {
 			return false;
 		}
