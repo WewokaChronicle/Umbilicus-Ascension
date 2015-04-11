@@ -35,6 +35,13 @@ public class KeyboardProfileWASD : UnityInputDeviceProfile
 					// KeyCodeButton fires when any of the provided KeyCode params are down.
 					Source = KeyCodeButton( KeyCode.E )
 				},
+
+				new InputControlMapping
+				{
+					Handle = "Back - Keyboard",
+					Target = InputControlType.Action2,
+					Source = KeyCodeButton( KeyCode.Q )
+				},
 			};
 
 		AnalogMappings = new[]

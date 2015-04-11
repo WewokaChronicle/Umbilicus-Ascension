@@ -57,7 +57,7 @@ public class Menu : MonoBehaviour
 		else {
 			for(int i = 0; i < InputManager.Devices.Count && i < PlayerControl.NumberOfPlayers; i++) {
 				if(InputManager.Devices[i].Action1) {
-					starting = true;
+//					starting = true;
 					color = this.GetComponent<SpriteRenderer>().color;
 					Sound_Manager.Instance.PlayEffectOnce(startSound);
 				}

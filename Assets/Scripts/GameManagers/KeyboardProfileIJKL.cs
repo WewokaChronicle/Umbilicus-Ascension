@@ -35,6 +35,13 @@ public class KeyboardProfileIJKL : UnityInputDeviceProfile
 					// KeyCodeButton fires when any of the provided KeyCode params are down.
 					Source = KeyCodeButton( KeyCode.O )
 				},
+
+				new InputControlMapping
+				{
+					Handle = "Back - Keyboard",
+					Target = InputControlType.Action2,
+					Source = KeyCodeButton( KeyCode.U )
+				},
 			};
 
 		AnalogMappings = new[]

@@ -200,7 +200,7 @@ RectTransform:
   m_Children:
   - {fileID: 1172881247}
   m_Father: {fileID: 507751623}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: -357}
@@ -496,7 +496,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1402074782}
-  m_Father: {fileID: 507751623}
+  m_Father: {fileID: 1315235432}
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: .862745106, b: .215686277, a: .392156869}
+  m_Color: {r: 1, g: .862745106, b: .215686277, a: .400000006}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .113706857, g: .113725491, b: .107035756, a: .607843161}
+  m_Color: {r: .113706857, g: .113725491, b: .107035756, a: .600000024}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -916,7 +916,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 3
   playerMenuPanel: {fileID: 326602611}
-  selectedCharacter: -1
+  characterMenuPanels:
+  - {fileID: 1105983741}
+  - {fileID: 118520388}
+  - {fileID: 433352913}
+  - {fileID: 487775047}
+  highlightedCharacter: 0
 --- !u!1 &330531159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,7 +1214,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1424956839}
-  m_Father: {fileID: 507751623}
+  m_Father: {fileID: 1315235432}
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
@@ -1228,7 +1233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .293333322, g: .398737282, b: .733333349, a: .607843161}
+  m_Color: {r: .293333322, g: .398737282, b: .733333349, a: .400000006}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1337,7 +1342,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2055341985}
-  m_Father: {fileID: 507751623}
+  m_Father: {fileID: 1315235432}
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
@@ -1356,7 +1361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .917647064, g: .223529413, b: .282352954, a: .607843161}
+  m_Color: {r: .917647064, g: .223529413, b: .282352954, a: .400000006}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1454,12 +1459,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1105983740}
-  - {fileID: 118520387}
-  - {fileID: 433352912}
-  - {fileID: 487775046}
   - {fileID: 2022135184}
   - {fileID: 1773583829}
+  - {fileID: 1315235432}
   - {fileID: 6984785}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1721,7 +1723,7 @@ GameObject:
   - 222: {fileID: 733889838}
   - 114: {fileID: 733889837}
   m_Layer: 5
-  m_Name: Player 1
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2315,7 +2317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .113706857, g: .113725491, b: .107035756, a: .607843161}
+  m_Color: {r: .113706857, g: .113725491, b: .107035756, a: .600000024}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -2343,7 +2345,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 2
   playerMenuPanel: {fileID: 1016102990}
-  selectedCharacter: -1
+  characterMenuPanels:
+  - {fileID: 1105983741}
+  - {fileID: 118520388}
+  - {fileID: 433352913}
+  - {fileID: 487775047}
+  highlightedCharacter: 0
 --- !u!1 &1105983739
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,7 +2379,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 733889836}
-  m_Father: {fileID: 507751623}
+  m_Father: {fileID: 1315235432}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
@@ -2391,7 +2398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: .941176474, a: .392156869}
+  m_Color: {r: 1, g: 1, b: .941176474, a: .400000006}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -2532,7 +2539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .113706857, g: .113725491, b: .107035756, a: .607843161}
+  m_Color: {r: .113706857, g: .113725491, b: .107035756, a: .600000024}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -2560,7 +2567,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 1
   playerMenuPanel: {fileID: 1265054939}
-  selectedCharacter: -1
+  characterMenuPanels:
+  - {fileID: 1105983741}
+  - {fileID: 118520388}
+  - {fileID: 433352913}
+  - {fileID: 487775047}
+  highlightedCharacter: 0
 --- !u!1 &1270081335
 GameObject:
   m_ObjectHideFlags: 0
@@ -2750,6 +2762,49 @@ BoxCollider2D:
   m_Offset: {x: -3.39871931, y: -.0214748383}
   serializedVersion: 2
   m_Size: {x: 8.41730404, y: 1.21474457}
+--- !u!1 &1315235431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1315235432}
+  - 222: {fileID: 1315235433}
+  m_Layer: 5
+  m_Name: Character Menu Panels
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1315235432
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1315235431}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1105983740}
+  - {fileID: 118520387}
+  - {fileID: 433352912}
+  - {fileID: 487775046}
+  m_Father: {fileID: 507751623}
+  m_RootOrder: 2
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: .5, y: .5}
+--- !u!222 &1315235433
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1315235431}
 --- !u!1 &1324056225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2947,7 +3002,7 @@ GameObject:
   - 222: {fileID: 1402074784}
   - 114: {fileID: 1402074783}
   m_Layer: 5
-  m_Name: Player 2
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3015,7 +3070,7 @@ GameObject:
   - 222: {fileID: 1424956841}
   - 114: {fileID: 1424956840}
   m_Layer: 5
-  m_Name: Player 3
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3359,7 +3414,7 @@ RectTransform:
   - {fileID: 1016102989}
   - {fileID: 326602613}
   m_Father: {fileID: 507751623}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -3682,7 +3737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .113706857, g: .113725491, b: .107035756, a: .607843161}
+  m_Color: {r: .113706857, g: .113725491, b: .107035756, a: .600000024}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -3710,7 +3765,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 0
   playerMenuPanel: {fileID: 1982651073}
-  selectedCharacter: -1
+  characterMenuPanels:
+  - {fileID: 1105983741}
+  - {fileID: 118520388}
+  - {fileID: 433352913}
+  - {fileID: 487775047}
+  highlightedCharacter: 0
 --- !u!1 &1983850507
 GameObject:
   m_ObjectHideFlags: 0
@@ -3833,7 +3893,7 @@ RectTransform:
   - {fileID: 571978404}
   - {fileID: 806087025}
   m_Father: {fileID: 507751623}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -143}
@@ -3916,7 +3976,7 @@ GameObject:
   - 222: {fileID: 2055341987}
   - 114: {fileID: 2055341986}
   m_Layer: 5
-  m_Name: Player 4
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
