@@ -1,32 +1,32 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class Block:MonoBehaviour
+public class Platform : MonoBehaviour
 {
 	public const float SPEED = -1f;
-
+	
 	public bool starterBlock = false;
-
+	
 	// Sounds
 	public AudioClip[] breakSnd;
 	public AudioClip[] crumbleSnd;
-
+	
 	private int blockNum;
 	private Sprite sp;
 	private Sprite spikeSprite;
 	private SpriteRenderer spriteRenderer;
 	private Color c;
-
+	
 	private bool spikes = false;
-
+	
 	public GameObject batteryPrefab;
 	public GameObject spikePrefab;
-
+	
 	public GameObject particlesPrefab;
-
+	
 	private Spike spike = null;
 	private GameObject battery = null;
-
+	
 	public void Awake()
 	{
 		// Sprite
@@ -35,7 +35,7 @@ public class Block:MonoBehaviour
 		// Set random sprite
 		blockNum = Random.Range(1, 4);
 		spriteRenderer.sprite = Instantiate(Resources.Load<Sprite>("Sprites/Environment/block" + blockNum)) as Sprite;
-
+		
 		// Spikes
 		if(!starterBlock) {
 			if(Random.Range(0, 10) == 0) {
@@ -50,13 +50,9 @@ public class Block:MonoBehaviour
 			}
 		}
 		// Velocity
-//		GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
-		GameObject floor = GameObject.Find("Floor");
-		Debug.Log(floor);
-//		floor.GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
-//		floor.transform.TransformDirection(-Vector2.up * SPEED);
+		GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
 	}
-
+	
 	public void Update()
 	{
 		// Destroy when we leave the screen
@@ -66,7 +62,7 @@ public class Block:MonoBehaviour
 				Destroy(battery);
 			}
 		}
-
+		
 		// Keep the block alive if our spikes are bloody
 		if(spikes) {
 			if(spike.bloody) {
@@ -76,7 +72,7 @@ public class Block:MonoBehaviour
 				spriteRenderer.color = Color.white; // redundant?
 			}
 		}
-
+		
 		// Death timer
 		if((!spikes || !spike.bloody)) {
 			c = spriteRenderer.color;
@@ -86,7 +82,7 @@ public class Block:MonoBehaviour
 			}
 		}
 	}
-
+	
 	public void OnCollisionEnter2D(Collision2D coll)
 	{
 		if(spikes && spike.bloody) {
@@ -94,3 +90,4 @@ public class Block:MonoBehaviour
 		}
 	}
 }
+
