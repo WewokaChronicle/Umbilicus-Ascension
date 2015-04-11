@@ -21,11 +21,13 @@ public class Menu : MonoBehaviour
 		GetComponent<SpriteRenderer>().sprite = this.fadeToSprite;
 
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
-			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileArrows()));
+			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileWASD()));
+			Debug.Log("Attaching Keyboard WASD");
 		}
 
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
-			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileWASD()));
+			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileArrows()));
+			Debug.Log("Attaching Keyboard Arrows");
 		}
 
 		// Look for device changes
@@ -60,5 +62,6 @@ public class Menu : MonoBehaviour
 			}
 		}
 	}
+
 }
 

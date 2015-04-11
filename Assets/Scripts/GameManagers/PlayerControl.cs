@@ -33,6 +33,7 @@ public class PlayerControl : MonoBehaviour {
 	public void RemoveKeyboardProfiles() {
 		for(int i = InputManager.Devices.Count - 1; i > 0; i--) {
 			if(InputManager.Devices[i].Name.StartsWith("Keyboard")) {
+				Debug.Log("Detaching..."+InputManager.Devices[i].Name);
 				InputManager.DetachDevice(InputManager.Devices[i]);
 			}
 		}
