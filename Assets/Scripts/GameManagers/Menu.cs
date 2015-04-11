@@ -40,6 +40,7 @@ public class Menu : MonoBehaviour
 		Sound_Manager.Instance.PlayMusicLoop(menuMusic);
 	}
 
+
 	public void Update()
 	{
 		// Fade out this scene and load the Game when done
@@ -56,8 +57,8 @@ public class Menu : MonoBehaviour
 
 		else {
 			for(int i = 0; i < InputManager.Devices.Count && i < PlayerControl.NumberOfPlayers; i++) {
-				if(InputManager.Devices[i].Action1) {
-//					starting = true;
+				if(Input.GetKeyUp(KeyCode.Space) && MenuPlayerController.allPlayersHaveChosenACharacter()) {
+					starting = true;
 					color = this.GetComponent<SpriteRenderer>().color;
 					Sound_Manager.Instance.PlayEffectOnce(startSound);
 				}

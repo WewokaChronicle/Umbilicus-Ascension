@@ -921,6 +921,8 @@ MonoBehaviour:
   - {fileID: 118520388}
   - {fileID: 433352913}
   - {fileID: 487775047}
+  characterSelectSound: {fileID: 8300000, guid: a4fd4379f57ef4ee8b628f889dceae24,
+    type: 3}
   highlightedCharacter: 0
 --- !u!1 &330531159
 GameObject:
@@ -1943,7 +1945,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PRESS ACTION KEY TO START
+  m_Text: PRESS SPACEBAR TO START
 --- !u!222 &806087027
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2363,6 +2365,8 @@ MonoBehaviour:
   - {fileID: 118520388}
   - {fileID: 433352913}
   - {fileID: 487775047}
+  characterSelectSound: {fileID: 8300000, guid: 1aa9081f3d90146d487773783ec35675,
+    type: 3}
   highlightedCharacter: 0
 --- !u!1 &1105983739
 GameObject:
@@ -2585,6 +2589,8 @@ MonoBehaviour:
   - {fileID: 118520388}
   - {fileID: 433352913}
   - {fileID: 487775047}
+  characterSelectSound: {fileID: 8300000, guid: 1b9a7a6282f5a410792cf873ca884da6,
+    type: 3}
   highlightedCharacter: 0
 --- !u!1 &1270081335
 GameObject:
@@ -3783,6 +3789,8 @@ MonoBehaviour:
   - {fileID: 118520388}
   - {fileID: 433352913}
   - {fileID: 487775047}
+  characterSelectSound: {fileID: 8300000, guid: aacd04dc94e914d9aa0db4bed2f5d659,
+    type: 3}
   highlightedCharacter: 0
 --- !u!1 &1983850507
 GameObject:
