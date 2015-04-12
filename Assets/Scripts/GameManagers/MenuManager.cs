@@ -44,10 +44,9 @@ public class MenuManager : MonoBehaviour
 		GameObject characterManager = GameObject.Find("CharacterManager");
 		if(characterManager != null) {
 			Destroy(characterManager);
-
-
 		}
 
+		// create a fresh CharacterManager object
 		characterManager = new GameObject("CharacterManager");
 		characterManager.AddComponent<CharacterManager>();
 	}
@@ -62,6 +61,18 @@ public class MenuManager : MonoBehaviour
 
 			// if we're done fading out
 			if(startTimer <= 0f) {
+
+				// before we load the level, let's save what characters each player got
+				GameObject characterManager = GameObject.Find("CharacterManager");
+				CharacterManager characterManagerScript = characterManager.GetComponent<CharacterManager>();
+				characterManagerScript.milkywayMikeIndex = MenuPlayerController.selectedCharacters[0];
+				characterManagerScript.quasarQuadeIndex = MenuPlayerController.selectedCharacters[1];
+				characterManagerScript.stardustStanIndex = MenuPlayerController.selectedCharacters[2];
+				characterManagerScript.cosmonautCarlaIndex = MenuPlayerController.selectedCharacters[3];
+
+				Debug.Log(characterManagerScript.milkywayMikeIndex);
+				Debug.Log(characterManagerScript.cosmonautCarlaIndex);
+			
 				Application.LoadLevel("Game");
 			}
 		}

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CharacterManager : MonoBehaviour {
 
+	public static readonly int UNASSIGNED = MenuPlayerController.AVAILABLE;
+
 	[HideInInspector]
 	public int milkywayMikeIndex;
 
@@ -22,9 +24,9 @@ public class CharacterManager : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {
-		this.milkywayMikeIndex = -1;
-		this.quasarQuadeIndex = -1;
-		this.stardustStanIndex = -1;
-		this.cosmonautCarlaIndex = -1;
+		this.milkywayMikeIndex = UNASSIGNED;
+		this.quasarQuadeIndex = UNASSIGNED;
+		this.stardustStanIndex = UNASSIGNED;
+		this.cosmonautCarlaIndex = UNASSIGNED;
 	}
 }

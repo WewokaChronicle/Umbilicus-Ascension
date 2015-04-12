@@ -10,7 +10,7 @@ public class MenuPlayerController : MonoBehaviour
 	public Image[] characterMenuPanels; // the image panels that contain all the game characters
 	public AudioClip characterSelectSound;
 
-	private static readonly int AVAILABLE = -1; // this denotes a character that is still available
+	public static readonly int AVAILABLE = -1; // this denotes a character that is still available
 	private static int numberOfCharacters = 4; // there are four potential characters
 	private InputDevice inputDevice; // the player's controller.
 	private bool inGame = false; // is the player in the game?
@@ -19,6 +19,12 @@ public class MenuPlayerController : MonoBehaviour
 
 	[HideInInspector]
 	public static int[] selectedCharacters;
+	// selectedCharacters is meant to be an array of length 4
+	// and each index is meant to be (in order):
+	// Milkyway Mike, Quasar Quade, Stardust Stan, and Cosmonaut Carla
+	// the value of each index is the player number of the player playing
+	// that particular character.
+
 
 	[HideInInspector]
 	public int highlightedCharacter;
