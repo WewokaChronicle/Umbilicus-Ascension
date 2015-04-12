@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spike:MonoBehaviour {
+public class Spike:MonoBehaviour
+{
 	public AudioClip flattenSound;
 
 //	private Sprite sp;
@@ -12,14 +13,16 @@ public class Spike:MonoBehaviour {
 
 	public GameObject particlePrefab;
 
-	public void Awake() {
+	public void Awake()
+	{
 		// Sprite
 		this.spriteRenderer = GetComponent<SpriteRenderer>(); 
 		// Set random sprite
 		this.spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Environment/Spikes" + Random.Range(1, 3)) as Sprite;
 	}
 
-	public void OnCollisionEnter2D(Collision2D coll) {
+	public void OnCollisionEnter2D(Collision2D coll)
+	{
 		if(flattened || bloody) {
 			return;
 		}
@@ -34,15 +37,13 @@ public class Spike:MonoBehaviour {
 				Destroy(gameObject);
 			} else if(!flattened) {
 
-				/****************************
-				* KILL PLAYER ROUTINE
-				****************************/
-//				Player player = coll.gameObject.GetComponent<Player>();
-//				if(player != null) {
-//					player.Kill();
-//					bloody = true;
-//					sp.SetSprite(sp.CurrentSprite.name + "_Blood");
-//				}
+				// Kill player
+				Player player = coll.gameObject.GetComponent<Player>();
+				if(player != null) {
+					player.Kill();
+					bloody = true;
+					this.spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Environment/" + this.spriteRenderer.sprite.name + "_Blood") as Sprite;
+				}
 			}
 		}
 		if(!bloody) {
@@ -50,7 +51,7 @@ public class Spike:MonoBehaviour {
 			flattened = true;
 			GetComponent<Collider2D>().isTrigger = true;
 			// Spawn particles
-			((GameObject) Instantiate(particlePrefab, transform.position + Vector3.back * 2f, particlePrefab.transform.rotation)).GetComponent<DestroyParticlesOnFinish>().followTarget = transform;
+			((GameObject)Instantiate(particlePrefab, transform.position + Vector3.back * 2f, particlePrefab.transform.rotation)).GetComponent<DestroyParticlesOnFinish>().followTarget = transform;
 		}
 	}
 }
