@@ -3381,9 +3381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press <- ->
-
-    To Choose your Player'
+  m_Text: Choose your Player
 --- !u!222 &1604974369
 CanvasRenderer:
   m_ObjectHideFlags: 0
