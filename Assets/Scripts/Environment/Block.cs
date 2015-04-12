@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Block:MonoBehaviour {
-	public const float SPEED = 5f;
+public class Block:MonoBehaviour
+{
+	public const float SPEED = -1f;
 
 	public bool starterBlock = false;
 
@@ -11,9 +12,6 @@ public class Block:MonoBehaviour {
 	public AudioClip[] crumbleSnd;
 
 	private int blockNum;
-	private bool dying = false;
-	private bool dyingPhase2 = false;
-	private float deathTimer = 1f;
 	private Sprite sp;
 	private Sprite spikeSprite;
 	private SpriteRenderer spriteRenderer;
@@ -29,7 +27,8 @@ public class Block:MonoBehaviour {
 	private Spike spike = null;
 	private GameObject battery = null;
 
-	public void Awake() {
+	public void Awake()
+	{
 		// Sprite
 		sp = GetComponent<Sprite>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -40,7 +39,7 @@ public class Block:MonoBehaviour {
 		// Spikes
 		if(!starterBlock) {
 			if(Random.Range(0, 10) == 0) {
-				GameObject spikeGO = (GameObject) Instantiate(spikePrefab, transform.position + Vector3.up + Vector3.back, Quaternion.Euler(new Vector3(0f, 0f, -90f)));
+				GameObject spikeGO = (GameObject)Instantiate(spikePrefab, transform.position + Vector3.up + Vector3.back, Quaternion.Euler(new Vector3(0f, 0f, -90f)));
 				spikeGO.transform.parent = transform;
 				spikeSprite = spikeGO.GetComponent<Sprite>();
 				spike = spikeGO.GetComponent<Spike>();
@@ -52,11 +51,16 @@ public class Block:MonoBehaviour {
 		}
 		// Velocity
 		GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
+//		GameObject floor = GameObject.Find("Floor");
+//		Debug.Log(floor);
+//		floor.GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
+//		floor.transform.TransformDirection(-Vector2.up * SPEED);
 	}
 
-	public void Update() {
+	public void Update()
+	{
 		// Destroy when we leave the screen
-		if(transform.position.y > 70f) {
+		if(transform.position.y < -70f) {
 			Destroy(gameObject);
 			if(battery != null) {
 				Destroy(battery);
@@ -65,60 +69,28 @@ public class Block:MonoBehaviour {
 
 		// Keep the block alive if our spikes are bloody
 		if(spikes) {
-			if(spike.bloody && dying) {
+			if(spike.bloody) {
 				spriteRenderer.sprite = sp;
 				spriteRenderer.color = Color.white;
 				spriteRenderer.sprite = spikeSprite;
 				spriteRenderer.color = Color.white; // redundant?
-				dying = false;
 			}
 		}
 
 		// Death timer
-		if((!spikes || !spike.bloody) && dying) {
-			deathTimer -= Time.deltaTime;
+		if((!spikes || !spike.bloody)) {
 			c = spriteRenderer.color;
-			c.a = deathTimer / 2f;
 			//sp.color = c;
 			if(spikes) {
 				//spikeSprite.color = c;
 			}
-			if(!dyingPhase2 && deathTimer < 0.5f) {
-				spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_3");
-				dyingPhase2 = true;
-				// Spawn particles
-			}
-			if(deathTimer <= 0f) {
-				Sound_Manager.Instance.PlayEffectOnce(breakSnd[Random.Range(0, 3)], false, true, 0.4f);
-				Destroy(gameObject);
-			}
 		}
 	}
 
-	public void OnCollisionEnter2D(Collision2D coll){
-		if(dying || (spikes && spike.bloody)) {
+	public void OnCollisionEnter2D(Collision2D coll)
+	{
+		if(spikes && spike.bloody) {
 			return;
 		}
-
-		if(Vector2.Dot(coll.contacts[0].normal, -Vector2.up) > 0.2f) {
-
-			/**
-			 * RockSpecial collision
-			 */ 
-//			RockSpecial rock = coll.gameObject.GetComponent<RockSpecial>();
-//			if(rock != null && rock.rocking) {
-//				Destroy(gameObject);
-//				if(spikes) {
-//					Destroy(spike);
-//				}
-//			}
-			dying = true;
-			spriteRenderer.sprite = Resources.Load<Sprite>("block" + blockNum + "_2");
-			// Spawn particles
-			((GameObject) Instantiate(particlesPrefab, transform.position + new Vector3(0.2f, 2f, 1f), Quaternion.identity)).GetComponent<DestroyParticlesOnFinish>().followTarget = transform;
-			// Play sound
-			Sound_Manager.Instance.PlayEffectOnce(crumbleSnd[Random.Range(0, 3)], false, true, 0.6f);
-		}
-
 	}
 }
