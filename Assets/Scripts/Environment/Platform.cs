@@ -48,8 +48,9 @@ public class Platform : MonoBehaviour
 		
 		// Add edge collider with length based on block count
 		gameObject.AddComponent<EdgeCollider2D>();
-		Vector2 startPoint = transform.position + new Vector3(-BLOCK_OFFSET_X / 2f, 1.2f / 2f);
-		Vector2 endPoint = startPoint + new Vector2(BLOCK_OFFSET_X * blockCount, 0);
+		float collider_y = 1.2f / 2f;
+		Vector2 startPoint = new Vector3(-BLOCK_OFFSET_X / 2f, collider_y);
+		Vector2 endPoint = new Vector2(BLOCK_OFFSET_X * blockCount - BLOCK_OFFSET_X / 2f, collider_y);
 		Vector2[] points = new Vector2[]{startPoint, endPoint};
 		gameObject.GetComponent<EdgeCollider2D>().points = points;
 	}
