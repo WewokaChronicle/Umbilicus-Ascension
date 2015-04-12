@@ -32,7 +32,7 @@ public class Platform : MonoBehaviour
 	
 	public void OnCollisionEnter2D(Collision2D coll)
 	{
-		Debug.Log("platform collision");
+
 	}
 
 	public void Spawn()
@@ -53,8 +53,6 @@ public class Platform : MonoBehaviour
 				blockPosition.x += BLOCK_OFFSET_X;
 			}
 		}
-
-		Debug.Log(transform.childCount);
 		
 		// Add edge collider with length based on block count
 		gameObject.AddComponent<EdgeCollider2D>();
