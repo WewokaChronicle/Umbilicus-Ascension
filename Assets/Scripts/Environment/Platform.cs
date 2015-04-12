@@ -33,11 +33,7 @@ public class Platform : MonoBehaviour
 
 	public void Spawn()
 	{
-		Debug.Log("spawning platform");
-		//		GameObject platform = new GameObject("Platform");
-		
 		int blockCount = Random.Range(1, MAX_BLOCKS + 1);
-
 		Vector3 blockPosition = new Vector3(transform.position.x, transform.position.y);
 		for(int i=0; i < blockCount; i++) {
 			if(blockPosition.x <= MAX_BLOCK_X) {
@@ -49,8 +45,9 @@ public class Platform : MonoBehaviour
 		// Add edge collider with length based on block count
 		gameObject.AddComponent<EdgeCollider2D>();
 		float collider_y = 1.2f / 2f;
-		Vector2 startPoint = new Vector3(-BLOCK_OFFSET_X / 2f, collider_y);
-		Vector2 endPoint = new Vector2(BLOCK_OFFSET_X * blockCount - BLOCK_OFFSET_X / 2f, collider_y);
+		float edgeColliderAdjustment = 0.1f;
+		Vector2 startPoint = new Vector3(-BLOCK_OFFSET_X / 2f + edgeColliderAdjustment, collider_y);
+		Vector2 endPoint = new Vector2(BLOCK_OFFSET_X * blockCount - BLOCK_OFFSET_X / 2f - edgeColliderAdjustment, collider_y);
 		Vector2[] points = new Vector2[]{startPoint, endPoint};
 		gameObject.GetComponent<EdgeCollider2D>().points = points;
 	}
