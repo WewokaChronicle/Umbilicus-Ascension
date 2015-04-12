@@ -152,10 +152,10 @@ public class Player : MonoBehaviour
 		}
 
 		// Input
-		this.UpdateInput(this.inputDevice);
+		this._UpdateInput(this.inputDevice);
 
-		// Reposition Slider over us
-		this.RepositionSlider(this.cooldownSlider);
+		// Reposition the cooldown slider over us
+		this._RepositionSlider(this.cooldownSlider, Vector3.up);
 	}
 
 	void FixedUpdate()
@@ -246,7 +246,7 @@ public class Player : MonoBehaviour
 	/// <summary>
 	/// Auxiliary method for handling input detection.
 	/// </summary>
-	private void UpdateInput(InputDevice inputDevice)
+	private void _UpdateInput(InputDevice inputDevice)
 	{
 		if(Time.timeScale == 0f) {
 			return; //we've effectively paused, so there's nothing to update
@@ -278,17 +278,17 @@ public class Player : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Auxiliary method for handling respositioning the slider bar above the player.
+	/// Auxiliary method for respositioning the slider bar relative to the player.
 	/// </summary>
-	private void RepositionSlider(Slider cooldownSlider) 
+	private void _RepositionSlider(Slider slider, Vector3 direction) 
 	{
-		cooldownSlider.transform.position = this.transform.position + Vector3.up * 1f;
+		slider.transform.position = this.transform.position + direction * 1f;
 		if(this.transform.position.y > 49f || this.transform.position.y < 3f || Time.timeScale == 0f) {
-			cooldownSlider.gameObject.SetActive(false);
+			slider.gameObject.SetActive(false);
 		}
 
 		else {
-			cooldownSlider.gameObject.SetActive(true);
+			slider.gameObject.SetActive(true);
 		}
 	}
 }
