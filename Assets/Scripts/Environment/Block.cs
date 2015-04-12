@@ -60,7 +60,7 @@ public class Block:MonoBehaviour
 	public void Update()
 	{
 		// Destroy when we leave the screen
-		if(transform.position.y < -70f) {
+		if(transform.position.y < -10f) {
 			Destroy(gameObject);
 			if(battery != null) {
 				Destroy(battery);
