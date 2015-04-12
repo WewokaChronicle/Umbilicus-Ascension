@@ -9,21 +9,23 @@ public class PlatformGenerator : MonoBehaviour
 	private float spawnTimer = 0f;
 	private float startTime;
 	private bool started = false;
-	private const int MAX_BLOCKS = 5;
+	private const int MAX_BLOCKS = 4;
 	private const float MAX_BLOCK_X = 6f;
 	private const float BLOCK_OFFSET_X = 1.2f;
 	private EdgeCollider2D edgeCollider;
-	private Block[] blocks;
+	private GameObject[] blocks;
+	private float blockWidth;
 
-	public void Awake()
-	{
-		this.blocks = new Block[MAX_BLOCKS];
-	}
 
 	public void Start()
 	{
+		this.blocks = new GameObject[MAX_BLOCKS];
 		Time.timeScale = 0f;
 		startTime = Time.realtimeSinceStartup;
+		// calculate the width of a block
+		GameObject initBlock = (GameObject)GameObject.Instantiate(blockPrefab, Vector3.zero, Quaternion.identity);
+		this.blockWidth = initBlock.GetComponent<Renderer>().bounds.size.x;
+		Destroy(initBlock);
 	}
 	
 	public void Update()
@@ -43,20 +45,20 @@ public class PlatformGenerator : MonoBehaviour
 	
 	public void SpawnPlatform()
 	{
+		GameObject platform = new GameObject("Platform");
 		Debug.Log("spawning platform");
-		int blockCount = Random.Range(1, MAX_BLOCKS);
-		Block block;
-		Vector2 pos = transform.position;
+		int blockCount = Random.Range(1, MAX_BLOCKS+1);
+		Vector3 pos = new Vector3(Random.Range(-MAX_BLOCK_X, MAX_BLOCK_X), 10f);
 		for(int i=0; i < blockCount; i++) {
-			this.blocks[i] = GameObject.Instantiate(blockPrefab, pos, Quaternion.identity) as Block;
+			this.blocks[i] = (GameObject)GameObject.Instantiate(blockPrefab, pos, Quaternion.identity);
 			pos.x += BLOCK_OFFSET_X;
 		}
 
-//		this.edgeCollider = gameObject.AddComponent<EdgeCollider2D>();
-//		Vector2 startPoint = new Vector2(transform.position.x, transform.position.y);
-//		Vector2 endPoint = startPoint + 
-//			new Vector2(blockPrefab.GetComponent<SpriteRenderer>().sprite.textureRect.width * count, 0);
-//		Vector2[] points = new Vector2[]{startPoint, endPoint};
-//		this.edgeCollider.points = points;
+		platform.AddComponent<EdgeCollider2D>();
+		Vector2 startPoint = this.blocks[0].transform.position;
+		Vector2 endPoint = startPoint + 
+			new Vector2(this.blockWidth * blockCount, startPoint.y);
+		Vector2[] points = new Vector2[]{startPoint, endPoint};
+		platform.GetComponent<EdgeCollider2D>().points = points;
 	}
 }

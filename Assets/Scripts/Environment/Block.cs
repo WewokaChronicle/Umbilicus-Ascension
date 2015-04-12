@@ -50,9 +50,9 @@ public class Block:MonoBehaviour
 			}
 		}
 		// Velocity
-//		GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
-		GameObject floor = GameObject.Find("Floor");
-		Debug.Log(floor);
+		GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
+//		GameObject floor = GameObject.Find("Floor");
+//		Debug.Log(floor);
 //		floor.GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
 //		floor.transform.TransformDirection(-Vector2.up * SPEED);
 	}
