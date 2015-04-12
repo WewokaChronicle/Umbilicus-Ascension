@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 using InControl;
 
-[RequireComponent (typeof (SpriteRenderer))]
 public class MenuManager : MonoBehaviour
 {
 	public static bool starting = false;
@@ -15,6 +14,7 @@ public class MenuManager : MonoBehaviour
 	private Color color;
 	private float startTimer = 2f;
 
+	// Runs before Start
 	public void Awake()
 	{
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
@@ -37,6 +37,20 @@ public class MenuManager : MonoBehaviour
 		Sound_Manager.Instance.PlayMusicLoop(menuMusic);
 	}
 
+	// Init
+	public void Start()
+	{
+		// if a character manager exists when we start up, delete it
+		GameObject characterManager = GameObject.Find("CharacterManager");
+		if(characterManager != null) {
+			Destroy(characterManager);
+
+
+		}
+
+		characterManager = new GameObject("CharacterManager");
+		characterManager.AddComponent<CharacterManager>();
+	}
 
 	public void Update()
 	{
