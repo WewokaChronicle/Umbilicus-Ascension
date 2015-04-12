@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 485454}
   - 50: {fileID: 5027882}
   - 114: {fileID: 11424498}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
