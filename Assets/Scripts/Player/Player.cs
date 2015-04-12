@@ -75,15 +75,21 @@ public class Player : MonoBehaviour
 	// This is called before Start
 	void Awake() 
 	{
+		// start as out of the game
+		this.inGame = false;
+
 		// Get the player number controlling this character
-		this.playerNumber = CharacterManager.selectedCharacters[this.characterID];
+		// if characters have been selected in the Menu Scene, overwrite the player number
+		if(CharacterManager.selectedCharacters != null) {
+			// this is inside an "if" guard so that I can test Scenes individually without
+			// having to necessarily load the Menu Scene prior to testing this class
+			this.playerNumber = CharacterManager.selectedCharacters[this.characterID];
+		}
 
 		// If this character hasn't been assigned a player number, destroy it
 		if(this.playerNumber == CharacterManager.UNASSIGNED) {
 			this.cooldownSlider.gameObject.SetActive(false);
-			this.inGame = false;
 			Destroy(this.gameObject);
-
 		}
 
 		else {

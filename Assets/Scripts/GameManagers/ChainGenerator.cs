@@ -1,30 +1,35 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
-public class ChainGenerator:MonoBehaviour
+public class ChainGenerator : MonoBehaviour
 {
-	public Player[] players;
+	public Player[] characters;
 	public GameObject chainLinkPrefab;
+
 	private const float PLAYER_DISTANCE = 0.2f;
 	private const int NUM_LINKS = 10;
 
 	public void Start()
 	{
+		this.characters = this._FindPlayers();
+		Debug.Log(this.characters.Length);
+
 		// Reposition players
-		for(int i = 1; i < players.Length; i++) {
-			players[i].transform.Translate(Vector3.right * PLAYER_DISTANCE * i);
+		for(int i = 1; i < characters.Length; i++) {
+			characters[i].transform.Translate(Vector3.right * PLAYER_DISTANCE * i);
 		}
 
 		// Create prefabs for chain between players
-		players[0].playerOnTheEnd = true;
-		for(int i = 1; i < players.Length; i++) {
-			if(players[i].inGame) {
-				CreateChain(i, players[i - 1], players[i]);
+		characters[0].playerOnTheEnd = true;
+		for(int i = 1; i < characters.Length; i++) {
+			if(characters[i].inGame) {
+				CreateChain(i, characters[i - 1], characters[i]);
 				// Set myself to the new player on the end and unless it's player 0, set the player behind me to no longer on the end
 				if(i > 1) {
-					players[i - 1].playerOnTheEnd = false;
+					characters[i - 1].playerOnTheEnd = false;
 				}
-				players[i].playerOnTheEnd = true;
+				characters[i].playerOnTheEnd = true;
 			}
 		}
 	}
@@ -56,5 +61,54 @@ public class ChainGenerator:MonoBehaviour
 		hinge.connectedBody = p2.GetComponent<Rigidbody2D>();
 		hinge.anchor = new Vector2(linkOffset, 0f);
 		hinge.connectedAnchor = new Vector2(-linkOffset, 0f);
+	}
+
+	/// <returns>All the players that currently exist in this Scene.</returns>
+	private Player[] _FindPlayers() {
+
+		ArrayList activePlayers = new ArrayList();
+
+		// try to find each in-game player and add it to the list
+		GameObject milkywayMike = GameObject.Find("Milkyway Mike");
+		if(milkywayMike != null) {
+			Player milkywayMikePlayer = milkywayMike.GetComponent<Player>();
+			if(milkywayMikePlayer.inGame) {
+				activePlayers.Add(milkywayMikePlayer);
+			}
+		}
+
+		GameObject quasarQuade = GameObject.Find("Quasar Quade");
+		if(quasarQuade != null) {
+			Player quasarQuadePlayer = quasarQuade.GetComponent<Player>();
+			if(quasarQuadePlayer.inGame) {
+				activePlayers.Add(quasarQuadePlayer);
+			}
+		}
+
+		GameObject stardustStan = GameObject.Find("Stardust Stan");
+		if(stardustStan != null) {
+			Player stardustStanPlayer = stardustStan.GetComponent<Player>();
+			if(stardustStanPlayer.inGame) {
+				activePlayers.Add(stardustStanPlayer);
+			}
+		}
+
+		GameObject cosmonautCarla = GameObject.Find("Cosmonaut Carla");
+		if(cosmonautCarla != null) {
+			Player cosmonautCarlaPlayer = cosmonautCarla.GetComponent<Player>();
+			if(cosmonautCarlaPlayer.inGame) {
+				activePlayers.Add(cosmonautCarlaPlayer);
+			}
+		}
+
+		// compile the list into an array
+		object[] activePlayerObjects = activePlayers.ToArray();
+		Player[] result = new Player[activePlayerObjects.Length];
+		for(int i = 0; i < activePlayerObjects.Length; i++) {
+			result[i] = (Player) activePlayerObjects[i];
+		}
+
+		// return the array
+		return result;
 	}
 }
