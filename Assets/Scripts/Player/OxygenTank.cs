@@ -35,8 +35,6 @@ public class OxygenTank : MonoBehaviour {
 		instance = this;
 	}
 
-
-	
 	// Update is called once per frame
 	public void Update () {
 
@@ -48,7 +46,6 @@ public class OxygenTank : MonoBehaviour {
 			this.oxygenSliderImage.color = this.oxygenSliderOriginalColor;
 			Sound_Manager.Instance.StopEffectLoop(1);
 		}
-
 
 		if(!this.triggerWarning && this.oxygenLevel < WARNING_OXYGEN_LEVEL) {
 			this.oxygenSliderImage.color = Color.yellow;
@@ -68,6 +65,10 @@ public class OxygenTank : MonoBehaviour {
 			this.oxygenSlider.gameObject.SetActive(false);
 		}
 
+		if(this.oxygenLevel > 1.0f) {
+			this.oxygenLevel = 1.0f;
+		}
+
 		this.oxygenSlider.value = this.oxygenLevel;
 	}
 
@@ -76,5 +77,11 @@ public class OxygenTank : MonoBehaviour {
 		return (this.oxygenLevel < 0.00001f);
 	}
 
-
+	/// <summary>
+	/// Adds oxygen to the tank.
+	/// </summary>
+	/// <param name="oxygenAmount">Oxygen amount (should be between 0.0 and 1.0)</param>
+	public void addOxygen(float oxygenAmount) {
+		this.oxygenLevel += oxygenAmount;
+	}
 }
