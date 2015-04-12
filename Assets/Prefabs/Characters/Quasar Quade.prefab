@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdaeac8332fbb416892b6e9e3e9d6464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterID: 1
   stickMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -287,7 +288,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c6a5e68e9862d42d58f6960f28d108aa, type: 3}
   - {fileID: 8300000, guid: c4c223c2015fb4198b5819da963681f2, type: 3}
   - {fileID: 8300000, guid: 24b6c9551ae43400783f216d9a5e1c75, type: 3}
-  playerNumber: 1
+  playerNumber: -1
   cooldownSlider: {fileID: 11402504}
   inGame: 0
   playerOnTheEnd: 0

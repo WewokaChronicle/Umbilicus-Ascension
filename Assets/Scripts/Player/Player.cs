@@ -14,6 +14,13 @@ public class Player : MonoBehaviour
 	public const float FORCE = 50.0f;
 	public const float MAX_SPEED = 50.0f;
 
+	// This is this player's unique character ID.
+	// Milkyway Mike = 0
+	// Quasar Quade = 1
+	// Stardust Stan = 2
+	// Cosmonaut Carla = 3
+	public int characterID;
+
 	// Layer mask
 	public LayerMask stickMask;
 
@@ -67,10 +74,16 @@ public class Player : MonoBehaviour
 	// This is called before Start
 	void Awake() 
 	{
-		this.boxCollider2D = GetComponent<BoxCollider2D>();
-		this.rigidbod2D = GetComponent<Rigidbody2D>();
-		this.spriteAnimator = GetComponent<Animator>();
-		this.spriteRenderer = GetComponent<SpriteRenderer>();
+		// See which player is controlling this character
+		GameObject characterManager = GameObject.Find("CharacterManager");
+		if(characterManager != null) {
+
+			CharacterManager characterManagerScript = characterManager.GetComponent<CharacterManager>();
+
+
+
+
+		}
 
 		// Get the input device corresponding to the player number
 		this.inputDevice = (InputManager.Devices.Count > playerNumber && PlayerControl.NumberOfPlayers > playerNumber) ? InputManager.Devices[playerNumber] : null;
@@ -84,6 +97,16 @@ public class Player : MonoBehaviour
 		else {
 			this.inGame = true;
 		}
+	}
+
+	// Init
+	public void Start()
+	{
+		// Get handles on all necessary components
+		this.boxCollider2D = GetComponent<BoxCollider2D>();
+		this.rigidbod2D = GetComponent<Rigidbody2D>();
+		this.spriteAnimator = GetComponent<Animator>();
+		this.spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame

@@ -3707,10 +3707,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09f3fc3773d14bfcb228c8b2be12703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  milkywayMikeIndex: 0
-  quasarQuadeIndex: 0
-  stardustStanIndex: 0
-  cosmonautCarlaIndex: 0
 --- !u!4 &1982118385
 Transform:
   m_ObjectHideFlags: 0

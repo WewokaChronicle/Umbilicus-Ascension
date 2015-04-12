@@ -10,32 +10,21 @@ public class MenuPlayerController : MonoBehaviour
 	public Image[] characterMenuPanels; // the image panels that contain all the game characters
 	public AudioClip characterSelectSound;
 
-	public static readonly int AVAILABLE = -1; // this denotes a character that is still available
-	private static int numberOfCharacters = 4; // there are four potential characters
 	private InputDevice inputDevice; // the player's controller.
 	private bool inGame = false; // is the player in the game?
 	private bool playerHasChosenCharacter; // has the player chosen a character yet?
 	private Camera camera;
-
+	
 	[HideInInspector]
-	public static int[] selectedCharacters;
-	// selectedCharacters is meant to be an array of length 4
-	// and each index is meant to be (in order):
-	// Milkyway Mike, Quasar Quade, Stardust Stan, and Cosmonaut Carla
-	// the value of each index is the player number of the player playing
-	// that particular character.
-
-
-	[HideInInspector]
-	public int highlightedCharacter;
+	public int highlightedCharacter; // this is the character currently being considered by this MenuPlayerController
 
 	/// <returns><c>true</c>, if all registered players have chosen a character, <c>false</c> otherwise.</returns>
 	public static bool allPlayersHaveChosenACharacter() {
 
 		// accumulate the number of characters that have been chosen
 		int numberOfCharactersThatHaveBeenChosen = 0;
-		for(int i = 0; i < MenuPlayerController.selectedCharacters.Length; i++) {
-			if(MenuPlayerController.selectedCharacters[i] != AVAILABLE) {
+		for(int i = 0; i < CharacterManager.selectedCharacters.Length; i++) {
+			if(CharacterManager.selectedCharacters[i] != CharacterManager.UNASSIGNED) {
 				numberOfCharactersThatHaveBeenChosen++;
 			}
 		}
@@ -52,10 +41,7 @@ public class MenuPlayerController : MonoBehaviour
 	// Use this for initialization
 	public void Start () {
 		this.camera = Camera.main;
-
 		this.highlightedCharacter = 0;
-		MenuPlayerController.selectedCharacters = new int[4] {AVAILABLE, AVAILABLE, AVAILABLE, AVAILABLE};
-
 		// Debug.Log("Controller " + playerNumber + " @ Position: " + playerMenuPanel.transform.position);
 
 		this.inputDevice = (InputManager.Devices.Count > playerNumber && PlayerControl.NumberOfPlayers > playerNumber) ? InputManager.Devices[playerNumber] : null;
@@ -104,7 +90,7 @@ public class MenuPlayerController : MonoBehaviour
 		}
 
 		// wrap around the total number of characters
-		this.highlightedCharacter = _Modulo(this.highlightedCharacter, MenuPlayerController.numberOfCharacters);
+		this.highlightedCharacter = _Modulo(this.highlightedCharacter, CharacterManager.NUMBER_OF_CHARACTERS);
 
 		// set the planel representing the player to the color of the character's panel
 		this.playerMenuPanel.color = this.characterMenuPanels[this.highlightedCharacter].color;
@@ -113,10 +99,10 @@ public class MenuPlayerController : MonoBehaviour
 		if(device.Action1.WasPressed) {
 
 			// can only do so if the character is still available
-			if(MenuPlayerController.selectedCharacters[this.highlightedCharacter] == AVAILABLE)
+			if(CharacterManager.selectedCharacters[this.highlightedCharacter] == CharacterManager.UNASSIGNED)
 			{
 				// record that the highlighted character now belongs to this player
-				MenuPlayerController.selectedCharacters[this.highlightedCharacter] = this.playerNumber;
+				CharacterManager.selectedCharacters[this.highlightedCharacter] = this.playerNumber;
 
 				// gray out the panels representing the player
 				this._SetUIGraphicAlpha(this.playerMenuPanel, 1.0f); 
@@ -139,7 +125,7 @@ public class MenuPlayerController : MonoBehaviour
 		if(device.Action2.WasPressed && this.playerHasChosenCharacter) {
 
 			// record that the player has released the highlighted character
-			MenuPlayerController.selectedCharacters[this.highlightedCharacter] = AVAILABLE;
+			CharacterManager.selectedCharacters[this.highlightedCharacter] = CharacterManager.UNASSIGNED;
 
 			// bring the panels back to their regular alpha
 			this._SetUIGraphicAlpha(this.playerMenuPanel, 0.6f);
