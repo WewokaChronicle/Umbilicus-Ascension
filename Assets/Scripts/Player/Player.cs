@@ -11,8 +11,9 @@ using InControl;
 [RequireComponent (typeof (SpriteRenderer))]
 public class Player : MonoBehaviour
 {
-	public const float FORCE = 50.0f;
+	public const float MOVEMENT_FORCE = 50.0f;
 	public const float MAX_SPEED = 50.0f;
+	public const float JUMPING_FORCE = 10.0f;
 
 	// This is this player's unique character ID.
 	// Milkyway Mike = 0
@@ -58,6 +59,9 @@ public class Player : MonoBehaviour
 
 	[HideInInspector]
 	public bool isDead = false;
+
+	[HideInInspector]
+	public bool canJump = false;
 	
 	// Corpse 
 	public GameObject corpsePrefab;
@@ -95,6 +99,8 @@ public class Player : MonoBehaviour
 
 		else {
 			this.inGame = true;
+			this.isDead = false;
+			this.canJump = true;
 
 			// Attach a player special, depending on which space person it is
 			if(this.characterID == CharacterManager.MILKYWAY_MIKE_INDEX) {
@@ -175,18 +181,26 @@ public class Player : MonoBehaviour
 		}
 
 		// Check float vs. stand
-		this.hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 3f, this.stickMask);
+		this.hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 0.65f, this.stickMask);
 		// Debug.Log(this.hit.collider);
 		// Debug.DrawRay(this.transform.position,-Vector3.up);
 		
 		if(this.hit.collider != null) { // if we hit something, then there is ground underneath
 			this.spriteAnimator.SetBool("thereIsGroundUnderneath", true);
+			this.canJump = true;
 		}
 		
 		else { // otherwise, we're not above anything
 			this.spriteAnimator.SetBool("thereIsGroundUnderneath", false);
+			this.canJump = false;
 		}
 
+		// Jumping
+		if(this.inputDevice.Direction.Up.WasPressed && this.canJump) {
+			this.rigidbod2D.AddForce(Vector2.up * JUMPING_FORCE, ForceMode2D.Impulse);
+			this.spriteAnimator.SetBool("thereIsGroundUnderneath", false); // there won't be ground when we jump!
+			this.canJump = false;
+		}
 	}
 
 	/// <summary>
@@ -239,9 +253,11 @@ public class Player : MonoBehaviour
 		}
 
 		// Direction
-		this.forceX = FORCE * inputDevice.Direction.X;
+		this.forceX = MOVEMENT_FORCE * inputDevice.Direction.X;
 		if(this.playerOnTheEnd) {
-			this.forceX *= 0.75f;
+			// this causes players at the end of the chain to have less 
+			// ability to pull the entire group sideways
+			this.forceX *= 0.75f; 
 		}
 
 		// Facing direction
