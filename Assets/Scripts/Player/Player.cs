@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
 	public SpriteRenderer spriteRenderer;
 
 	// Audio
+	public AudioClip[] specialSounds;
 	public AudioClip[] goreSounds;
 	public AudioClip[] deathSounds;
 	
@@ -90,19 +91,19 @@ public class Player : MonoBehaviour
 
 			// Attach a player special, depending
 			if(this.characterID == CharacterManager.MILKYWAY_MIKE_INDEX) {
-				this.gameObject.AddComponent<JetSpecial>();
+				this.gameObject.AddComponent<JetSpecial>().specialSound = this.specialSounds[this.characterID];
 			}
 
 			else if(this.characterID == CharacterManager.QUASAR_QUADE_INDEX) {
-				this.gameObject.AddComponent<FloatSpecial>();
+				this.gameObject.AddComponent<FloatSpecial>().specialSound = this.specialSounds[this.characterID];;
 			}
 
 			else if(this.characterID == CharacterManager.STARDUST_STAN_INDEX) {
-				this.gameObject.AddComponent<StickSpecial>();
+				this.gameObject.AddComponent<StickSpecial>().specialSound = this.specialSounds[this.characterID];;
 			} 
 
 			else if(this.characterID == CharacterManager.COSMONAUT_CARLA_INDEX) {
-				this.gameObject.AddComponent<RockSpecial>();
+				this.gameObject.AddComponent<RockSpecial>().specialSound = this.specialSounds[this.characterID];;
 			}
 		}
 	}
@@ -115,8 +116,6 @@ public class Player : MonoBehaviour
 		this.rigidbod2D = GetComponent<Rigidbody2D>();
 		this.spriteAnimator = GetComponent<Animator>();
 		this.spriteRenderer = GetComponent<SpriteRenderer>();
-
-		Debug.Log(this.playerNumber);
 
 		// Get the input device corresponding to the player number
 		this.inputDevice = (InputManager.Devices.Count > playerNumber && PlayerControl.NumberOfPlayers > playerNumber) ? InputManager.Devices[playerNumber] : null;
