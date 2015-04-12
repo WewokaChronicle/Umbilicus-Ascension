@@ -29,7 +29,7 @@ public class PlatformGenerator : MonoBehaviour
 		spawnTimer -= Time.deltaTime;
 		
 		if(spawnTimer <= 0f) {
-			SpawnPlatform();			
+			this.SpawnPlatform();			
 			spawnTimer = SPAWN_TIME + Random.Range(0f, 1f);
 		}
 	}

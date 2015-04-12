@@ -44,8 +44,8 @@ public class Platform : MonoBehaviour
 				this.blocks[i] = (GameObject)GameObject.Instantiate(blockPrefab, blockPosition, Quaternion.identity);
 				this.blocks[i].transform.parent = transform;
 				if(this.starterPlatform) {
+					// destroy children of all blocks (spikes, etc)
 					foreach(Transform comp in this.blocks[i].transform) {
-						Debug.Log("destroying " + comp.gameObject);
 						Destroy(comp.gameObject);
 					}
 				}
