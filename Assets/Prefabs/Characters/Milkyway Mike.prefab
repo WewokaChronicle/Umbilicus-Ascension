@@ -280,6 +280,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   spriteAnimator: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 1bb92a1adc156446c8a7d1d2c77b72fa, type: 3}
   specialSounds:
   - {fileID: 8300000, guid: 13a65c9ad89fd4f50ad2d750cc0d19cb, type: 3}
   - {fileID: 8300000, guid: 0025f4e7f50c048a7829253c3ad20732, type: 3}

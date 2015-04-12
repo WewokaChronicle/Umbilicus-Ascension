@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
 	public SpriteRenderer spriteRenderer;
 
 	// Audio
+	public AudioClip jumpSound;
 	public AudioClip[] specialSounds;
 	public AudioClip[] goreSounds;
 	public AudioClip[] deathSounds;

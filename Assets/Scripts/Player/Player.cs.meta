@@ -1,13 +1,16 @@
 fileFormatVersion: 2
 guid: fdaeac8332fbb416892b6e9e3e9d6464
-timeCreated: 1428171414
+timeCreated: 1428865552
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
+  - deadTorsoSprite: {instanceID: 0}
+  - deadLegsSprite: {instanceID: 0}
   - sprite: {instanceID: 0}
   - spriteAnimator: {instanceID: 0}
   - spriteRenderer: {instanceID: 0}
+  - jumpSound: {fileID: 8300000, guid: 1bb92a1adc156446c8a7d1d2c77b72fa, type: 3}
   - cooldownSlider: {instanceID: 0}
   - corpsePrefab: {instanceID: 0}
   - bloodParticles: {fileID: 19893940, guid: e5c710c089d1c1e4189ae2840b72c751, type: 2}
