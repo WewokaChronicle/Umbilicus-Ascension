@@ -200,6 +200,7 @@ public class Player : MonoBehaviour
 			this.rigidbod2D.AddForce(Vector2.up * JUMPING_FORCE, ForceMode2D.Impulse);
 			this.spriteAnimator.SetBool("thereIsGroundUnderneath", false); // there won't be ground when we jump!
 			this.canJump = false;
+			Sound_Manager.Instance.PlayEffectOnce(this.jumpSound);
 		}
 	}
 
