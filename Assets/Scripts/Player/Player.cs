@@ -44,24 +44,24 @@ public class Player : MonoBehaviour
 	public AudioClip[] goreSounds;
 	public AudioClip[] deathSounds;
 	
-	// Input
+	// Player properties
 	public int playerNumber;
 	public Slider cooldownSlider;
 
 	[HideInInspector]
-	public bool inGame = false;
-
-	[HideInInspector]
-	public bool playerOnTheEnd = false;
-
-	[HideInInspector]
 	public InputDevice inputDevice;
+
+	[HideInInspector]
+	public bool inGame = false;
 
 	[HideInInspector]
 	public bool isDead = false;
 
 	[HideInInspector]
 	public bool canJump = false;
+
+	[HideInInspector]
+	public bool playerOnTheEnd = false;
 	
 	// Corpse 
 	public GameObject corpsePrefab;
@@ -137,15 +137,23 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		// End Game
+		// We've jumped outside the screen.
 		if(this.transform.position.y < -5f) {
-//			GameManager.instance.EndLevel();
+		//  GameManager.instance.EndLevel();
 			Debug.Log("You lose!");
-		} else if(this.transform.position.y > 70f) {
-//			GameManager.instance.EndLevel();
+		} 
+
+		else if(this.transform.position.y > 70f) {
+		//	GameManager.instance.EndLevel();
 			Debug.Log("You lose!");
 		}
-		
+
+		// Oxygen Updating
+		if(OxygenTank.instance.isEmpty()) {
+			// if we've ran out, we're dead
+			this.Kill();
+		}
+
 		// Don't do anything if we're dead
 		if(this.isDead) {
 			return;
