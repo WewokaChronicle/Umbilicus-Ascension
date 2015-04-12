@@ -14,7 +14,6 @@ public class PlatformGenerator : MonoBehaviour
 	private const float BLOCK_OFFSET_X = 1.2f;
 	private EdgeCollider2D edgeCollider;
 	private GameObject[] blocks;
-	private float blockWidth;
 
 
 	public void Start()
@@ -22,10 +21,6 @@ public class PlatformGenerator : MonoBehaviour
 		this.blocks = new GameObject[MAX_BLOCKS];
 		Time.timeScale = 0f;
 		startTime = Time.realtimeSinceStartup;
-		// calculate the width of a block
-		GameObject initBlock = (GameObject)GameObject.Instantiate(blockPrefab, Vector3.zero, Quaternion.identity);
-		this.blockWidth = initBlock.GetComponent<Renderer>().bounds.size.x;
-		Destroy(initBlock);
 	}
 	
 	public void Update()
@@ -46,19 +41,21 @@ public class PlatformGenerator : MonoBehaviour
 	public void SpawnPlatform()
 	{
 		GameObject platform = new GameObject("Platform");
-		Debug.Log("spawning platform");
-		int blockCount = Random.Range(1, MAX_BLOCKS+1);
+		int blockCount = Random.Range(1, MAX_BLOCKS + 1);
 		Vector3 pos = new Vector3(Random.Range(-MAX_BLOCK_X, MAX_BLOCK_X), 10f);
 		for(int i=0; i < blockCount; i++) {
-			this.blocks[i] = (GameObject)GameObject.Instantiate(blockPrefab, pos, Quaternion.identity);
-			pos.x += BLOCK_OFFSET_X;
+			if(pos.x <= MAX_BLOCK_X) {
+				this.blocks[i] = (GameObject)GameObject.Instantiate(blockPrefab, pos, Quaternion.identity);
+				pos.x += BLOCK_OFFSET_X;
+			}
 		}
 
 		platform.AddComponent<EdgeCollider2D>();
-		Vector2 startPoint = this.blocks[0].transform.position;
-		Vector2 endPoint = startPoint + 
-			new Vector2(this.blockWidth * blockCount, startPoint.y);
+		Vector2 startPoint = this.blocks[0].transform.position - new Vector3(BLOCK_OFFSET_X / 2, 0);
+		Vector2 endPoint = startPoint + new Vector2(BLOCK_OFFSET_X * blockCount, 0);
 		Vector2[] points = new Vector2[]{startPoint, endPoint};
 		platform.GetComponent<EdgeCollider2D>().points = points;
+		// reset blocks array
+		this.blocks = new GameObject[MAX_BLOCKS];
 	}
 }
