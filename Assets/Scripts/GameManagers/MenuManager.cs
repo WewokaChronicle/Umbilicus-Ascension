@@ -57,9 +57,7 @@ public class MenuManager : MonoBehaviour
 
 			// if we're done fading out
 			if(startTimer <= 0f) {
-//				Application.LoadLevel("Game");
-				// Test:
-				Application.LoadLevel("PlayerAnimation");
+				Application.LoadLevel("Game");
 			}
 		}
 

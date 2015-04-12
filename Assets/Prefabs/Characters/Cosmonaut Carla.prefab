@@ -337,6 +337,11 @@ MonoBehaviour:
   sprite: {fileID: 0}
   spriteAnimator: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  specialSounds:
+  - {fileID: 8300000, guid: 13a65c9ad89fd4f50ad2d750cc0d19cb, type: 3}
+  - {fileID: 8300000, guid: 0025f4e7f50c048a7829253c3ad20732, type: 3}
+  - {fileID: 8300000, guid: 272761fda9bcc4362a1cb745611eba6d, type: 3}
+  - {fileID: 8300000, guid: cc046ac672e9d42ec9d9afb5e42a4c7e, type: 3}
   goreSounds:
   - {fileID: 8300000, guid: 07aba8f83f2ce4c1d9150a67f676f17a, type: 3}
   - {fileID: 8300000, guid: fff3b4f73f84d4e5ba92068a08423485, type: 3}
