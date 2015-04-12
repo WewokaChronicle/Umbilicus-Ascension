@@ -51,16 +51,12 @@ public class Block:MonoBehaviour
 		}
 		// Velocity
 		GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
-//		GameObject floor = GameObject.Find("Floor");
-//		Debug.Log(floor);
-//		floor.GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
-//		floor.transform.TransformDirection(-Vector2.up * SPEED);
 	}
 
 	public void Update()
 	{
 		// Destroy when we leave the screen
-		if(transform.position.y < -70f) {
+		if(transform.position.y < -10f) {
 			Destroy(gameObject);
 			if(battery != null) {
 				Destroy(battery);

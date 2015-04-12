@@ -29,7 +29,7 @@ public class PlatformGenerator : MonoBehaviour
 		spawnTimer -= Time.deltaTime;
 		
 		if(spawnTimer <= 0f) {
-			SpawnPlatform();			
+			this.SpawnPlatform();			
 			spawnTimer = SPAWN_TIME + Random.Range(0f, 1f);
 		}
 	}
@@ -37,6 +37,6 @@ public class PlatformGenerator : MonoBehaviour
 	public void SpawnPlatform()
 	{
 		Vector3 platformPosition = new Vector3(Random.Range(-MAX_BLOCK_X, MAX_BLOCK_X), 10f);
-		GameObject platform = (GameObject)GameObject.Instantiate(platformPrefab, platformPosition, Quaternion.identity);
+		GameObject.Instantiate(platformPrefab, platformPosition, Quaternion.identity);
 	}
 }

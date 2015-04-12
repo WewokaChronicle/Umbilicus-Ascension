@@ -10,10 +10,14 @@ public class Platform : MonoBehaviour
 	private const float MAX_BLOCK_X = 6f;
 	private const float BLOCK_OFFSET_X = 1.2f;
 	private GameObject[] blocks;
+	public int blockCount = 1;
 
 	void Awake()
 	{
-		this.blocks = new GameObject[MAX_BLOCKS];
+		if(this.blockCount < 1) {
+			this.blockCount = Random.Range(1, MAX_BLOCKS + 1);
+		}
+		this.blocks = new GameObject[this.blockCount];
 		this.Spawn();
 		GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
 	}
@@ -21,23 +25,31 @@ public class Platform : MonoBehaviour
 	public void Update()
 	{
 		// Destroy when we leave the screen
-		if(transform.position.y < -70f) {
+		if(transform.position.y < -10f) {
 			Destroy(gameObject);
 		}
 	}
 	
 	public void OnCollisionEnter2D(Collision2D coll)
 	{
-		Debug.Log("platform collision");
+
 	}
 
 	public void Spawn()
 	{
-		int blockCount = Random.Range(1, MAX_BLOCKS + 1);
+
 		Vector3 blockPosition = new Vector3(transform.position.x, transform.position.y);
-		for(int i=0; i < blockCount; i++) {
+		for(int i=0; i < this.blockCount; i++) {
 			if(blockPosition.x <= MAX_BLOCK_X) {
 				this.blocks[i] = (GameObject)GameObject.Instantiate(blockPrefab, blockPosition, Quaternion.identity);
+				this.blocks[i].transform.parent = transform;
+				if(this.starterPlatform) {
+					// destroy children of all blocks (spikes, etc)
+					foreach(Transform comp in this.blocks[i].transform) {
+						Destroy(comp.gameObject);
+					}
+				}
+				this.blocks[i].GetComponent<Block>().starterBlock = starterPlatform;
 				blockPosition.x += BLOCK_OFFSET_X;
 			}
 		}
@@ -47,7 +59,7 @@ public class Platform : MonoBehaviour
 		float collider_y = 1.2f / 2f;
 		float edgeColliderAdjustment = 0.1f;
 		Vector2 startPoint = new Vector3(-BLOCK_OFFSET_X / 2f + edgeColliderAdjustment, collider_y);
-		Vector2 endPoint = new Vector2(BLOCK_OFFSET_X * blockCount - BLOCK_OFFSET_X / 2f - edgeColliderAdjustment, collider_y);
+		Vector2 endPoint = new Vector2(BLOCK_OFFSET_X * this.blockCount - BLOCK_OFFSET_X / 2f - edgeColliderAdjustment, collider_y);
 		Vector2[] points = new Vector2[]{startPoint, endPoint};
 		gameObject.GetComponent<EdgeCollider2D>().points = points;
 	}
