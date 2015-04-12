@@ -119,9 +119,7 @@ MonoBehaviour:
   enableXInput: 0
   useFixedUpdate: 0
   dontDestroyOnLoad: 0
-  customProfiles:
-  - KeyboardProfileArrows
-  - KeyboardProfileWASD
+  customProfiles: []
 --- !u!4 &148226053
 Transform:
   m_ObjectHideFlags: 0
@@ -484,7 +482,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 493604, guid: 765ca918b6bb44a95a2b508351f46b1b, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 765ca918b6bb44a95a2b508351f46b1b, type: 2}
@@ -956,7 +954,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
 --- !u!1001 &1996569188
 Prefab:
   m_ObjectHideFlags: 0
@@ -994,7 +992,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 499112, guid: 368a46c813362433db04dbd1c51d0907, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 368a46c813362433db04dbd1c51d0907, type: 2}
@@ -1078,7 +1076,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437528, guid: edb953b50718c44ec823bd0c91fa9e2d, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: edb953b50718c44ec823bd0c91fa9e2d, type: 2}

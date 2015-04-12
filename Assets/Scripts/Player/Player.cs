@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
 
 	[HideInInspector]
 	public bool isDead = false;
-
+	
 	// Corpse 
 	public GameObject corpsePrefab;
 	
@@ -74,28 +74,36 @@ public class Player : MonoBehaviour
 	// This is called before Start
 	void Awake() 
 	{
-		// See which player is controlling this character
-		GameObject characterManager = GameObject.Find("CharacterManager");
-		if(characterManager != null) {
+		// Get the player number controlling this character
+		this.playerNumber = CharacterManager.selectedCharacters[this.characterID];
 
-			CharacterManager characterManagerScript = characterManager.GetComponent<CharacterManager>();
-
-
-
+		// If this character hasn't been assigned a player number, destroy it
+		if(this.playerNumber == CharacterManager.UNASSIGNED) {
+			this.cooldownSlider.gameObject.SetActive(false);
+			this.inGame = false;
+			Destroy(this.gameObject);
 
 		}
 
-		// Get the input device corresponding to the player number
-		this.inputDevice = (InputManager.Devices.Count > playerNumber && PlayerControl.NumberOfPlayers > playerNumber) ? InputManager.Devices[playerNumber] : null;
-
-		if(this.inputDevice == null) {
-			this.cooldownSlider.gameObject.SetActive(false);
-			// If no controller exists for this player, destroy it
-			Destroy(this.gameObject);
-		} 
-
 		else {
 			this.inGame = true;
+
+			// Attach a player special, depending
+			if(this.characterID == CharacterManager.MILKYWAY_MIKE_INDEX) {
+				this.gameObject.AddComponent<JetSpecial>();
+			}
+
+			else if(this.characterID == CharacterManager.QUASAR_QUADE_INDEX) {
+				this.gameObject.AddComponent<FloatSpecial>();
+			}
+
+			else if(this.characterID == CharacterManager.STARDUST_STAN_INDEX) {
+				this.gameObject.AddComponent<StickSpecial>();
+			} 
+
+			else if(this.characterID == CharacterManager.COSMONAUT_CARLA_INDEX) {
+				this.gameObject.AddComponent<RockSpecial>();
+			}
 		}
 	}
 
@@ -107,6 +115,11 @@ public class Player : MonoBehaviour
 		this.rigidbod2D = GetComponent<Rigidbody2D>();
 		this.spriteAnimator = GetComponent<Animator>();
 		this.spriteRenderer = GetComponent<SpriteRenderer>();
+
+		Debug.Log(this.playerNumber);
+
+		// Get the input device corresponding to the player number
+		this.inputDevice = (InputManager.Devices.Count > playerNumber && PlayerControl.NumberOfPlayers > playerNumber) ? InputManager.Devices[playerNumber] : null;
 	}
 	
 	// Update is called once per frame

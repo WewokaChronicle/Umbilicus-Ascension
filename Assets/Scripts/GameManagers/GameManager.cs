@@ -18,10 +18,12 @@ public class GameManager : MonoBehaviour {
 	private bool ended = false;
 	private float endTime;
 
-	public void Awake() {
+	public void Awake() 
+	{
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
 			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileIJKL()));
 		}
+
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
 			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileWASD()));
 		}

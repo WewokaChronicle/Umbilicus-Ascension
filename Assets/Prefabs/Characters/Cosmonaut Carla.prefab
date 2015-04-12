@@ -45,7 +45,6 @@ GameObject:
   - 61: {fileID: 6169568}
   - 50: {fileID: 5063224}
   - 114: {fileID: 11491544}
-  - 114: {fileID: 11466162}
   m_Layer: 8
   m_Name: Cosmonaut Carla
   m_TagString: Untagged
@@ -140,7 +139,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.27999997, y: 0, z: 0}
+  m_LocalPosition: {x: -4.73000002, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22429948}
@@ -302,20 +301,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &11466162
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 106eb3cc99a36472aae19b002f0e4d16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 11491544}
-  rocking: 0
-  specialSound: {fileID: 8300000, guid: cc046ac672e9d42ec9d9afb5e42a4c7e, type: 3}
 --- !u!114 &11481090
 MonoBehaviour:
   m_ObjectHideFlags: 1

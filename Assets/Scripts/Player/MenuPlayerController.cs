@@ -11,10 +11,8 @@ public class MenuPlayerController : MonoBehaviour
 	public AudioClip characterSelectSound;
 
 	private InputDevice inputDevice; // the player's controller.
-	private bool inGame = false; // is the player in the game?
 	private bool playerHasChosenCharacter; // has the player chosen a character yet?
-	private Camera camera;
-	
+
 	[HideInInspector]
 	public int highlightedCharacter; // this is the character currently being considered by this MenuPlayerController
 
@@ -40,7 +38,6 @@ public class MenuPlayerController : MonoBehaviour
 	
 	// Use this for initialization
 	public void Start () {
-		this.camera = Camera.main;
 		this.highlightedCharacter = 0;
 		// Debug.Log("Controller " + playerNumber + " @ Position: " + playerMenuPanel.transform.position);
 
@@ -52,7 +49,6 @@ public class MenuPlayerController : MonoBehaviour
 		}
 
 		else {
-			this.inGame = true;
 			this.playerHasChosenCharacter = false;
 		}
 	}

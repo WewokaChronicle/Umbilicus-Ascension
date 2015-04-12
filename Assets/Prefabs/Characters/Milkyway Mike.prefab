@@ -28,7 +28,6 @@ GameObject:
   - 61: {fileID: 6160904}
   - 50: {fileID: 5060496}
   - 114: {fileID: 11472870}
-  - 114: {fileID: 11423150}
   m_Layer: 8
   m_Name: Milkyway Mike
   m_TagString: Untagged
@@ -140,7 +139,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 116458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.42000008, y: 0, z: 0}
+  m_LocalPosition: {x: 1.97000003, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22410516}
@@ -240,19 +239,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &11423150
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 116458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 619ac889c91574e55941d48b10987ec4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 11472870}
-  specialSound: {fileID: 8300000, guid: 13a65c9ad89fd4f50ad2d750cc0d19cb, type: 3}
 --- !u!114 &11460260
 MonoBehaviour:
   m_ObjectHideFlags: 1

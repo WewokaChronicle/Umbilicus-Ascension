@@ -126,5 +126,9 @@ public class StickSpecial : MonoBehaviour {
 	public void DisableSpecial() {
 		this.enabled = false;
 	}
+
+	public void Destroy() {
+		Destroy(this.gameObject);
+	}
 }
 

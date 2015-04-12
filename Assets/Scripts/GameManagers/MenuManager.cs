@@ -19,15 +19,11 @@ public class MenuManager : MonoBehaviour
 	{
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
 			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileIJKL()));
-			Debug.Log("Attaching Keyboard IJKL");
 		}
 
-		
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
 			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileWASD()));
-			Debug.Log("Attaching Keyboard WASD");
 		}
-
 
 		// Look for device changes
 		InputManager.OnDeviceAttached += inputDevice => Application.LoadLevel(0);
@@ -61,7 +57,9 @@ public class MenuManager : MonoBehaviour
 
 			// if we're done fading out
 			if(startTimer <= 0f) {
-				Application.LoadLevel("Game");
+//				Application.LoadLevel("Game");
+				// Test:
+				Application.LoadLevel("PlayerAnimation");
 			}
 		}
 
