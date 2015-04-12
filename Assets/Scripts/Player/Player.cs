@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
 		else {
 			this.inGame = true;
 
-			// Attach a player special, depending
+			// Attach a player special, depending on which space person it is
 			if(this.characterID == CharacterManager.MILKYWAY_MIKE_INDEX) {
 				this.gameObject.AddComponent<JetSpecial>().specialSound = this.specialSounds[this.characterID];
 			}
