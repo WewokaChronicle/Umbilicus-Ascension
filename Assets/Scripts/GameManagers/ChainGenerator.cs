@@ -50,24 +50,25 @@ public class ChainGenerator : MonoBehaviour
 	public void FixedUpdate()
 	{
 		this.lastActiveInputDevice = InputManager.ActiveDevice;
-		
+
+		// the player has manually severed the connection
 		if(this.lastActiveInputDevice.Action2.WasPressed) {
 
 			// get every link
 			for(int linkIndex = 0; linkIndex < this.instantiatedChainLinks.Length; linkIndex++) {
-
-				// destroy the link's hinge
 				GameObject link = this.instantiatedChainLinks[linkIndex];
 
-				HingeJoint2D linkHinge = link.GetComponent<HingeJoint2D>();
-				Destroy(linkHinge);
+				// if it exists, destroy the link's hinge
+				if(link != null) {
+					HingeJoint2D linkHinge = link.GetComponent<HingeJoint2D>();
+					Destroy(linkHinge);
 
-				// blast it to oblivion
-				Vector2 force = -Vector2.up * UnityEngine.Random.Range(1.0f, 5.0f);
-				link.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+					// and blast it to oblivion
+					Vector2 force = -Vector2.up * UnityEngine.Random.Range(1.0f, 5.0f);
+					link.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+				}
 			}
 		}
-
 	}
 
 	/// <summary>
