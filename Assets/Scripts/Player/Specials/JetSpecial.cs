@@ -6,7 +6,7 @@ using InControl;
 public class JetSpecial : MonoBehaviour {
 
 	// Jet Force power!
-	public const float FORCE = 100f;
+	public const float FORCE = 75.0f;
 
 	// Player and input
 	public Player player;
@@ -26,7 +26,8 @@ public class JetSpecial : MonoBehaviour {
 	// Leftover force timer
 	private const float COOLDOWN_TIME = 3f;
 	private float cooldownTimer;
-	
+
+	// Init
 	public void Start() {
 		this.player = GetComponent<Player>();
 		if(this.player.inGame) {
@@ -38,7 +39,9 @@ public class JetSpecial : MonoBehaviour {
 		}
 	}
 
+	// Called every frame
 	public void Update() {
+
 		// Action
 		this.actionOn = inputDevice.Action1;
 
@@ -57,6 +60,7 @@ public class JetSpecial : MonoBehaviour {
 		}
 	}
 
+	// Called at a fixed framerate
 	public void FixedUpdate() {
 		if(this.actionOn && this.cooldownTimer <= 0f) {
 			// Sound
@@ -76,6 +80,9 @@ public class JetSpecial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Disables the JetSpecial
+	/// </summary>
 	public void DisableSpecial() {
 		enabled = false;
 	}

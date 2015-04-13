@@ -290,7 +290,7 @@ public class Player : MonoBehaviour
 	private void _RepositionSlider(Slider slider, Vector3 direction) 
 	{
 		slider.transform.position = this.transform.position + direction * 1f;
-		if(this.transform.position.y > 49f || this.transform.position.y < 3f || Time.timeScale == 0f) {
+		if(this.isDead || Time.timeScale == 0f) {
 			slider.gameObject.SetActive(false);
 		}
 
