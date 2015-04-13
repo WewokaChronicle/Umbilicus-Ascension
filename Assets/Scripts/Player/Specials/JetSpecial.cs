@@ -53,7 +53,7 @@ public class JetSpecial : MonoBehaviour {
 
 		else {
 			this.cooldownSlider.value = 1f;
-			if(!this.actionAvailable) {
+			if(!this.actionAvailable && this.player.IsOnTheGround()) {
 				this.actionAvailable = true;
 				this.cooldownFillImage.color = this.origColor;
 			}
@@ -62,7 +62,7 @@ public class JetSpecial : MonoBehaviour {
 
 	// Called at a fixed framerate
 	public void FixedUpdate() {
-		if(this.actionOn && this.cooldownTimer <= 0f) {
+		if(this.actionOn && this.actionAvailable && this.cooldownTimer <= 0f) {
 			// Sound
 			Sound_Manager.Instance.PlayEffectOnce(specialSound);
 
