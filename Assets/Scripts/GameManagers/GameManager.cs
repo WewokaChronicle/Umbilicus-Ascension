@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using InControl;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 	public AudioClip gameMusic;
 	public AudioClip gameOverSound;
 	public AudioClip highScoreSound;
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour {
 
 	public Player winner;
 
-	public void Awake() 
+	public void Awake()
 	{
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
 			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileIJKL()));
@@ -38,7 +39,8 @@ public class GameManager : MonoBehaviour {
 		Sound_Manager.Instance.PlayMusicLoop(gameMusic);
 	}
 
-	public void Update() {
+	public void Update()
+	{
 		if(this.ended) {
 			return;
 		}
@@ -69,7 +71,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	/// <returns>All the players that currently exist in this Scene.</returns>
-	private Player[] FindPlayers() {
+	private Player[] FindPlayers()
+	{
 		
 		ArrayList activePlayers = new ArrayList();
 		
@@ -110,18 +113,20 @@ public class GameManager : MonoBehaviour {
 		object[] activePlayerObjects = activePlayers.ToArray();
 		Player[] result = new Player[activePlayerObjects.Length];
 		for(int i = 0; i < activePlayerObjects.Length; i++) {
-			result[i] = (Player) activePlayerObjects[i];
+			result[i] = (Player)activePlayerObjects[i];
 		}
 		
 		// return the array
 		return result;
 	}
 
-	public void CollectOxygenTank() {
+	public void CollectOxygenTank()
+	{
 		OxygenTank.instance.addOxygen(1.0f);
 	}
 
-	public void EndLevel() {
+	public void EndLevel()
+	{
 		if(!ended) {
 			ended = true;
 			Time.timeScale = 0f;
@@ -131,11 +136,11 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator EndRoutine() {
+	private IEnumerator EndRoutine()
+	{
 		if(winner) {
 			WinText();
-		}
-		else {
+		} else {
 			DeathText();
 		}
 		while(Time.realtimeSinceStartup - endTime < 3f) {
@@ -145,7 +150,8 @@ public class GameManager : MonoBehaviour {
 //		Application.LoadLevel(1);
 	}
 
-	private void DeathText() {
+	private void DeathText()
+	{
 		// Save score
 		bool high = false;
 		if(score > highScore) {
@@ -170,7 +176,7 @@ public class GameManager : MonoBehaviour {
 		scoreText.rectTransform.localPosition = pos;
 	}
 
-	private void WinText() 
+	private void WinText()
 	{
 		bool high = false;
 		if(score > highScore) {
@@ -184,10 +190,11 @@ public class GameManager : MonoBehaviour {
 			Sound_Manager.Instance.PlayEffectOnce(highScoreSound);
 		}
 		// Text
+		int playerID = winner.GetComponent<Player>().playerNumber + 1;
 		if(high) {
-			scoreText.text = winner.name + " WINS\n\n" + scoreText.text + "\n\nHIGH SCORE ACHIEVED!!!";
+			scoreText.text = "PLAYER " + playerID + " WINS\n\n" + scoreText.text + "\n\nHIGH SCORE ACHIEVED!!!";
 		} else {
-			scoreText.text = winner.name + " WINS\n\n" + scoreText.text;
+			scoreText.text = "PLAYER " + playerID + " WINS\n\n" + scoreText.text;
 		}
 		// Reposition
 		Vector3 pos = scoreText.rectTransform.localPosition;
