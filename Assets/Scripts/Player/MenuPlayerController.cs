@@ -78,15 +78,20 @@ public class MenuPlayerController : MonoBehaviour
 	private void _InputUpdate(InputDevice device) {
 
 		if(device.Direction.Left.WasPressed && !this.playerHasChosenCharacter) {
-			this.highlightedCharacter--;
+			do {
+				this.highlightedCharacter--; // wrap around the total number of characters
+				this.highlightedCharacter = _Modulo(this.highlightedCharacter, CharacterManager.NUMBER_OF_CHARACTERS);
+			} // keep moving if the player is hovering over a character that has been selected
+			while(CharacterManager.selectedCharacters[this.highlightedCharacter] != CharacterManager.UNASSIGNED);
 		}
 
 		if(device.Direction.Right.WasPressed && !this.playerHasChosenCharacter) {
-			this.highlightedCharacter++;
+			do {
+				this.highlightedCharacter++; // wrap around the total number of characters
+				this.highlightedCharacter = _Modulo(this.highlightedCharacter, CharacterManager.NUMBER_OF_CHARACTERS);
+			} // keep moving if the player is hovering over a character that has been selected
+			while(CharacterManager.selectedCharacters[this.highlightedCharacter] != CharacterManager.UNASSIGNED);
 		}
-
-		// wrap around the total number of characters
-		this.highlightedCharacter = _Modulo(this.highlightedCharacter, CharacterManager.NUMBER_OF_CHARACTERS);
 
 		// set the planel representing the player to the color of the character's panel
 		this.playerMenuPanel.color = this.characterMenuPanels[this.highlightedCharacter].color;
@@ -133,6 +138,11 @@ public class MenuPlayerController : MonoBehaviour
 
 			// unset the player has chosen flag
 			this.playerHasChosenCharacter = false;
+		}
+
+		// player was already over a character that was selected before she could act
+		if(!this.playerHasChosenCharacter && CharacterManager.selectedCharacters[this.highlightedCharacter] != CharacterManager.UNASSIGNED) {
+			this.playerMenuPanel.color = Color.black;
 		}
 	}
 
