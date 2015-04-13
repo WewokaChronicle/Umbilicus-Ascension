@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 {
 	public const float MOVEMENT_FORCE = 50.0f;
 	public const float MAX_SPEED = 50.0f;
-	public const float JUMPING_FORCE = 10.0f;
+	public float JUMPING_FORCE = 10.0f;
 
 	// This is this player's unique character ID.
 	// Milkyway Mike = 0

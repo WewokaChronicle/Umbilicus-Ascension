@@ -39,6 +39,7 @@ public class StickSpecial : MonoBehaviour {
 		this.player = GetComponent<Player>();
 		if(this.player.inGame) {
 
+			this.player.JUMPING_FORCE = 30.0f; // change the jumping force!
 			this.inputDevice = player.inputDevice;
 
 			// Setup the slider

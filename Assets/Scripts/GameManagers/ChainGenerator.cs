@@ -12,7 +12,7 @@ public class ChainGenerator : MonoBehaviour
 	public AudioClip chainBurstSound;
 	public AudioClip oxygenLeakSound;
 
-	private const float PLAYER_DISTANCE = 0.2f;
+	private const float PLAYER_DISTANCE = 1f;
 	private const int NUM_LINKS = 10;
 	private InputDevice lastActiveInputDevice;
 	private GameObject[] instantiatedChainLinks;
@@ -29,8 +29,10 @@ public class ChainGenerator : MonoBehaviour
 		this.lastActiveInputDevice = InputManager.ActiveDevice;
 
 		// Reposition players
-		for(int i = 0; i < characters.Length; i++) {
-			characters[i].transform.position = (PLAYER_DISTANCE * i * Vector2.one);
+		Vector3 startingPosition = characters[0].transform.position;
+
+		for(int i = 1; i < characters.Length; i++) {
+			characters[i].transform.position = characters[i-1].transform.position + (PLAYER_DISTANCE * Vector3.right);
 //			characters[i].transform.Translate(Vector3.right * PLAYER_DISTANCE * i);
 
 		}
@@ -99,7 +101,7 @@ public class ChainGenerator : MonoBehaviour
 	public void CreateChain(int playerIndex, Player p1, Player p2)
 	{
 		Vector2 linkSize = ((BoxCollider2D)chainLinkPrefab.GetComponent<Collider2D>()).size;
-		float linkOffset = linkSize.x * 0.2f;
+		float linkOffset = linkSize.x * 0.1f;
 		Vector3 pos = p1.transform.position + (Vector3.right * linkOffset) + Vector3.forward;
 
 		GameObject link;
@@ -121,9 +123,10 @@ public class ChainGenerator : MonoBehaviour
 
 		// Final hinge
 		hinge = prevLink.gameObject.AddComponent<HingeJoint2D>();
+		hinge.transform.position = p2.transform.position + (Vector3.right * linkOffset) + Vector3.forward;
 		hinge.connectedBody = p2.GetComponent<Rigidbody2D>();
-		hinge.anchor = new Vector2(linkOffset, 0f);
-		hinge.connectedAnchor = new Vector2(-linkOffset, 0f);
+		hinge.anchor = new Vector2(-linkOffset, 0f);
+		hinge.connectedAnchor = new Vector2(linkOffset, 0f);
 	}
 
 	/// <returns>All the players that currently exist in this Scene.</returns>
