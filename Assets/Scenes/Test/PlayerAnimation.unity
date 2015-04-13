@@ -595,6 +595,10 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11485904, guid: 077646df851214afe8df47218b052bd0, type: 2}
+      propertyPath: oxygenLevel
+      value: .200000003
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 077646df851214afe8df47218b052bd0, type: 2}
   m_IsPrefabParent: 0
@@ -1814,7 +1818,7 @@ Transform:
   - {fileID: 295217844}
   - {fileID: 580694128}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &1610453567
 GameObject:
   m_ObjectHideFlags: 0

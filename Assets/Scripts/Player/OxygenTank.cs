@@ -8,7 +8,6 @@ public class OxygenTank : MonoBehaviour {
 
 	public AudioClip alarm;
 
-	[HideInInspector]
 	public float oxygenLevel;
 
 	[HideInInspector]
@@ -28,7 +27,6 @@ public class OxygenTank : MonoBehaviour {
 		this.triggerWarning = false;
 		this.triggerDanger = false;
 		this.oxygenDecay = DEFAULT_OXYGEN_DECAY;
-		this.oxygenLevel = 1.0f;
 		this.oxygenSlider = this.GetComponent<Slider>();
 		this.oxygenSliderImage = this.oxygenSlider.transform.FindChild("Fill Area").FindChild("Fill").GetComponent<Image>();
 		this.oxygenSliderOriginalColor = this.oxygenSliderImage.color;
