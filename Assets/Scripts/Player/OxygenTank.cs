@@ -14,7 +14,7 @@ public class OxygenTank : MonoBehaviour {
 	[HideInInspector]
 	public float oxygenDecay;
 
-	private readonly float DEFAULT_OXYGEN_DECAY = 0.001f;
+	private readonly float DEFAULT_OXYGEN_DECAY = 0.0001f;
 	private readonly float WARNING_OXYGEN_LEVEL = 0.50f;
 	private readonly float DANGER_OXYGEN_LEVEL = 0.15f;
 	private Slider oxygenSlider;
@@ -28,7 +28,7 @@ public class OxygenTank : MonoBehaviour {
 		this.triggerWarning = false;
 		this.triggerDanger = false;
 		this.oxygenDecay = DEFAULT_OXYGEN_DECAY;
-		this.oxygenLevel = 0.6f;
+		this.oxygenLevel = 1.0f;
 		this.oxygenSlider = this.GetComponent<Slider>();
 		this.oxygenSliderImage = this.oxygenSlider.transform.FindChild("Fill Area").FindChild("Fill").GetComponent<Image>();
 		this.oxygenSliderOriginalColor = this.oxygenSliderImage.color;

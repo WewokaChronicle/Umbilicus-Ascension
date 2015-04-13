@@ -16,6 +16,7 @@ public class ChainGenerator : MonoBehaviour
 	private const int NUM_LINKS = 10;
 	private InputDevice lastActiveInputDevice;
 	private GameObject[] instantiatedChainLinks;
+	private bool chainHasBeenSevered;
 
 	// Init
 	public void Start()
@@ -44,6 +45,8 @@ public class ChainGenerator : MonoBehaviour
 				characters[i].playerOnTheEnd = true;
 			}
 		}
+
+		this.chainHasBeenSevered = false;
 	}
 
 	// FixedUpdate is called every fixed framerate frame
@@ -52,7 +55,10 @@ public class ChainGenerator : MonoBehaviour
 		this.lastActiveInputDevice = InputManager.ActiveDevice;
 
 		// the player has manually severed the connection
-		if(this.lastActiveInputDevice.Action2.WasPressed) {
+		if(this.lastActiveInputDevice.Action2.WasPressed && !this.chainHasBeenSevered) {
+
+			// chain has been severed!
+			this.chainHasBeenSevered = true;
 
 			// get every link
 			for(int linkIndex = 0; linkIndex < this.instantiatedChainLinks.Length; linkIndex++) {
@@ -69,7 +75,11 @@ public class ChainGenerator : MonoBehaviour
 				}
 			}
 
+			// Because the oxygen tank has burst, the oxygen falls quicker by a factor of 10
+			OxygenTank.instance.oxygenDecay *= 10.0f;
+
 			Sound_Manager.Instance.PlayEffectOnce(this.chainBurstSound);
+
 		}
 	}
 
