@@ -4,24 +4,31 @@ using System.Collections;
 using InControl;
 
 public class GameManager : MonoBehaviour {
+
+	// Public attributes
+	public float startingDepth = 10000f; // Game Attribute
+	public GameObject winningPlatformPrefab;
 	public AudioClip gameMusic;
 	public AudioClip gameOverSound;
 	public AudioClip highScoreSound;
+	public Text altitudeText;
+	public Text highScoreText;
+
+	[HideInInspector]
+	public Player winner;
 
 	public static GameManager instance;
-
 	public static int highScore;
 
-	public Text scoreText;
-	public Text highScoreText;
-	private float score;
+	private Player[] players;
+	private float altitude;
 	private bool ended = false;
 	private float endTime;
 
-	public Player winner;
-
+	// Called before Start
 	public void Awake() 
 	{
+		// Attach Input Devices
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
 			InputManager.AttachDevice(new UnityInputDevice(new KeyboardProfileIJKL()));
 		}
@@ -31,13 +38,16 @@ public class GameManager : MonoBehaviour {
 		}
 
 		instance = this;
-		score = 0f;
+		altitude = -startingDepth;
+
+
+
 		highScore = PlayerPrefs.GetInt("HighScore", 0);
 		highScoreText.text = "HIGH SCORE: " + highScore;
-
 		Sound_Manager.Instance.PlayMusicLoop(gameMusic);
 	}
 
+	// Called every frame
 	public void Update() {
 		if(this.ended) {
 			return;
@@ -48,9 +58,9 @@ public class GameManager : MonoBehaviour {
 			Time.timeScale = 1f;
 		}
 
-		score += Time.deltaTime * 100f;
+		altitude += Time.deltaTime * 100f;
 		if(! ended) {
-			scoreText.text = "ALTITUDE: " + Mathf.RoundToInt(score);
+			altitudeText.text = "ALTITUDE: " + Mathf.RoundToInt(altitude);
 		}
 
 		// check if any players are still alive
@@ -68,8 +78,33 @@ public class GameManager : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// Collects the oxygen from the level and adds it to the Oxygen tank
+	/// </summary>
+	public void CollectOxygenTank() {
+		OxygenTank.instance.addOxygen(1.0f);
+	}
+
+	/// <summary>
+	/// Ends the level.
+	/// </summary>
+	public void EndLevel() {
+		if(!ended) {
+			ended = true;
+			Time.timeScale = 0f;
+			endTime = Time.realtimeSinceStartup;
+
+			// mute any loop sounds
+			Sound_Manager.Instance.StopEffectLoop(Sound_Manager.GAS_LOOP_CHANNEL);
+			Sound_Manager.Instance.StopEffectLoop(Sound_Manager.ALARM_LOOP_CHANNEL);
+
+			OxygenTank.instance.gameObject.SetActive(false);
+			StartCoroutine(_EndRoutine());
+		}
+	}
+
 	/// <returns>All the players that currently exist in this Scene.</returns>
-	private Player[] FindPlayers() {
+	public Player[] FindPlayers() {
 		
 		ArrayList activePlayers = new ArrayList();
 		
@@ -117,31 +152,16 @@ public class GameManager : MonoBehaviour {
 		return result;
 	}
 
-	public void CollectOxygenTank() {
-		OxygenTank.instance.addOxygen(1.0f);
-	}
-
-	public void EndLevel() {
-		if(!ended) {
-			ended = true;
-			Time.timeScale = 0f;
-			endTime = Time.realtimeSinceStartup;
-
-			// mute any loop sounds
-			Sound_Manager.Instance.StopEffectLoop(Sound_Manager.GAS_LOOP_CHANNEL);
-			Sound_Manager.Instance.StopEffectLoop(Sound_Manager.ALARM_LOOP_CHANNEL);
-
-			OxygenTank.instance.gameObject.SetActive(false);
-			StartCoroutine(EndRoutine());
-		}
-	}
-
-	private IEnumerator EndRoutine() {
+	/// <summary>
+	/// Cleanup routine for this class.
+	/// </summary>
+	/// <returns>The routine.</returns>
+	private IEnumerator _EndRoutine() {
 		if(winner) {
-			WinText();
+			_WinText();
 		}
 		else {
-			DeathText();
+			_DeathText();
 		}
 		while(Time.realtimeSinceStartup - endTime < 3f) {
 			yield return false;
@@ -150,11 +170,14 @@ public class GameManager : MonoBehaviour {
 		Application.LoadLevel(1);
 	}
 
-	private void DeathText() {
+	/// <summary>
+	/// Auxiliary method for displaying the Death Text
+	/// </summary>
+	private void _DeathText() {
 		// Save score
 		bool high = false;
-		if(score > highScore) {
-			highScore = Mathf.RoundToInt(score);
+		if(altitude > highScore) {
+			highScore = Mathf.RoundToInt(altitude);
 			PlayerPrefs.SetInt("HighScore", highScore);
 			highScoreText.text = "HIGH SCORE: " + highScore;
 			PlayerPrefs.Save();
@@ -165,21 +188,24 @@ public class GameManager : MonoBehaviour {
 		}
 		// Text
 		if(high) {
-			scoreText.text = "YOU DIED\n\n" + scoreText.text + "\n\nHIGH SCORE ACHIEVED!!!";
+			altitudeText.text = "YOU DIED\n\n" + altitudeText.text + "\n\nHIGH SCORE ACHIEVED!!!";
 		} else {
-			scoreText.text = "YOU DIED\n\n" + scoreText.text;
+			altitudeText.text = "YOU DIED\n\n" + altitudeText.text;
 		}
 		// Reposition
-		Vector3 pos = scoreText.rectTransform.localPosition;
+		Vector3 pos = altitudeText.rectTransform.localPosition;
 		pos.y = 80f;
-		scoreText.rectTransform.localPosition = pos;
+		altitudeText.rectTransform.localPosition = pos;
 	}
 
-	private void WinText() 
+	/// <summary>
+	/// Auxiliary method for displaying the Win Text
+	/// </summary>
+	private void _WinText() 
 	{
 		bool high = false;
-		if(score > highScore) {
-			highScore = Mathf.RoundToInt(score);
+		if(altitude > highScore) {
+			highScore = Mathf.RoundToInt(altitude);
 			PlayerPrefs.SetInt("HighScore", highScore);
 			highScoreText.text = "HIGH SCORE: " + highScore;
 			PlayerPrefs.Save();
@@ -190,13 +216,22 @@ public class GameManager : MonoBehaviour {
 		}
 		// Text
 		if(high) {
-			scoreText.text = winner.name + " WINS\n\n" + scoreText.text + "\n\nHIGH SCORE ACHIEVED!!!";
+			altitudeText.text = winner.name + " WINS\n\n" + altitudeText.text + "\n\nHIGH SCORE ACHIEVED!!!";
 		} else {
-			scoreText.text = winner.name + " WINS\n\n" + scoreText.text;
+			altitudeText.text = winner.name + " WINS\n\n" + altitudeText.text;
 		}
 		// Reposition
-		Vector3 pos = scoreText.rectTransform.localPosition;
+		Vector3 pos = altitudeText.rectTransform.localPosition;
 		pos.y = 80f;
-		scoreText.rectTransform.localPosition = pos;
+		altitudeText.rectTransform.localPosition = pos;
 	}
+
+	/// <summary>
+	/// Generates the winning platform to end the game.
+	/// </summary>
+	private void _GenerateWinningPlatform() {
+
+	}
+
+
 }

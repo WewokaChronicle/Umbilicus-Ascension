@@ -21,7 +21,7 @@ public class ChainGenerator : MonoBehaviour
 	// Init
 	public void Start()
 	{
-		this.characters = this._FindPlayers();
+		this.characters = GameManager.instance.FindPlayers();
 
 		// the total possible number of chain links is given by the
 		// number of links per character * the number of character in the scene
@@ -129,54 +129,5 @@ public class ChainGenerator : MonoBehaviour
 		hinge.connectedBody = p2.GetComponent<Rigidbody2D>();
 		hinge.anchor = new Vector2(-linkOffset, 0f);
 		hinge.connectedAnchor = new Vector2(linkOffset, 0f);
-	}
-
-	/// <returns>All the players that currently exist in this Scene.</returns>
-	private Player[] _FindPlayers() {
-
-		ArrayList activePlayers = new ArrayList();
-
-		// try to find each in-game player and add it to the list
-		GameObject milkywayMike = GameObject.Find("Milkyway Mike");
-		if(milkywayMike != null) {
-			Player milkywayMikePlayer = milkywayMike.GetComponent<Player>();
-			if(milkywayMikePlayer.inGame) {
-				activePlayers.Add(milkywayMikePlayer);
-			}
-		}
-
-		GameObject quasarQuade = GameObject.Find("Quasar Quade");
-		if(quasarQuade != null) {
-			Player quasarQuadePlayer = quasarQuade.GetComponent<Player>();
-			if(quasarQuadePlayer.inGame) {
-				activePlayers.Add(quasarQuadePlayer);
-			}
-		}
-
-		GameObject stardustStan = GameObject.Find("Stardust Stan");
-		if(stardustStan != null) {
-			Player stardustStanPlayer = stardustStan.GetComponent<Player>();
-			if(stardustStanPlayer.inGame) {
-				activePlayers.Add(stardustStanPlayer);
-			}
-		}
-
-		GameObject cosmonautCarla = GameObject.Find("Cosmonaut Carla");
-		if(cosmonautCarla != null) {
-			Player cosmonautCarlaPlayer = cosmonautCarla.GetComponent<Player>();
-			if(cosmonautCarlaPlayer.inGame) {
-				activePlayers.Add(cosmonautCarlaPlayer);
-			}
-		}
-
-		// compile the list into an array
-		object[] activePlayerObjects = activePlayers.ToArray();
-		Player[] result = new Player[activePlayerObjects.Length];
-		for(int i = 0; i < activePlayerObjects.Length; i++) {
-			result[i] = (Player) activePlayerObjects[i];
-		}
-
-		// return the array
-		return result;
 	}
 }
