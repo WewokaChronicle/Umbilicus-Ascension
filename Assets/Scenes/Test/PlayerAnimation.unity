@@ -1818,7 +1818,7 @@ Transform:
   - {fileID: 295217844}
   - {fileID: 580694128}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1 &1610453567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1851,6 +1851,7 @@ MonoBehaviour:
   highScoreSound: {fileID: 8300000, guid: b0a74644ff0e249498faffe172f30807, type: 3}
   scoreText: {fileID: 11458402, guid: a759bc8b1325948cd8c63da3dc6a922a, type: 2}
   highScoreText: {fileID: 11469516, guid: 6888883e0b8024c79afcf713e6b89037, type: 2}
+  winner: {fileID: 0}
 --- !u!4 &1610453569
 Transform:
   m_ObjectHideFlags: 0
