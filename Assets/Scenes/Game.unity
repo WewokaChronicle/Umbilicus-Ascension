@@ -1314,6 +1314,10 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11476786, guid: 765ca918b6bb44a95a2b508351f46b1b, type: 2}
+      propertyPath: playerNumber
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 765ca918b6bb44a95a2b508351f46b1b, type: 2}
   m_IsPrefabParent: 0

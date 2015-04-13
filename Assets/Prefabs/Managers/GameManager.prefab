@@ -39,7 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4867bd21ba044f8a93496259a1feb98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingDepth: 10000
+  scrollSpeed: -1
+  startingDepth: -10000
+  winningDepth: 0
   winningPlatformPrefab: {fileID: 133498, guid: afd5088ce6f9949b1a8aab3e5c48fd68,
     type: 2}
   gameMusic: {fileID: 8300000, guid: 6f60b64a48c68482394591c7a165901c, type: 3}
