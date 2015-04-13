@@ -1772,6 +1772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters: []
   chainLinkPrefab: {fileID: 175744, guid: ed56bc2c9c9f04a27a782780663d954e, type: 2}
+  chainBurstSound: {fileID: 8300000, guid: 85ccac7de639940f796948fd80655f75, type: 3}
   oxygenLeakSound: {fileID: 8300000, guid: e84ac282ee1df445098388a08aaea56b, type: 3}
 --- !u!4 &1430875068
 Transform:

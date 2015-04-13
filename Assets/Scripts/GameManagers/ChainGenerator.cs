@@ -68,6 +68,8 @@ public class ChainGenerator : MonoBehaviour
 					link.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
 				}
 			}
+
+			Sound_Manager.Instance.PlayEffectOnce(this.chainBurstSound);
 		}
 	}
 
