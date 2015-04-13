@@ -1,4 +1,38 @@
-# Umbilicus
-Umbilicus, made for GGJ 2015
+# Umbilicus: Ascension
+Re-mixed from [Umbilicus](http://globalgamejam.org/2015/games/umbilicus-%E2%80%93%C2%A0descent-team-delta), 
+made for the 2015 Global Game Jam.
 
-NOTICE: This project requires InControl <del>and 2D Toolkit</del> which are not included in the repo for licensing reasons. They must be imported from the asset store manually for the project to work.
+## About Umbilicus: Ascension
+
+> You are stranded at the bottom of a pit with limited oxygen.
+> You need to cooperate to make your way out.
+> But only one of you can be saved.
+
+(Screenshot)
+
+In _Umbilicus: Ascension_ you are part of a team that must escape a pit. You must cooperate
+and coordinate with each other (out of the game) to carefully maneuver to the top. However,
+only one player can actually win the game. 
+
+The entire team is sharing one oxygen tank that depletes over time. Scattered powerups will
+replenish your oxygen tank. In addition, each player has a unique ability they can leverage
+to help the entire team advance. However, any player can decide to cut the oxygen cord, 
+which detaches everyone but also leaks oxygen at a much faster rate. 
+
+How will you reach the top?
+
+## Referenced Open Source Projects
+1. [InControl](https://github.com/pbhogan/InControl), an input manager for Unity that
+tames the cross-platform controller beast. InControl is not included in this repo.
+
+2. [Umbilicus, n&eacute;e FarscapeFreefall](https://github.com/YoriKv/FarscapeFreefall), 
+the code-base we started with.
+
+Note: The original code base depended on [2D Toolkit](http://www.unikronsoftware.com/2dtoolkit/), 
+which costs $75. We refactored the code to use Unity-native 2D tools, which are free.
+
+## Team
+
+- [Sweet Carolina Games](http://sweetcarolinagames.com)
+- [Ian Coleman](http://twitter.com/iancoleman) - Game Design & Development
+- [Rogelio E. Cardona-Rivera](http://twitter.com/recardona) - Game Design & Development

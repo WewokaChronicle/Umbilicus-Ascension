@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: -1
-  startingDepth: -10000
+  startingDepth: -5000
   winningDepth: 0
   winningPlatformPrefab: {fileID: 133498, guid: afd5088ce6f9949b1a8aab3e5c48fd68,
     type: 2}
