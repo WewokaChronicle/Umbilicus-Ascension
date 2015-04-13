@@ -139,12 +139,14 @@ public class Player : MonoBehaviour
 	{
 		// We've jumped outside the screen.
 		if(this.transform.position.y < -6f) {
-	  		GameManager.instance.EndLevel();
+			this.Kill();
+//	  		GameManager.instance.EndLevel();
 			Debug.Log("You lose!");
 		} 
 
 		else if(this.transform.position.y > 70f) {
-			GameManager.instance.EndLevel();
+//			GameManager.instance.EndLevel();
+			this.Kill();
 			Debug.Log("You lose!");
 		}
 
