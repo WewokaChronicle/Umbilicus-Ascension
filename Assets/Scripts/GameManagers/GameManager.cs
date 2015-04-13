@@ -6,7 +6,8 @@ using InControl;
 public class GameManager : MonoBehaviour {
 
 	// Public attributes
-	public float startingDepth = 10000f; // Game Attribute
+	public float startingDepth = -10000f; // Game Attribute
+	public float winningDepth = 0f;
 	public GameObject winningPlatformPrefab;
 	public AudioClip gameMusic;
 	public AudioClip gameOverSound;
@@ -38,12 +39,9 @@ public class GameManager : MonoBehaviour {
 		}
 
 		instance = this;
-		altitude = -startingDepth;
-
-
-
-		highScore = PlayerPrefs.GetInt("HighScore", 0);
-		highScoreText.text = "HIGH SCORE: " + highScore;
+		this.altitude = startingDepth;
+		this.highScore = PlayerPrefs.GetInt("HighScore", 0);
+		this.highScoreText.text = "HIGH SCORE: " + highScore;
 		Sound_Manager.Instance.PlayMusicLoop(gameMusic);
 	}
 
