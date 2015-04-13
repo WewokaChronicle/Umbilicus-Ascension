@@ -44,10 +44,10 @@ which costs $75. We refactored the code to use Unity-native 2D tools, which are 
 
 ## Team
 
-- [Sweet Carolina Games](http://sweetcarolinagames.com)
-- Developed by:
--- [Ian Coleman](http://twitter.com/iancoleman) - Game Design & Development
--- [Rogelio E. Cardona-Rivera](http://twitter.com/recardona) - Game Design & Development
+* [Sweet Carolina Games](http://sweetcarolinagames.com)
+* Developed by:
+** [Ian Coleman](http://twitter.com/iancoleman) - Game Design & Development
+** [Rogelio E. Cardona-Rivera](http://twitter.com/recardona) - Game Design & Development
 
 ## License
 
