@@ -227,6 +227,8 @@ public class Player : MonoBehaviour
 		// Spawn Corpse
 		GameObject corpse = ((GameObject) Instantiate(this.corpsePrefab, this.transform.position, this.transform.rotation));
 		corpse.GetComponent<SpriteRenderer>().sprite = this.deadTorsoSprite;
+		corpse.GetComponent<BoxCollider2D>().size = this.deadTorsoSprite.bounds.size;
+
 
 		// --- Player modifications ---
 		// change the sprite to dead legs
