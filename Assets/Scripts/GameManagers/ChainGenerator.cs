@@ -29,8 +29,10 @@ public class ChainGenerator : MonoBehaviour
 		this.lastActiveInputDevice = InputManager.ActiveDevice;
 
 		// Reposition players
-		for(int i = 1; i < characters.Length; i++) {
-			characters[i].transform.Translate(Vector3.right * PLAYER_DISTANCE * i);
+		for(int i = 0; i < characters.Length; i++) {
+			characters[i].transform.position = (PLAYER_DISTANCE * i * Vector2.one);
+//			characters[i].transform.Translate(Vector3.right * PLAYER_DISTANCE * i);
+
 		}
 
 		// Create prefabs for chain between players
