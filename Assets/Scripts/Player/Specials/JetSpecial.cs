@@ -6,7 +6,7 @@ using InControl;
 public class JetSpecial : MonoBehaviour {
 
 	// Jet Force power!
-	public const float FORCE = 75.0f;
+	public const float FORCE = 50.0f;
 
 	// Cooldown Attributes
 	private const float COOLDOWN_TIME = 2f;
