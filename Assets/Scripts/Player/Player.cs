@@ -297,6 +297,7 @@ public class Player : MonoBehaviour
 	/// </summary>
 	private void _RepositionSlider(Slider slider, Vector3 direction) 
 	{
+		Debug.Log("RespositionSlider");
 		slider.transform.position = this.transform.position + direction * 1f;
 		if(this.isDead || Time.timeScale == 0f) {
 			slider.gameObject.SetActive(false);
