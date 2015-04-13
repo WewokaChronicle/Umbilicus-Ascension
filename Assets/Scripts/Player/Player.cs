@@ -222,6 +222,10 @@ public class Player : MonoBehaviour
 			return; // do nothing.
 		}
 
+		// If one player dies, we are all screwed
+		if(! ChainGenerator.instance.chainHasBeenSevered) {
+			ChainGenerator.instance.SeverChain();
+		}
 		this.isDead = true;
 		this.inGame = false;
 

@@ -155,7 +155,7 @@ Rigidbody2D:
   m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 1
+  m_GravityScale: .25
   m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -353,7 +353,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5b5c85baa50c145d49930b8ebfca847e, type: 3}
   - {fileID: 8300000, guid: fa3336fda956b4d60b0cd09fe23ac39a, type: 3}
   - {fileID: 8300000, guid: 141acb242e13a4ca7b0daae8bac85380, type: 3}
-  playerNumber: 0
+  playerNumber: -1
   cooldownSlider: {fileID: 11463150}
   inGame: 0
   isDead: 0

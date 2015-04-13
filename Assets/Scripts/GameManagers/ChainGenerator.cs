@@ -5,8 +5,13 @@ using InControl;
 
 public class ChainGenerator : MonoBehaviour
 {
+	public static ChainGenerator instance;
+
 	[HideInInspector]
 	public Player[] characters;
+
+	[HideInInspector]
+	public bool chainHasBeenSevered;
 
 	public GameObject chainLinkPrefab;
 	public AudioClip chainBurstSound;
@@ -16,11 +21,12 @@ public class ChainGenerator : MonoBehaviour
 	private const int NUM_LINKS = 10;
 	private InputDevice lastActiveInputDevice;
 	private GameObject[] instantiatedChainLinks;
-	private bool chainHasBeenSevered;
+
 
 	// Init
 	public void Start()
 	{
+		instance = this;
 		this.characters = GameManager.instance.FindPlayers();
 
 		// the total possible number of chain links is given by the
