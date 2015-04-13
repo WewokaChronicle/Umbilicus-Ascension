@@ -1,19 +1,31 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using InControl;
 
 public class ChainGenerator : MonoBehaviour
 {
+	[HideInInspector]
 	public Player[] characters;
+
 	public GameObject chainLinkPrefab;
+	public AudioClip chainBurstSound;
+	public AudioClip oxygenLeakSound;
 
 	private const float PLAYER_DISTANCE = 0.2f;
 	private const int NUM_LINKS = 10;
+	private InputDevice lastActiveInputDevice;
+	private GameObject[] instantiatedChainLinks;
 
+	// Init
 	public void Start()
 	{
 		this.characters = this._FindPlayers();
-		Debug.Log(this.characters.Length);
+
+		// the total possible number of chain links is given by the
+		// number of links per character * the number of character in the scene
+		this.instantiatedChainLinks = new GameObject[NUM_LINKS*this.characters.Length];
+		this.lastActiveInputDevice = InputManager.ActiveDevice;
 
 		// Reposition players
 		for(int i = 1; i < characters.Length; i++) {
@@ -34,7 +46,35 @@ public class ChainGenerator : MonoBehaviour
 		}
 	}
 
-	public void CreateChain(int playerInd, Player p1, Player p2)
+	// FixedUpdate is called every fixed framerate frame
+	public void FixedUpdate()
+	{
+		this.lastActiveInputDevice = InputManager.ActiveDevice;
+		
+		if(this.lastActiveInputDevice.Action2.WasPressed) {
+
+			// get every link
+			for(int linkIndex = 0; linkIndex < this.instantiatedChainLinks.Length; linkIndex++) {
+
+				// destroy the link's hinge
+				GameObject link = this.instantiatedChainLinks[linkIndex];
+
+				HingeJoint2D linkHinge = link.GetComponent<HingeJoint2D>();
+				Destroy(linkHinge);
+
+				// blast it to oblivion
+				Vector2 force = -Vector2.up * UnityEngine.Random.Range(1.0f, 5.0f);
+				link.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+			}
+		}
+
+	}
+
+	/// <summary>
+	/// Creates a link chain between Players p1 and p2. Also stores every instantiated
+	/// link prefab into the class array of instantiatedChainLinks
+	/// </summary>
+	public void CreateChain(int playerIndex, Player p1, Player p2)
 	{
 		Vector2 linkSize = ((BoxCollider2D)chainLinkPrefab.GetComponent<Collider2D>()).size;
 		float linkOffset = linkSize.x * 0.2f;
@@ -46,13 +86,14 @@ public class ChainGenerator : MonoBehaviour
 
 		for(int i = 0; i < NUM_LINKS; i++) {
 			link = (GameObject)GameObject.Instantiate(chainLinkPrefab, pos + Vector3.right * linkSize.x * i, Quaternion.identity);
-			link.name = "ChainP" + playerInd + "_" + i;
+			link.name = "ChainP" + playerIndex + "_" + i;
 			// Connect current link with previous link (or player)
 			hinge = link.AddComponent<HingeJoint2D>();
 			hinge.connectedBody = prevLink;
 			hinge.anchor = new Vector2(-linkOffset, 0f);
 			hinge.connectedAnchor = new Vector2(linkOffset, 0f);
 			// Set previous link to current link
+			this.instantiatedChainLinks[i * playerIndex] = link;
 			prevLink = link.GetComponent<Rigidbody2D>();
 		}
 

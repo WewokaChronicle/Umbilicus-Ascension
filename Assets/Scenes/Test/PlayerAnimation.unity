@@ -589,11 +589,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22456744, guid: 077646df851214afe8df47218b052bd0, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22456744, guid: 077646df851214afe8df47218b052bd0, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 077646df851214afe8df47218b052bd0, type: 2}
@@ -1083,7 +1083,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11476786, guid: 765ca918b6bb44a95a2b508351f46b1b, type: 2}
       propertyPath: playerNumber
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 765ca918b6bb44a95a2b508351f46b1b, type: 2}
@@ -1772,6 +1772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters: []
   chainLinkPrefab: {fileID: 175744, guid: ed56bc2c9c9f04a27a782780663d954e, type: 2}
+  oxygenLeakSound: {fileID: 8300000, guid: e84ac282ee1df445098388a08aaea56b, type: 3}
 --- !u!4 &1430875068
 Transform:
   m_ObjectHideFlags: 0
