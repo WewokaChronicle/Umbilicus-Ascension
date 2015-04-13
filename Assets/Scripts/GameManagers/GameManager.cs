@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour {
 
 		score += Time.deltaTime * 100f;
 		if(! ended) {
-			scoreText.text = "SCORE: " + Mathf.RoundToInt(score);
+			scoreText.text = "ALTITUDE: " + Mathf.RoundToInt(score);
 		}
 
 		// check if any players are still alive
@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour {
 			ended = true;
 			Time.timeScale = 0f;
 			endTime = Time.realtimeSinceStartup;
+			OxygenTank.instance.gameObject.SetActive(false);
 			StartCoroutine(EndRoutine());
 		}
 	}

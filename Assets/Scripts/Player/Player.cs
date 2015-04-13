@@ -138,21 +138,12 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		// We've jumped outside the screen.
-		if(this.transform.position.y < -6f) {
+		if(this._IsOutsideScreen()) {
 			this.Kill();
-//	  		GameManager.instance.EndLevel();
-			Debug.Log("You lose!");
 		} 
 
-		else if(this.transform.position.y > 70f) {
-//			GameManager.instance.EndLevel();
-			this.Kill();
-			Debug.Log("You lose!");
-		}
-
-		// Oxygen Updating
+		// We've ran out of oxygen
 		if(OxygenTank.instance.isEmpty()) {
-			// if we've ran out, we're dead
 			this.Kill();
 		}
 
@@ -304,6 +295,12 @@ public class Player : MonoBehaviour
 		else {
 			slider.gameObject.SetActive(true);
 		}
+	}
+
+	/// <returns><c>true</c>, if this player is outside the screen, <c>false</c> otherwise.</returns>
+	private bool _IsOutsideScreen()
+	{
+		return (this.transform.position.y < -6f || this.transform.position.y > 70f);
 	}
 }
 
