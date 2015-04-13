@@ -44,6 +44,7 @@ public class Block:MonoBehaviour
 			} else if(Random.Range(0, 8) == 0) {
 				battery = (GameObject)Instantiate(batteryPrefab, transform.position + Vector3.up * 1.5f + Vector3.back, Quaternion.identity);
 				((Rigidbody2D)battery.GetComponent<Rigidbody2D>()).velocity = Vector2.up * GameManager.instance.scrollSpeed;
+				battery.transform.parent = transform;
 			}
 		}
 		// Velocity
