@@ -33,9 +33,9 @@ public class Platform : MonoBehaviour
 	
 	public void OnCollisionEnter2D(Collision2D coll)
 	{
-		Debug.Log("Landed on platform");
 		if(this.isWinCondition) {
-			Debug.Log(coll.gameObject.name + " wins the game!");
+			GameManager.instance.winner = coll.gameObject.GetComponent<Player>();
+			GameManager.instance.EndLevel();
 		}
 	}
 
