@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour {
 			high = true;
 			Sound_Manager.Instance.PlayEffectOnce(highScoreSound);
 		} else {
-			Sound_Manager.Instance.PlayEffectOnce(gameOverSound);
+			Sound_Manager.Instance.PlayEffectOnce(highScoreSound);
 		}
 		// Text
 		if(high) {
