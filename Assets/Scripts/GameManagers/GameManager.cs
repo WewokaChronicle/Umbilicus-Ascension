@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour {
 			yield return false;
 		}
 		Time.timeScale = 1f;
-		Application.LoadLevel(1);
+//		Application.LoadLevel(1);
 	}
 
 	private void DeathText() {
