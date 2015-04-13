@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 
-public class Sound_Manager:MonoBehaviour
+public class Sound_Manager : MonoBehaviour
 {
+	// Audio loop channels
+	public static readonly int ALARM_LOOP_CHANNEL = 1;
+	public static readonly int GAS_LOOP_CHANNEL = 2;
+
 	// Audio source
 	private AudioSource _musicSrc;
 	private AudioSource _musicSrcAlt;

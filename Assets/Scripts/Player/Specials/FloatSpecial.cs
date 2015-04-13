@@ -5,7 +5,7 @@ using InControl;
 
 public class FloatSpecial : MonoBehaviour {
 	public const float MAX_SPEED = 5f;
-	public const float FORCE = 500f;
+	public const float FORCE = 100f;
 
 	// Player and input
 	public Player player;

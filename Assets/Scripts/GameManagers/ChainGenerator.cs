@@ -28,9 +28,6 @@ public class ChainGenerator : MonoBehaviour
 		this.instantiatedChainLinks = new GameObject[NUM_LINKS*this.characters.Length];
 		this.lastActiveInputDevice = InputManager.ActiveDevice;
 
-		// Reposition players
-		Vector3 startingPosition = characters[0].transform.position;
-
 		for(int i = 1; i < characters.Length; i++) {
 			characters[i].transform.position = characters[i-1].transform.position + (PLAYER_DISTANCE * Vector3.right);
 //			characters[i].transform.Translate(Vector3.right * PLAYER_DISTANCE * i);
@@ -60,38 +57,43 @@ public class ChainGenerator : MonoBehaviour
 
 		// the player has manually severed the connection
 		if(this.lastActiveInputDevice.Action2.WasPressed && !this.chainHasBeenSevered) {
-
-			// chain has been severed!
-			this.chainHasBeenSevered = true;
-
-			// get every link
-			for(int linkIndex = 0; linkIndex < this.instantiatedChainLinks.Length; linkIndex++) {
-				GameObject link = this.instantiatedChainLinks[linkIndex];
-
-				// if it exists, destroy the link's hinge
-				if(link != null) {
-					HingeJoint2D linkHinge = link.GetComponent<HingeJoint2D>();
-					Destroy(linkHinge);
-
-					// and blast it to oblivion
-					Vector2 force = -Vector2.up * UnityEngine.Random.Range(1.0f, 5.0f);
-					link.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
-				}
-			}
-
-			// Because the oxygen tank has burst, the oxygen falls quicker by a factor of 10
-			OxygenTank.instance.oxygenDecay *= 10.0f;
-
-			Sound_Manager.Instance.PlayEffectOnce(this.chainBurstSound); // chain burst!
-			Sound_Manager.Instance.PlayEffectLoop(this.oxygenLeakSound, 2); // oxygen leak!
+			this.SeverChain();
 		}
 
 		// stop the oxygen leak sound when there's no more oxygen
 		if(OxygenTank.instance.isEmpty()) {
-			Sound_Manager.Instance.StopEffectLoop(2);
+			Sound_Manager.Instance.StopEffectLoop(Sound_Manager.GAS_LOOP_CHANNEL);
 		}
+	}
 
-
+	/// <summary>
+	/// Severs the chain.
+	/// </summary>
+	public void SeverChain()
+	{
+		// chain has been severed!
+		this.chainHasBeenSevered = true;
+		
+		// get every link
+		for(int linkIndex = 0; linkIndex < this.instantiatedChainLinks.Length; linkIndex++) {
+			GameObject link = this.instantiatedChainLinks[linkIndex];
+			
+			// if it exists, destroy the link's hinge
+			if(link != null) {
+				HingeJoint2D linkHinge = link.GetComponent<HingeJoint2D>();
+				Destroy(linkHinge);
+				
+				// and blast it to oblivion
+				Vector2 force = -Vector2.up * UnityEngine.Random.Range(1.0f, 5.0f);
+				link.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+			}
+		}
+		
+		// Because the oxygen tank has burst, the oxygen falls quicker by a factor of 10
+		OxygenTank.instance.oxygenDecay *= 10.0f;
+		
+		Sound_Manager.Instance.PlayEffectOnce(this.chainBurstSound); // chain burst!
+		Sound_Manager.Instance.PlayEffectLoop(this.oxygenLeakSound, 2); // oxygen leak!
 	}
 
 	/// <summary>

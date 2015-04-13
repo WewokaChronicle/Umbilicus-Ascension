@@ -6,8 +6,8 @@ public class OxygenTank : MonoBehaviour {
 
 	public static OxygenTank instance;
 
+	// Editor variables
 	public AudioClip alarm;
-
 	public float oxygenLevel;
 
 	[HideInInspector]
@@ -42,7 +42,7 @@ public class OxygenTank : MonoBehaviour {
 			this.triggerWarning = false;
 			this.triggerDanger = false;
 			this.oxygenSliderImage.color = this.oxygenSliderOriginalColor;
-			Sound_Manager.Instance.StopEffectLoop(1);
+			Sound_Manager.Instance.StopEffectLoop(Sound_Manager.ALARM_LOOP_CHANNEL);
 		}
 
 		if(!this.triggerWarning && this.oxygenLevel < WARNING_OXYGEN_LEVEL) {
@@ -53,13 +53,14 @@ public class OxygenTank : MonoBehaviour {
 
 		if(!this.triggerDanger && this.oxygenLevel < DANGER_OXYGEN_LEVEL) {
 			this.oxygenSliderImage.color = Color.red;
-			Sound_Manager.Instance.PlayEffectLoop(this.alarm, 1);
+			Sound_Manager.Instance.PlayEffectLoop(this.alarm, Sound_Manager.ALARM_LOOP_CHANNEL);
 			this.triggerDanger = true;
 		}
 
 		if(this.isEmpty()) {
 			this.oxygenLevel = 0.0f; // clamp to 0.0f;
-			Sound_Manager.Instance.StopEffectLoop(1);
+			Sound_Manager.Instance.StopEffectLoop(Sound_Manager.GAS_LOOP_CHANNEL);
+			Sound_Manager.Instance.StopEffectLoop(Sound_Manager.ALARM_LOOP_CHANNEL);
 			this.oxygenSlider.gameObject.SetActive(false);
 		}
 
