@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void CollectOxygenTank() {
-		OxygenTank.instance.addOxygen(0.25f);
+		OxygenTank.instance.addOxygen(1.0f);
 	}
 
 	public void EndLevel() {
