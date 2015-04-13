@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
 	private bool ended = false;
 	private float endTime;
 
-	public Player winner;
+	[HideInInspector]
+	public Player
+		winner;
 
 	public void Awake()
 	{
