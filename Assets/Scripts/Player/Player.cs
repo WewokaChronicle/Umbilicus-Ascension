@@ -222,6 +222,7 @@ public class Player : MonoBehaviour
 		}
 
 		this.isDead = true;
+		this.inGame = false;
 
 		// Spawn Corpse
 		GameObject corpse = ((GameObject) Instantiate(this.corpsePrefab, this.transform.position, this.transform.rotation));

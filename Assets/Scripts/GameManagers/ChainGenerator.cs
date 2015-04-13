@@ -78,9 +78,16 @@ public class ChainGenerator : MonoBehaviour
 			// Because the oxygen tank has burst, the oxygen falls quicker by a factor of 10
 			OxygenTank.instance.oxygenDecay *= 10.0f;
 
-			Sound_Manager.Instance.PlayEffectOnce(this.chainBurstSound);
-
+			Sound_Manager.Instance.PlayEffectOnce(this.chainBurstSound); // chain burst!
+			Sound_Manager.Instance.PlayEffectLoop(this.oxygenLeakSound, 2); // oxygen leak!
 		}
+
+		// stop the oxygen leak sound when there's no more oxygen
+		if(OxygenTank.instance.isEmpty()) {
+			Sound_Manager.Instance.StopEffectLoop(2);
+		}
+
+
 	}
 
 	/// <summary>
