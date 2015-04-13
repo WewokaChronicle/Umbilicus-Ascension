@@ -11,6 +11,7 @@ public class Platform : MonoBehaviour
 	private const float BLOCK_OFFSET_X = 1.2f;
 	private GameObject[] blocks;
 	public int blockCount = 1;
+	public bool isWinCondition = false;
 
 	void Awake()
 	{
@@ -32,7 +33,10 @@ public class Platform : MonoBehaviour
 	
 	public void OnCollisionEnter2D(Collision2D coll)
 	{
-
+		if(this.isWinCondition) {
+			GameManager.instance.winner = coll.gameObject.GetComponent<Player>();
+			GameManager.instance.EndLevel();
+		}
 	}
 
 	public void Spawn()
