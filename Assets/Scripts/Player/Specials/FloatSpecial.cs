@@ -93,6 +93,7 @@ public class FloatSpecial : MonoBehaviour {
 
 		// Display remaining float power
 		cooldownSlider.value = floatPower / MAX_FLOAT_POWER;
+		floatPower = 1f;
 	}
 	
 	public void FixedUpdate() {
