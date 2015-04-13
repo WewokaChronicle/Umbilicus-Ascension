@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 	private bool ended = false;
 	private float endTime;
 
+	public float SCROLL_SPEED = -1.0f;
+
 	[HideInInspector]
 	public Player
 		winner;

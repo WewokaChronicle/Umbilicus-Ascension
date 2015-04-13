@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using InControl;
 
-[RequireComponent (typeof (Player))]
-public class StickSpecial : MonoBehaviour {
+[RequireComponent (typeof(Player))]
+public class StickSpecial : MonoBehaviour
+{
 
 	// Player and input
 	public Player player;
@@ -34,7 +35,7 @@ public class StickSpecial : MonoBehaviour {
 	private float velY;
 	private Vector2 velocity;
 
-	public void Start() 
+	public void Start()
 	{
 		this.player = GetComponent<Player>();
 		if(this.player.inGame) {
@@ -52,7 +53,7 @@ public class StickSpecial : MonoBehaviour {
 		}
 	}
 
-	public void Update() 
+	public void Update()
 	{
 		// Action
 		if(!this.actionDisabled && this.floatPower > (MAX_STICK_POWER * 0.1f)) {
@@ -61,8 +62,8 @@ public class StickSpecial : MonoBehaviour {
 				// Turn on
 
 				// Get the bounding box of this game object
-				Vector2 boundingBoxTopLeftCoordinate = ((Vector2) this.transform.position - this.bottomRightOffset);
-				Vector2 boundingBoxBottomRightCoordinate = ((Vector2) this.transform.position + this.bottomRightOffset);
+				Vector2 boundingBoxTopLeftCoordinate = ((Vector2)this.transform.position - this.bottomRightOffset);
+				Vector2 boundingBoxBottomRightCoordinate = ((Vector2)this.transform.position + this.bottomRightOffset);
 
 				// Check for anything colliding with this bounding box
 				Collider2D coll = Physics2D.OverlapArea(boundingBoxTopLeftCoordinate, boundingBoxBottomRightCoordinate, this.player.stickMask);
@@ -75,18 +76,14 @@ public class StickSpecial : MonoBehaviour {
 					this.player.spriteAnimator.SetTrigger("grabLoopStart");
 					this.player.spriteAnimator.SetBool("isGrabbing", true);
 				}
-			} 
-
-			else if(this.actionOn && !this.inputDevice.Action1) {
+			} else if(this.actionOn && !this.inputDevice.Action1) {
 				this.actionDisabled = true; // Turn off
 			}
 
 			if(this.actionOn) {
 				this.floatPower -= Time.deltaTime;
 			}
-		} 
-
-		else {
+		} else {
 
 			if(!this.actionDisabled) {
 				this.actionDisabled = true;
@@ -116,18 +113,21 @@ public class StickSpecial : MonoBehaviour {
 		this.cooldownSlider.value = this.floatPower / MAX_STICK_POWER;
 	}
 	
-	public void FixedUpdate() {
+	public void FixedUpdate()
+	{
 		if(this.actionOn) {
 			// Stick in place
-			GetComponent<Rigidbody2D>().velocity = Vector2.up * Block.SPEED;
+			GetComponent<Rigidbody2D>().velocity = Vector2.up * GameManager.instance.SCROLL_SPEED;
 		}
 	}
 
-	public void DisableSpecial() {
+	public void DisableSpecial()
+	{
 		this.enabled = false;
 	}
 
-	public void Destroy() {
+	public void Destroy()
+	{
 		Destroy(this.gameObject);
 	}
 }
