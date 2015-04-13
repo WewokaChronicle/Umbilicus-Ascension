@@ -31,6 +31,10 @@ public class MenuManager : MonoBehaviour
 
 		starting = false;
 		Sound_Manager.Instance.PlayMusicLoop(menuMusic);
+
+		// mute any loop sounds
+		Sound_Manager.Instance.StopEffectLoop(Sound_Manager.GAS_LOOP_CHANNEL);
+		Sound_Manager.Instance.StopEffectLoop(Sound_Manager.ALARM_LOOP_CHANNEL);
 	}
 
 	// Init
