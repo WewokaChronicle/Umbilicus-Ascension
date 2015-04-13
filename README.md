@@ -13,7 +13,7 @@ made for the 2015 Global Game Jam.
 ![Screenshot](<https://raw.githubusercontent.com/sweetcarolinagames/FarscapeFreefall/master/screenshot.png>)
 
 In _Umbilicus: Ascension_ you are part of a team that must escape a pit. You must cooperate
-and coordinate with each other (out of the game) to carefully maneuver to the top. However,
+and coordinate with each other (out of game) to carefully maneuver to the top. However,
 only one player can actually win the game. 
 
 The entire team is sharing one oxygen tank that depletes over time. Scattered powerups will
