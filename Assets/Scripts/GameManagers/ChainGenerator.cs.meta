@@ -1,8 +1,15 @@
 fileFormatVersion: 2
 guid: 8a73f8f3defc14dbcb6a2ced6204bdd3
+timeCreated: 1428894023
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - chainLinkPrefab: {fileID: 175744, guid: ed56bc2c9c9f04a27a782780663d954e, type: 2}
+  - chainBurstSound: {fileID: 8300000, guid: 85ccac7de639940f796948fd80655f75, type: 3}
+  - oxygenLeakSound: {fileID: 8300000, guid: 9f3ec42465b6d4a2a9f328894b6bf067, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
