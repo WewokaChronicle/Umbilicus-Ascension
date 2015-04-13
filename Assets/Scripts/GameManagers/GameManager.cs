@@ -50,8 +50,8 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void Collect() {
-		score += 500f;
+	public void CollectOxygenTank() {
+		OxygenTank.instance.addOxygen(0.25f);
 	}
 
 	public void EndLevel() {
