@@ -52,3 +52,7 @@ which costs $75. We refactored the code to use Unity-native 2D tools, which are 
 ## License
 
 All original content developed is Copyright 2015 Sweet Carolina Games (Ian Coleman & Rogelio E. Cardona-Rivera)
+
+## Known Issues
+
+- High Scores don't update correctly. 
