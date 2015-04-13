@@ -8,24 +8,24 @@ public class JetSpecial : MonoBehaviour {
 	// Jet Force power!
 	public const float FORCE = 75.0f;
 
-	// Player and input
-	public Player player;
-	private InputDevice inputDevice;
-	private bool actionOn = false;
-	private bool actionAvailable = true;
+	// Cooldown Attributes
+	private const float COOLDOWN_TIME = 2f;
+	private float cooldownTimer;
 
-	// Jet SFX
-	public AudioClip specialSound;
-
-	// Cooldown
+	// Cooldown Slider
 	private Slider cooldownSlider;
 	private Image cooldownFillImage;
 	private Color origColor;
 	private Color offColor;
 
-	// Leftover force timer
-	private const float COOLDOWN_TIME = 3f;
-	private float cooldownTimer;
+	// Jet SFX
+	public AudioClip specialSound;
+
+	// Player and input
+	public Player player;
+	private InputDevice inputDevice;
+	private bool actionOn = false;
+	private bool actionAvailable = true;
 
 	// Init
 	public void Start() {
