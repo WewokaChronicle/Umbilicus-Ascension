@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 {
 	public const float MOVEMENT_FORCE = 50.0f;
 	public const float MAX_SPEED = 50.0f;
-	public float JUMPING_FORCE = 10.0f;
+	public float jumpingForce = 10.0f;
 
 	// This is this player's unique character ID.
 	// Milkyway Mike = 0
@@ -117,6 +117,8 @@ public class Player : MonoBehaviour
 			else if(this.characterID == CharacterManager.COSMONAUT_CARLA_INDEX) {
 				this.gameObject.AddComponent<RockSpecial>().specialSound = this.specialSounds[this.characterID];;
 			}
+
+			this._RepositionSlider(this.cooldownSlider, Vector3.up);
 		}
 	}
 
@@ -196,7 +198,7 @@ public class Player : MonoBehaviour
 
 		// Jumping
 		if(this.inputDevice.Direction.Up.WasPressed && this.canJump) {
-			this.rigidbod2D.AddForce(Vector2.up * JUMPING_FORCE, ForceMode2D.Impulse);
+			this.rigidbod2D.AddForce(Vector2.up * jumpingForce, ForceMode2D.Impulse);
 			this.spriteAnimator.SetBool("thereIsGroundUnderneath", false); // there won't be ground when we jump!
 			this.canJump = false;
 			Sound_Manager.Instance.PlayEffectOnce(this.jumpSound);

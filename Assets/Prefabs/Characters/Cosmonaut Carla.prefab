@@ -63,7 +63,7 @@ GameObject:
   - 223: {fileID: 22328876}
   - 114: {fileID: 11456038}
   - 114: {fileID: 11481090}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.30000019, y: 2.70000005, z: 0}
+  m_LocalPosition: {x: -4, y: 3.57999992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22429948}
@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdaeac8332fbb416892b6e9e3e9d6464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JUMPING_FORCE: 10
   characterID: 3
   stickMask:
     serializedVersion: 2
@@ -351,7 +352,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5b5c85baa50c145d49930b8ebfca847e, type: 3}
   - {fileID: 8300000, guid: fa3336fda956b4d60b0cd09fe23ac39a, type: 3}
   - {fileID: 8300000, guid: 141acb242e13a4ca7b0daae8bac85380, type: 3}
-  playerNumber: -1
+  playerNumber: 0
   cooldownSlider: {fileID: 11427086, guid: e05c6e3fb326e4ba0bdfce3f185e1f07, type: 2}
   inGame: 0
   isDead: 0
