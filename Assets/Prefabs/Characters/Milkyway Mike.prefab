@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: .113706857, g: .113725491, b: .107035756, a: .600000024}
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -294,11 +294,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6b2aca33e73e1403da8b528574e8582e, type: 3}
   - {fileID: 8300000, guid: 6c80c9edae186485fa9e3909059ad291, type: 3}
   - {fileID: 8300000, guid: 31fccea895ae747488d94931db389ccd, type: 3}
-  playerNumber: -1
+  playerNumber: 0
   cooldownSlider: {fileID: 11420258}
   inGame: 0
-  playerOnTheEnd: 0
   isDead: 0
+  canJump: 0
+  playerOnTheEnd: 0
   corpsePrefab: {fileID: 160410, guid: 6e95eac1e52314b8fa9576d203b78880, type: 2}
   bloodParticles: {fileID: 19893940, guid: e5c710c089d1c1e4189ae2840b72c751, type: 2}
 --- !u!114 &11479172
@@ -350,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .5, g: .5, b: .5, a: 1}
+  m_Color: {r: .501960814, g: 1, b: .501960814, a: 1}
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0

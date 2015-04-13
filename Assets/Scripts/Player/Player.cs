@@ -222,11 +222,11 @@ public class Player : MonoBehaviour
 		corpse.GetComponent<SpriteRenderer>().sprite = this.deadTorsoSprite;
 		corpse.GetComponent<BoxCollider2D>().size = this.deadTorsoSprite.bounds.size;
 
-
 		// --- Player modifications ---
 		// change the sprite to dead legs
 		this.spriteRenderer.sprite = this.deadLegsSprite;
 		this.transform.position += new Vector3(0f, -deadLegsSprite.bounds.size.y);
+		this.cooldownSlider.gameObject.SetActive(false);
 
 		// Play a death grunt
 		Sound_Manager.Instance.PlayEffectOnce(this.deathSounds[UnityEngine.Random.Range(0, 3)]);
@@ -272,6 +272,7 @@ public class Player : MonoBehaviour
 			Vector3 oldLocalScale = this.transform.localScale;
 			Vector3 newLocalScale = new Vector3(-oldLocalScale.x, oldLocalScale.y, oldLocalScale.z);
 			this.transform.localScale = newLocalScale;
+			this.cooldownSlider.direction = Slider.Direction.LeftToRight;
 		}
 
 		// if we're moving left and we are facing right,
@@ -279,6 +280,7 @@ public class Player : MonoBehaviour
 			Vector3 oldLocalScale = this.transform.localScale;
 			Vector3 newLocalScale = new Vector3(-oldLocalScale.x, oldLocalScale.y, oldLocalScale.z);
 			this.transform.localScale = newLocalScale;
+			this.cooldownSlider.direction = Slider.Direction.RightToLeft;
 		}
 	}
 

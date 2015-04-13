@@ -211,6 +211,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   spriteAnimator: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 1bb92a1adc156446c8a7d1d2c77b72fa, type: 3}
   specialSounds:
   - {fileID: 8300000, guid: 13a65c9ad89fd4f50ad2d750cc0d19cb, type: 3}
   - {fileID: 8300000, guid: 0025f4e7f50c048a7829253c3ad20732, type: 3}
@@ -227,8 +228,9 @@ MonoBehaviour:
   playerNumber: -1
   cooldownSlider: {fileID: 11456932}
   inGame: 0
-  playerOnTheEnd: 0
   isDead: 0
+  canJump: 0
+  playerOnTheEnd: 0
   corpsePrefab: {fileID: 160410, guid: 6e95eac1e52314b8fa9576d203b78880, type: 2}
   bloodParticles: {fileID: 19858360}
 --- !u!114 &11406250
@@ -280,7 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .5, g: .5, b: .5, a: 1}
+  m_Color: {r: .501960814, g: 1, b: .501960814, a: 1}
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -349,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: .113706857, g: .113725491, b: .107035756, a: .600000024}
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
