@@ -314,7 +314,7 @@ public class Player : MonoBehaviour
 	/// <returns><c>true</c>, if this player is outside the screen, <c>false</c> otherwise.</returns>
 	private bool _IsOutsideScreen()
 	{
-		return (this.transform.position.y < -6f || this.transform.position.y > 70f);
+		return (this.transform.position.y < -6f || this.transform.position.y > 6f);
 	}
 }
 
