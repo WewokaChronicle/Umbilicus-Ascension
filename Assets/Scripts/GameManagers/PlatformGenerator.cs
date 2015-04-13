@@ -4,7 +4,14 @@ using System.Collections;
 
 public class PlatformGenerator : MonoBehaviour
 {
+	public static PlatformGenerator instance;
+
 	public GameObject platformPrefab;
+	public GameObject winningPlatformPrefab;
+
+	[HideInInspector]
+	public bool generateWinningPlatform;
+
 	private const float SPAWN_TIME = 4f;
 	private float spawnTimer = 0f;
 	private float startTime;
@@ -17,6 +24,7 @@ public class PlatformGenerator : MonoBehaviour
 	{
 		Time.timeScale = 0f;
 		startTime = Time.realtimeSinceStartup;
+		instance = this;
 	}
 	
 	public void Update()
@@ -29,7 +37,18 @@ public class PlatformGenerator : MonoBehaviour
 		spawnTimer -= Time.deltaTime;
 		
 		if(spawnTimer <= 0f) {
-			this.SpawnPlatform();			
+
+			// generate the last one!
+			if(generateWinningPlatform == true) {
+				this.SpawnWinningPlatform();
+				this.generateWinningPlatform = false;
+			}
+
+			else {
+				this.SpawnPlatform();
+			}
+
+
 			spawnTimer = SPAWN_TIME + Random.Range(0f, 1f);
 		}
 	}
@@ -38,5 +57,11 @@ public class PlatformGenerator : MonoBehaviour
 	{
 		Vector3 platformPosition = new Vector3(Random.Range(-MAX_BLOCK_X, MAX_BLOCK_X), 10f);
 		GameObject.Instantiate(platformPrefab, platformPosition, Quaternion.identity);
+	}
+
+	public void SpawnWinningPlatform()
+	{
+		Vector3 platformPosition = new Vector3(Random.Range(-MAX_BLOCK_X, MAX_BLOCK_X), 10f);
+		GameObject.Instantiate(winningPlatformPrefab, platformPosition, Quaternion.identity);
 	}
 }

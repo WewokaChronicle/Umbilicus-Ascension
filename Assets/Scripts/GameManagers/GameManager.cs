@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 	public static int highScore;
 
-	private bool winningPlatformHasBeenGenerated;
+	private bool winningPlatformHasBeenRequested;
 	private Player[] players;
 	private float altitude;
 	private bool ended = false;
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
 
 		instance = this;
 		this.altitude = startingDepth;
-		this.winningPlatformHasBeenGenerated = false;
+		this.winningPlatformHasBeenRequested = false;
 		GameManager.highScore = PlayerPrefs.GetInt("HighScore", 0);
 		this.highScoreText.text = "HIGH SCORE: " + highScore;
 		Sound_Manager.Instance.PlayMusicLoop(gameMusic);
@@ -56,9 +56,9 @@ public class GameManager : MonoBehaviour {
 			return;
 		}
 
-		if(this.altitude > this.winningDepth && !this.winningPlatformHasBeenGenerated) {
-			this._GenerateWinningPlatform();
-			this.winningPlatformHasBeenGenerated = true;
+		if(this.altitude > this.winningDepth && !this.winningPlatformHasBeenRequested) {
+			PlatformGenerator.instance.generateWinningPlatform = true;
+			this.winningPlatformHasBeenRequested = true;
 		}
 
 		if(Input.GetKeyUp(KeyCode.Escape)) {
