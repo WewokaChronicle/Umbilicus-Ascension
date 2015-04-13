@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BGDecoration:MonoBehaviour
@@ -7,7 +7,7 @@ public class BGDecoration:MonoBehaviour
 
 	public void Awake()
 	{
-		GetComponent<Rigidbody2D>().velocity = Vector3.up * Block.SPEED * 0.8f;
+		GetComponent<Rigidbody2D>().velocity = Vector3.up * GameManager.instance.scrollSpeed * 0.8f;
 	}
 
 	public void Update()

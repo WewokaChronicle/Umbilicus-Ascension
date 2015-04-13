@@ -1,10 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Block:MonoBehaviour
 {
-	public const float SPEED = -1f;
-
 	public bool starterBlock = false;
 
 	// Sounds
@@ -29,16 +27,15 @@ public class Block:MonoBehaviour
 
 	public void Awake()
 	{
-		// Sprite
-		sp = GetComponent<Sprite>();
-		spriteRenderer = GetComponent<SpriteRenderer>();
+		this.spriteRenderer = GetComponent<SpriteRenderer>();
 		// Set random sprite
 		blockNum = Random.Range(1, 4);
-		spriteRenderer.sprite = Instantiate(Resources.Load<Sprite>("Sprites/Environment/block" + blockNum)) as Sprite;
+		this.spriteRenderer.sprite = Instantiate(Resources.Load<Sprite>("Sprites/Environment/block" + blockNum)) as Sprite;
+
 
 		// Spikes
 		if(!starterBlock) {
-			if(Random.Range(0, 10) == 0) {
+			if(Random.Range(0, 10) >= 0) {
 				GameObject spikeGO = (GameObject)Instantiate(spikePrefab, transform.position + Vector3.up + Vector3.back, Quaternion.Euler(new Vector3(0f, 0f, -90f)));
 				spikeGO.transform.parent = transform;
 				spikeSprite = spikeGO.GetComponent<Sprite>();
@@ -46,11 +43,11 @@ public class Block:MonoBehaviour
 				spikes = true;
 			} else if(Random.Range(0, 8) == 0) {
 				battery = (GameObject)Instantiate(batteryPrefab, transform.position + Vector3.up * 1.5f + Vector3.back, Quaternion.identity);
-				((Rigidbody2D)battery.GetComponent<Rigidbody2D>()).velocity = Vector2.up * SPEED;
+				((Rigidbody2D)battery.GetComponent<Rigidbody2D>()).velocity = Vector2.up * GameManager.instance.scrollSpeed;
 			}
 		}
 		// Velocity
-		GetComponent<Rigidbody2D>().velocity = Vector2.up * SPEED;
+		GetComponent<Rigidbody2D>().velocity = Vector2.up * GameManager.instance.scrollSpeed;
 	}
 
 	public void Update()
@@ -60,25 +57,6 @@ public class Block:MonoBehaviour
 			Destroy(gameObject);
 			if(battery != null) {
 				Destroy(battery);
-			}
-		}
-
-		// Keep the block alive if our spikes are bloody
-		if(spikes) {
-			if(spike.bloody) {
-				spriteRenderer.sprite = sp;
-				spriteRenderer.color = Color.white;
-				spriteRenderer.sprite = spikeSprite;
-				spriteRenderer.color = Color.white; // redundant?
-			}
-		}
-
-		// Death timer
-		if((!spikes || !spike.bloody)) {
-			c = spriteRenderer.color;
-			//sp.color = c;
-			if(spikes) {
-				//spikeSprite.color = c;
 			}
 		}
 	}

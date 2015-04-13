@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Wall:MonoBehaviour
@@ -9,7 +9,7 @@ public class Wall:MonoBehaviour
 
 	public void Awake()
 	{
-		GetComponent<Rigidbody2D>().velocity = Vector3.up * Block.SPEED;
+		GetComponent<Rigidbody2D>().velocity = Vector3.up * GameManager.instance.scrollSpeed;
 		// Only do this on the first wall segment, not any clone
 //		if(name == "RightWall" || name == "LeftWall") {
 //			transform.Translate(Vector3.up * Random.Range(0f, 40f));

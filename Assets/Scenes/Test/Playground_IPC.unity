@@ -751,6 +751,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 11485904, guid: 077646df851214afe8df47218b052bd0, type: 2}
+      propertyPath: oxygenLevel
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 077646df851214afe8df47218b052bd0, type: 2}
   m_IsPrefabParent: 0
@@ -883,6 +887,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters: []
   chainLinkPrefab: {fileID: 175744, guid: ed56bc2c9c9f04a27a782780663d954e, type: 2}
+  chainBurstSound: {fileID: 0}
+  oxygenLeakSound: {fileID: 0}
 --- !u!4 &1359993032
 Transform:
   m_ObjectHideFlags: 0

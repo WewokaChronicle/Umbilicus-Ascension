@@ -6,9 +6,11 @@ using InControl;
 public class GameManager : MonoBehaviour {
 
 	// Public attributes
+	public float scrollSpeed = -1.0f;
 	public float startingDepth = -10000f; // Game Attribute
 	public float winningDepth = 0f;
 	public GameObject winningPlatformPrefab;
+
 	public AudioClip gameMusic;
 	public AudioClip gameOverSound;
 	public AudioClip highScoreSound;
@@ -25,9 +27,9 @@ public class GameManager : MonoBehaviour {
 	private float altitude;
 	private bool ended = false;
 	private float endTime;
-
-	// Called before Start
-	public void Awake() 
+	
+	// Runs before Start
+	public void Awake()
 	{
 		// Attach Input Devices
 		if(InputManager.Devices.Count < PlayerControl.NumberOfPlayers) {
@@ -44,9 +46,10 @@ public class GameManager : MonoBehaviour {
 		this.highScoreText.text = "HIGH SCORE: " + highScore;
 		Sound_Manager.Instance.PlayMusicLoop(gameMusic);
 	}
-
+	
 	// Called every frame
-	public void Update() {
+	public void Update() 
+	{
 		if(this.ended) {
 			return;
 		}
@@ -75,9 +78,9 @@ public class GameManager : MonoBehaviour {
 		}
 
 	}
-
+	
 	/// <summary>
-	/// Collects the oxygen from the level and adds it to the Oxygen tank
+	/// Collects the oxygen powerup and adds oxygen to the tank.
 	/// </summary>
 	public void CollectOxygenTank() {
 		OxygenTank.instance.addOxygen(1.0f);
@@ -102,8 +105,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	/// <returns>All the players that currently exist in this Scene.</returns>
-	public Player[] FindPlayers() {
-		
+	public Player[] FindPlayers() 
+	{
 		ArrayList activePlayers = new ArrayList();
 		
 		// try to find each in-game player and add it to the list
@@ -143,7 +146,7 @@ public class GameManager : MonoBehaviour {
 		object[] activePlayerObjects = activePlayers.ToArray();
 		Player[] result = new Player[activePlayerObjects.Length];
 		for(int i = 0; i < activePlayerObjects.Length; i++) {
-			result[i] = (Player) activePlayerObjects[i];
+			result[i] = (Player)activePlayerObjects[i];
 		}
 		
 		// return the array
@@ -151,16 +154,30 @@ public class GameManager : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Cleanup routine for this class.
+	/// Ends the level.
 	/// </summary>
-	/// <returns>The routine.</returns>
-	private IEnumerator _EndRoutine() {
+	public void EndLevel()
+	{
+		if(!ended) {
+			ended = true;
+			Time.timeScale = 0f;
+			endTime = Time.realtimeSinceStartup;
+			OxygenTank.instance.gameObject.SetActive(false);
+			StartCoroutine(EndRoutine());
+		}
+	}
+
+	/// <summary>
+	/// Displays win/lose text and restarts the level.
+	/// </summary>
+	private IEnumerator _EndRoutine()
+	{
 		if(winner) {
 			_WinText();
-		}
-		else {
+		} else {
 			_DeathText();
 		}
+
 		while(Time.realtimeSinceStartup - endTime < 3f) {
 			yield return false;
 		}
@@ -195,7 +212,7 @@ public class GameManager : MonoBehaviour {
 		pos.y = 80f;
 		altitudeText.rectTransform.localPosition = pos;
 	}
-
+	
 	/// <summary>
 	/// Auxiliary method for displaying the Win Text
 	/// </summary>
@@ -212,12 +229,17 @@ public class GameManager : MonoBehaviour {
 		} else {
 			Sound_Manager.Instance.PlayEffectOnce(highScoreSound);
 		}
+
 		// Text
+		int playerID = winner.GetComponent<Player>().playerNumber + 1;
 		if(high) {
-			altitudeText.text = winner.name + " WINS\n\n" + altitudeText.text + "\n\nHIGH SCORE ACHIEVED!!!";
-		} else {
-			altitudeText.text = winner.name + " WINS\n\n" + altitudeText.text;
+			altitudeText.text = "PLAYER " + playerID + " WINS\n\n" + altitudeText.text + "\n\nHIGH SCORE ACHIEVED!!!";
+		} 
+
+		else {
+			altitudeText.text = "PLAYER " + playerID + " WINS\n\n" + altitudeText.text;
 		}
+
 		// Reposition
 		Vector3 pos = altitudeText.rectTransform.localPosition;
 		pos.y = 80f;
