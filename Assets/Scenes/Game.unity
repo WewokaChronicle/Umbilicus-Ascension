@@ -728,6 +728,10 @@ Prefab:
       propertyPath: winningDepth
       value: -9950
       objectReference: {fileID: 0}
+    - target: {fileID: 11498140, guid: 9c90e50bbd81c48959cc672536c7fa78, type: 2}
+      propertyPath: startingDepth
+      value: -10000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c90e50bbd81c48959cc672536c7fa78, type: 2}
   m_IsPrefabParent: 0
@@ -866,6 +870,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 133498, guid: 5607f4cd27f06334984b35872f5b7f2e, type: 2}
+  winningPlatformPrefab: {fileID: 133498, guid: afd5088ce6f9949b1a8aab3e5c48fd68,
+    type: 2}
+  generateWinningPlatform: 0
 --- !u!1 &1572012905
 GameObject:
   m_ObjectHideFlags: 0
