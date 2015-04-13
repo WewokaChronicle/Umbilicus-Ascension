@@ -29,12 +29,11 @@ public class Block:MonoBehaviour
 
 	public void Awake()
 	{
-		// Sprite
-		sp = GetComponent<Sprite>();
-		spriteRenderer = GetComponent<SpriteRenderer>();
+		this.spriteRenderer = GetComponent<SpriteRenderer>();
 		// Set random sprite
 		blockNum = Random.Range(1, 4);
-		spriteRenderer.sprite = Instantiate(Resources.Load<Sprite>("Sprites/Environment/block" + blockNum)) as Sprite;
+		this.spriteRenderer.sprite = Instantiate(Resources.Load<Sprite>("Sprites/Environment/block" + blockNum)) as Sprite;
+
 
 		// Spikes
 		if(!starterBlock) {
@@ -60,25 +59,6 @@ public class Block:MonoBehaviour
 			Destroy(gameObject);
 			if(battery != null) {
 				Destroy(battery);
-			}
-		}
-
-		// Keep the block alive if our spikes are bloody
-		if(spikes) {
-			if(spike.bloody) {
-				spriteRenderer.sprite = sp;
-				spriteRenderer.color = Color.white;
-				spriteRenderer.sprite = spikeSprite;
-				spriteRenderer.color = Color.white; // redundant?
-			}
-		}
-
-		// Death timer
-		if((!spikes || !spike.bloody)) {
-			c = spriteRenderer.color;
-			//sp.color = c;
-			if(spikes) {
-				//spikeSprite.color = c;
 			}
 		}
 	}
