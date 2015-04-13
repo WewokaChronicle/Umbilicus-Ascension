@@ -118,7 +118,7 @@ public class StickSpecial : MonoBehaviour
 	{
 		if(this.actionOn) {
 			// Stick in place
-			GetComponent<Rigidbody2D>().velocity = Vector2.up * GameManager.instance.SCROLL_SPEED;
+			GetComponent<Rigidbody2D>().velocity = Vector2.up * GameManager.instance.scrollSpeed;
 		}
 	}
 

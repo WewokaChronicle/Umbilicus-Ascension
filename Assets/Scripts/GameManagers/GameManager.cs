@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour {
 
 		instance = this;
 		this.altitude = startingDepth;
-		this.highScore = PlayerPrefs.GetInt("HighScore", 0);
+		GameManager.highScore = PlayerPrefs.GetInt("HighScore", 0);
 		this.highScoreText.text = "HIGH SCORE: " + highScore;
 		Sound_Manager.Instance.PlayMusicLoop(gameMusic);
 	}
@@ -151,20 +151,6 @@ public class GameManager : MonoBehaviour {
 		
 		// return the array
 		return result;
-	}
-
-	/// <summary>
-	/// Ends the level.
-	/// </summary>
-	public void EndLevel()
-	{
-		if(!ended) {
-			ended = true;
-			Time.timeScale = 0f;
-			endTime = Time.realtimeSinceStartup;
-			OxygenTank.instance.gameObject.SetActive(false);
-			StartCoroutine(EndRoutine());
-		}
 	}
 
 	/// <summary>
