@@ -185,8 +185,8 @@ public class GameManager : MonoBehaviour {
 	private void _DeathText() {
 		// Save score
 		bool high = false;
-		if(altitude > highScore) {
-			highScore = Mathf.RoundToInt(altitude);
+		if(-altitude < highScore) {
+			highScore = Mathf.RoundToInt(-altitude);
 			PlayerPrefs.SetInt("HighScore", highScore);
 			highScoreText.text = "HIGH SCORE: " + highScore;
 			PlayerPrefs.Save();
@@ -213,8 +213,8 @@ public class GameManager : MonoBehaviour {
 	private void _WinText() 
 	{
 		bool high = false;
-		if(altitude > highScore) {
-			highScore = Mathf.RoundToInt(altitude);
+		if(-altitude < highScore) {
+			highScore = Mathf.RoundToInt(-altitude);
 			PlayerPrefs.SetInt("HighScore", highScore);
 			highScoreText.text = "HIGH SCORE: " + highScore;
 			PlayerPrefs.Save();
