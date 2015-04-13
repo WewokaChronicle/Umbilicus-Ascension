@@ -10,7 +10,7 @@ public class PlatformGenerator : MonoBehaviour
 	private float startTime;
 	private bool started = false;
 	private const int MAX_BLOCKS = 4;
-	private const float MAX_BLOCK_X = 6f;
+	public static readonly float MAX_BLOCK_X = 6f;
 	private const float BLOCK_OFFSET_X = 1.2f;
 
 	public void Start()

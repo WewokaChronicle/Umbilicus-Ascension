@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 	public static int highScore;
 
+	private bool winningPlatformHasBeenGenerated;
 	private Player[] players;
 	private float altitude;
 	private bool ended = false;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour {
 
 		instance = this;
 		this.altitude = startingDepth;
+		this.winningPlatformHasBeenGenerated = false;
 		GameManager.highScore = PlayerPrefs.GetInt("HighScore", 0);
 		this.highScoreText.text = "HIGH SCORE: " + highScore;
 		Sound_Manager.Instance.PlayMusicLoop(gameMusic);
@@ -52,6 +54,11 @@ public class GameManager : MonoBehaviour {
 	{
 		if(this.ended) {
 			return;
+		}
+
+		if(this.altitude > this.winningDepth && !this.winningPlatformHasBeenGenerated) {
+			this._GenerateWinningPlatform();
+			this.winningPlatformHasBeenGenerated = true;
 		}
 
 		if(Input.GetKeyUp(KeyCode.Escape)) {
@@ -73,6 +80,7 @@ public class GameManager : MonoBehaviour {
 				return;
 			}
 		}
+
 		if(allPlayersDead) {
 			this.EndLevel();
 		}
@@ -236,8 +244,7 @@ public class GameManager : MonoBehaviour {
 	/// Generates the winning platform to end the game.
 	/// </summary>
 	private void _GenerateWinningPlatform() {
-
+		Vector3 platformPosition = new Vector3(Random.Range(-PlatformGenerator.MAX_BLOCK_X, PlatformGenerator.MAX_BLOCK_X), 10f);
+		GameObject.Instantiate(this.winningPlatformPrefab, platformPosition, Quaternion.identity);
 	}
-
-
 }

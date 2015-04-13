@@ -720,6 +720,10 @@ Prefab:
       propertyPath: highScoreText
       value: 
       objectReference: {fileID: 978747403}
+    - target: {fileID: 11498140, guid: 9c90e50bbd81c48959cc672536c7fa78, type: 2}
+      propertyPath: winningDepth
+      value: -9000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c90e50bbd81c48959cc672536c7fa78, type: 2}
   m_IsPrefabParent: 0
