@@ -15,7 +15,7 @@ public class Battery:MonoBehaviour {
 			return;
 		collected = true;
 //		GameManager.instance.Collect();
-//		Sound_Manager.Instance.PlayEffectOnce(collectSnd);
+		Sound_Manager.Instance.PlayEffectOnce(collectSnd);
 		Destroy(gameObject);
 	}
 }
