@@ -23,6 +23,15 @@ which detaches everyone but also leaks oxygen at a much faster rate.
 
 How will you reach the top?
 
+### Play Information
+This game requires at least two players. If present, this game will attempt to use two gamepads.
+By default, the game uses WASD and IJKL controls.
+
+- Horizontal: Move sideways
+- Up: Jump
+- Action 1: Activate power (E on WASD controls, O on IJKL controls, A on Xbox 360 Controls)
+- Action 2: Cut Oxygen Tube (Q on WASD controls, U on IJKL controls, B on Xbox 360 Controls)
+
 ## Referenced Open Source Projects
 1. [InControl](https://github.com/pbhogan/InControl), an input manager for Unity that
 tames the cross-platform controller beast. InControl is not included in this repo.
