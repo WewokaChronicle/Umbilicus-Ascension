@@ -73,7 +73,6 @@ public class Player : MonoBehaviour
 	private float forceX;
 	private float velocityX;
 	private Vector2 velocity;
-	private RaycastHit2D hit;
 	private Rigidbody2D rigidbod2D;
 	private BoxCollider2D boxCollider2D;
 
@@ -131,11 +130,13 @@ public class Player : MonoBehaviour
 		this.spriteRenderer = GetComponent<SpriteRenderer>();
 
 		// Get the input device corresponding to the player number
-		this.inputDevice = (InputManager.Devices.Count > playerNumber && PlayerControl.NumberOfPlayers > playerNumber) ? InputManager.Devices[playerNumber] : null;
+		this.inputDevice = (InputManager.Devices.Count > playerNumber && 
+		                    PlayerControl.NumberOfPlayers > playerNumber) ? 
+			InputManager.Devices[playerNumber] : null;
 	}
 	
 	// Update is called once per frame
-	void Update()
+	public void Update()
 	{
 		// We've jumped outside the screen.
 		if(this._IsOutsideScreen()) {
@@ -159,7 +160,8 @@ public class Player : MonoBehaviour
 		this._RepositionSlider(this.cooldownSlider, Vector3.up);
 	}
 
-	void FixedUpdate()
+	// FixedUpdate is called at a fixed framerate frame
+	public void FixedUpdate()
 	{
 		if(this.isDead) {
 			return; //do nothing!
@@ -182,16 +184,12 @@ public class Player : MonoBehaviour
 		}
 
 		// Check float vs. stand
-		this.hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 0.65f, this.stickMask);
-		// Debug.Log(this.hit.collider);
-		// Debug.DrawRay(this.transform.position,-Vector3.up);
-		
-		if(this.hit.collider != null) { // if we hit something, then there is ground underneath
+		if(this.IsOnTheGround()) { 
 			this.spriteAnimator.SetBool("thereIsGroundUnderneath", true);
 			this.canJump = true;
 		}
 		
-		else { // otherwise, we're not above anything
+		else { 
 			this.spriteAnimator.SetBool("thereIsGroundUnderneath", false);
 			this.canJump = false;
 		}
@@ -203,6 +201,14 @@ public class Player : MonoBehaviour
 			this.canJump = false;
 			Sound_Manager.Instance.PlayEffectOnce(this.jumpSound);
 		}
+	}
+	
+	/// <returns><c>true</c> if this instance is on the ground; otherwise, <c>false</c>.</returns>
+	public bool IsOnTheGround() 
+	{
+		// if we hit something, then there is ground underneath
+		RaycastHit2D hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 0.65f, this.stickMask);
+		return (hit.collider != null);
 	}
 
 	/// <summary>

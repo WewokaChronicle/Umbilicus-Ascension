@@ -799,7 +799,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11403094, guid: 368a46c813362433db04dbd1c51d0907, type: 2}
       propertyPath: playerNumber
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5046776, guid: 368a46c813362433db04dbd1c51d0907, type: 2}
       propertyPath: m_GravityScale
@@ -1324,7 +1324,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11472870, guid: b32134ced402c4a7eafc9b7e44267185, type: 2}
       propertyPath: playerNumber
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b32134ced402c4a7eafc9b7e44267185, type: 2}

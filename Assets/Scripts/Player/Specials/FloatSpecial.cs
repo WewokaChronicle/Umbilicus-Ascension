@@ -42,38 +42,55 @@ public class FloatSpecial : MonoBehaviour {
 	}
 
 	public void Update() {
-		// Action
+
+		// If our action is not disabled and we have power available,
 		if(!actionDisabled && floatPower > (MAX_FLOAT_POWER * 0.1f)) {
+
+			// If we hadn't activated our power, and we now activated it
 			if(!actionOn && inputDevice.Action1) {
 				Sound_Manager.Instance.PlayEffectOnce(specialSound);
 				this.player.spriteAnimator.SetBool("isJetting", true);
-			} else if(actionOn && !inputDevice.Action1) {
+			} 
+
+			// If we had activated our power, and we stopped
+			else if(actionOn && !inputDevice.Action1) {
 				this.player.spriteAnimator.SetBool("isJetting", false);
 			}
+
+			// Decrease power 
 			actionOn = inputDevice.Action1;
 			if(actionOn) {
 				floatPower -= Time.deltaTime;
 			}
-		} else {
+		} 
+
+		else {
+
+			// if our action was not disabled, we must disable it.
 			if(!actionDisabled) {
 				actionDisabled = true;
 				cooldownFillImage.color = Color.red;
 			}
+
+			// if we were floating, stop it!
 			if(actionOn) {
 				actionOn = false;
 				this.player.spriteAnimator.SetBool("isJetting", false);
 			}
 		}
+
 		// Undisable
 		if(actionDisabled && floatPower > (MAX_FLOAT_POWER * 0.9f)) {
 			actionDisabled = false;
 			cooldownFillImage.color = origColor;
 		}
-		// Recover float power
-		if(!actionOn) {
-			floatPower += Time.deltaTime;
+
+		// Recover float power only if we're touching the ground
+		if(!actionOn && this.player.IsOnTheGround()) {
+			floatPower += 2*Time.deltaTime;
 			floatPower = Mathf.Min(floatPower, MAX_FLOAT_POWER);
 		}
+
 		// Display remaining float power
 		cooldownSlider.value = floatPower / MAX_FLOAT_POWER;
 	}
