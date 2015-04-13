@@ -33,7 +33,9 @@ public class Platform : MonoBehaviour
 	
 	public void OnCollisionEnter2D(Collision2D coll)
 	{
-		if(this.isWinCondition) {
+		Player player = coll.gameObject.GetComponent<Player>();
+		// check if a player collides w/ winning platform
+		if(this.isWinCondition && player != null) {
 			GameManager.instance.winner = coll.gameObject.GetComponent<Player>();
 			GameManager.instance.EndLevel();
 		}
