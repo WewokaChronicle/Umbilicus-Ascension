@@ -4,8 +4,8 @@ using UnityEngine.UI;
 using InControl;
 
 public class FloatSpecial : MonoBehaviour {
-	public const float MAX_SPEED = 5f;
-	public const float FORCE = 100f;
+	public const float MAX_SPEED = 2.5f;
+	public const float FORCE = 75f;
 
 	// Player and input
 	public Player player;
