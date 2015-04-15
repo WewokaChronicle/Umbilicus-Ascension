@@ -42,7 +42,7 @@ the code-base we started with. [This game was submit to the 2015 Global Game Jam
 Note: The original code base depended on [2D Toolkit](http://www.unikronsoftware.com/2dtoolkit/), 
 which costs $75. We refactored the code to use [Unity-native 2D tools](http://unity3d.com/pages/2d-power), which are free.
 
-## How the game has changed
+## How the Game has Changed
 
 As mentioned, _Umbilicus: Ascension_ is a remix of the game [Umbilicus: Descent Team Delta](http://globalgamejam.org/2015/games/umbilicus-%E2%80%93%C2%A0descent-team-delta). Here's a summary of what we changed:
 
